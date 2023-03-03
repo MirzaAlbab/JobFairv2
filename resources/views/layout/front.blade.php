@@ -48,7 +48,34 @@
           <li><a class="nav-link scrollto {{ (request()->is('partners')) ? 'active' : '' }}" href="{{ route('user-partners') }}">Partners</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('events')) ? 'active' : '' }}" href="{{ route('user-events') }}">Events</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('galleryy')) ? 'active' : '' }}" href="{{ route('user-gallery') }}">Gallery</a></li>
-          <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+         
+             @if (Auth::check())
+             <li><a class="nav-link scrollto {{ (request()->is('galleryy')) ? 'active' : '' }}" href="{{ route('login') }}">My Dashboard</a></li>
+             <div class="dropdown">
+              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::User()->name }}
+              </a>
+            
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                <li><form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  <button class="dropdown-item d-flex align-items-center" type="submit">
+                    <span>Logout</span>
+                  </button>
+                </form></li>
+               
+             
+              </ul>
+            </div>
+
+              @else
+             
+
+               <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+             
+             @endif
+         
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

@@ -15,17 +15,18 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('position');
-            $table->string('level');
-            $table->enum('kategori', ['part-time', 'full-time'])->default('full-time');
-            $table->enum('gaji',['2-3','3-5','6-8', '8-10'])->nullable();
-            $table->string('tingkat penempatan');
+            $table->string('job_title');
+            $table->string('type');
+            $table->enum('status', ['part-time', 'full-time'])->default('full-time');
+            $table->enum('salary',['2-3','3-5','6-8', '8-10'])->nullable();
+            $table->enum('graduation',['SMA/SMK','D3/D4','S1', 'S2'])->nullable();
             $table->string('deskripsi');
-            // $table->string('penempatan')->nullable();
-            // start date end date
+            $table->string('kota')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->foreignId('partner_id');
             $table->timestamps();
-            // 
+            
         });
     }
 

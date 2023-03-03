@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     use HasFactory;
-    protected $fillable = ['position', 'level', 'kategori', 'requirement','gaji', 'deskripsi', 'penempatan', 'partner_id'];
-
+    protected $fillable = ['job_title', 'type', 'kategori', 'status','salary', 'graduation', 'deskripsi','kota', 'partner_id'];
+   
     public function Jobsin(){
         return $this->hasOne(Partner::class,'id','partner_id');
     }

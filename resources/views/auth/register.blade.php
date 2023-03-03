@@ -16,6 +16,24 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+         <!-- Phone Number -->
+         <div class="mt-4">
+            <x-input-label for="phone" :value="__('No Telp')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="text" maxlength="13" name="phone" :value="old('phone')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+
+        <!-- Kategori Peserta -->
+        <div class="mt-4">
+            <x-input-label for="kategori" :value="__('Kategori Peserta')" />
+            <select id="kategori" class="block mt-1 w-full rounded border-gray-300" name="role">
+                <option selected>Pilih salah satu</option>
+                <option value="mhs">Mahasiswa UNAIR</option>
+                <option value="alumni">Alumni UNAIR</option>
+                <option value="umum">Umum</option>
+              </select>
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

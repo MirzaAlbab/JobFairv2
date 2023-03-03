@@ -51,7 +51,7 @@ Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery'
 Route::get('/loginuser/{id}', [FrontController::class, 'login'])->name('loginuser');
 Route::get('/counter/{id}', [FrontController::class, 'counter']);
 Route::get('/teams',[FrontController::class, 'team'])->name('teams');
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth','verified', 'admin'])->group(function () {
     // route: admin/dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     

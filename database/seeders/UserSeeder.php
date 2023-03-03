@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'phone' => '',
             'password'=> '$2y$10$Fz4h8C5JDHNPJ3zb4rq/7epCGnoIj5kpE.Hzdq/1D67MQeH8l/o0m',
             'role' => 'superAdmin',
             'status' => 'active'
