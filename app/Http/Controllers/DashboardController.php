@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-   
-  
     public function index()
     {
         $auth = auth()->user();
@@ -27,5 +25,10 @@ class DashboardController extends Controller
         $countpartner = Partner::where('status', 'active')->count();
         $counterevent = Event::where('status', 'active')->count();
         return view('admin.dashboard', compact('auth', 'countpartner', 'counterevent', 'partners', 'test','aocf'));
+    }
+
+    public function user(){
+        $user = auth()->user();
+        return view('user.dashboard', compact('user'));
     }
 }

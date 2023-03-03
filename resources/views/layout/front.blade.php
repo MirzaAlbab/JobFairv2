@@ -29,6 +29,7 @@
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/front/style.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -50,7 +51,7 @@
           <li><a class="nav-link scrollto {{ (request()->is('galleryy')) ? 'active' : '' }}" href="{{ route('user-gallery') }}">Gallery</a></li>
          
              @if (Auth::check())
-             <li><a class="nav-link scrollto {{ (request()->is('galleryy')) ? 'active' : '' }}" href="{{ route('login') }}">My Dashboard</a></li>
+             <li><a class="nav-link scrollto {{ (request()->is('/user')) ? 'active' : '' }}" href="{{ route('user-area') }}">My Dashboard</a></li>
              <div class="dropdown">
               <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ Auth::User()->name }}
