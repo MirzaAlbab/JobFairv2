@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'about'=> '',
             'address' =>'',
-            'email' => 'admin@gmail.com',
+            'email' => 'mirzaalbabfirdaus17@gmail.com',
             'phone' => '',
             'password'=> '$2y$10$Fz4h8C5JDHNPJ3zb4rq/7epCGnoIj5kpE.Hzdq/1D67MQeH8l/o0m',
             'role' => 'admin',
