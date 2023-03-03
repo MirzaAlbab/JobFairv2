@@ -18,19 +18,17 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
+        if ($request->user()->role == 'admin') {
+            return $next($request);
         }
-
-        if (Auth::user()->role == 'admin') {
-            return redirect()->route('dashboard');
+        else if($request->user()->role == 'umum'){
+            return redirect('user');
         }
-        else{
-            return redirect('/');
-        }
-
+    
+       abort(403);
+    }
         
             
         
-    }
+    
 }

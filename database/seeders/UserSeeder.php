@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'phone' => '',
             'password'=> '$2y$10$Fz4h8C5JDHNPJ3zb4rq/7epCGnoIj5kpE.Hzdq/1D67MQeH8l/o0m',
             'role' => 'admin',
+            'photo'=> '',
             'instagram'=> '',
             'linkedin'=>'',
             'status' => 'active'

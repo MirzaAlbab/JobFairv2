@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Partner;
 use App\Models\Careerfair;
-use App\Models\User;
-use Closure;
-use Illuminate\Http\Request;
+
+
+
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
-{
+{   
+    
     public function index()
     {
         $auth = auth()->user();
