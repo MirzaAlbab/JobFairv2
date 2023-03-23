@@ -26,15 +26,32 @@
 
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <h2>Kevin Anderson</h2>
-            <h3>Web Designer</h3>
+           
+            <img src=" {{ asset('laravel/storage/app/'.Auth::user()->photo) }} " alt="Profile" class="rounded-circle">
+            <h2>{{ Auth::user()->name }}</h2>
+            <div class="row mb-3">
+              <label for="password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="password" type="password" class="form-control" id="password">
+                
+              </div>
+            </div>
+            @error('password')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
+           
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
               <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+             
+              @if (session('status'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session('status') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
             </div>
           </div>
         </div>
@@ -69,58 +86,59 @@
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 <h5 class="card-title">About</h5>
-                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+                <p class="small fst-italic">{{ Auth::user()->about }}</p>
 
                 <h5 class="card-title">Profile Details</h5>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                  <div class="col-lg-9 col-md-8">Kevin Anderson</div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Company</div>
-                  <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Job</div>
-                  <div class="col-lg-9 col-md-8">Web Designer</div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Country</div>
-                  <div class="col-lg-9 col-md-8">USA</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Address</div>
-                  <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->address }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Phone</div>
-                  <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
                 </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Tingkat Pendidikan</div>
+                  <div class="col-lg-9 col-md-8">S1</div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Jurusan</div>
+                  <div class="col-lg-9 col-md-8">Sistem Informasi</div>
+                </div>
+
+                
 
               </div>
 
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                 <!-- Profile Edit Form -->
-                <form>
+                <form enctype="multipart/form-data" method="post" action="{{ route('profile.update') }}">
+                  @csrf
+                  @method('patch')
                   <div class="row mb-3">
+                    <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
-                      <img src="assets/img/profile-img.jpg" alt="Profile">
+                      <img src="{{ asset('laravel/storage/app/'.Auth::user()->photo) }} || assets/img/profile-img.jpg" alt="Profile" class="img-preview">
                       <div class="pt-2">
-                        <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="photo" onchange="previewImage()" hidden>
+                        <a href="#" id="upload_image" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm" id="delete_profile" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                       </div>
                     </div>
                   </div>
@@ -128,84 +146,83 @@
                   <div class="row mb-3">
                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                      <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                     <div class="col-md-8 col-lg-9">
-                      <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                      <textarea name="about" class="form-control" id="about" style="height: 100px">{{ Auth::user()->about }}</textarea>
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                    <label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                      <input name="address" type="text" class="form-control" id="address" value="{{ Auth::user()->address }}">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
+                      <input name="phone" type="text" class="form-control" id="phone" value="{{ Auth::user()->phone }}">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                    <label for="pendidikan" class="col-md-4 col-lg-3 col-form-label">Tingkat Pendidikan</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="country" type="text" class="form-control" id="Country" value="USA">
+                      <select class="form-select" aria-label="Default select example" id="pendidikan" name="education">
+                        <option selected>Pilih salah satu</option>
+                        <option value="SMA/SMK">SMA/SMK</option>
+                        <option value="D3">D3</option>
+                        <option value="D4">D4</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                      </select>
+                     
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                    <label for="jurusan" class="col-md-4 col-lg-3 col-form-label">Jurusan</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                      
+                      <select class="form-select" aria-label="Default select example" id="jurusan" name="major">
+                        <option selected>Pilih salah satu</option>
+                        <option value="Manajemen">Manajemen</option>
+                        <option value="Administrasi">Administrasi</option>
+                        <option value="Akutansi">Akutansi</option>
+                        <option value="Teknik Elektro">Teknik Elektro</option>
+                        <option value="Teknik Mesin">S2</option>
+                        <option value="Teknik Robotika">Teknik Robotika</option>
+                      </select>
                     </div>
                   </div>
 
-                  <div class="row mb-3">
-                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                    </div>
-                  </div>
+                
 
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
+                      <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
+                      <input name="instagram" type="text" class="form-control" id="Instagram" value="{{ Auth::user()->instagram }}">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                      <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{ Auth::user()->linkedin }}">
                     </div>
                   </div>
 
@@ -219,36 +236,13 @@
               <div class="tab-pane fade pt-3" id="profile-settings">
 
                 <!-- Settings Form -->
-                <form>
-
-                  <div class="row mb-3">
-                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                    <div class="col-md-8 col-lg-9">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                        <label class="form-check-label" for="changesMade">
-                          Changes made to your account
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                        <label class="form-check-label" for="newProducts">
-                          Information on new products and services
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="proOffers">
-                        <label class="form-check-label" for="proOffers">
-                          Marketing and promo offers
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                        <label class="form-check-label" for="securityNotify">
-                          Security alerts
-                        </label>
-                      </div>
-                    </div>
+                <form enctype="multipart/form-data" method="post" action="{{ route('profile.cv') }}">
+                  @csrf
+                  @method('put')
+                  <div class="mb-3">
+                    <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
+                    <label for="formFileSm" class="form-label">{{ Auth::user()->cv }}</label>
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="cv">
                   </div>
 
                   <div class="text-center">
@@ -260,26 +254,39 @@
 
               <div class="tab-pane fade pt-3" id="profile-change-password">
                 <!-- Change Password Form -->
-                <form>
-
+                <form method="post" action="{{ route('password.update') }}">
+                  @csrf
+                  @method('put')
                   <div class="row mb-3">
                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="password" type="password" class="form-control" id="currentPassword">
+                      <input name="current_password" type="password" class="form-control" id="currentPassword">
+                      @error('current_password', 'updatePassword')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+           
+                    
+                  
+                   
+                  <div class="row mb-3">
+                    <label for="password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="password" type="password" class="form-control" id="password">
+                      @error('password', 'updatePassword')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                    <label for="password_confirmation" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="newpassword" type="password" class="form-control" id="newPassword">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      <input name="password_confirmation" type="password" class="form-control" id="password_confirmation">
+                      @error('password_confirmation', 'updatePassword')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
@@ -300,5 +307,6 @@
   </section>
 
 </main><!-- End #main -->
+
 
 @endsection

@@ -35,12 +35,7 @@
             <span>Partner</span>
           </a>
         </li><!-- End Job Page Nav -->
-        <li class="nav-item">
-          <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
-            <i class="bi bi-people"></i>
-            <span>Job</span>
-          </a>
-        </li><!-- End Job Page Nav -->
+       
         <li class="nav-item">
           <a class="nav-link @yield('event', 'collapsed')" href="{{ route('event') }}">
             <i class="bi bi bi-calendar3"></i>
@@ -54,7 +49,7 @@
           </a>
         </li><!-- End Gallery Page Nav -->
       
-      @can('admin')
+     
       <li class="nav-heading">Administrator</li>
         <li class="nav-item">
           <a class="nav-link @yield('user', 'collapsed')" href="{{ route('user') }}">
@@ -62,6 +57,14 @@
             <span>User</span>
           </a>
         </li><!-- End User Page Nav -->
-      @endcan
+     
+      <li class="nav-heading">Jobfair</li>
+      <li class="nav-item">
+        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
+          <i class="bi bi-people"></i>
+          <span>Job</span>
+        </a>
+      </li><!-- End Job Page Nav -->
+    </li>
     </ul>
   </aside>

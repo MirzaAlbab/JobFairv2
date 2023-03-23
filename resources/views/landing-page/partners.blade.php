@@ -21,10 +21,8 @@
   <section id="partner" class="partner">
     <div class="container" data-aos="fade-up">
       <div class="row">
-        <div class="col-lg-8 entries">
-          @foreach ($partners as $partner)
-          
-          
+        @foreach ($partners as $partner)
+        <div class="col-md-4">
           <article class="entry">
             <div class=" text-center">
               <img src="{{ asset('laravel/storage/app/'.$partner->img) }}" alt="" class=" entry-img img-fluid">
@@ -51,46 +49,19 @@
             </div>
 
           </article>
-          @endforeach
-
+          
           <!-- End company entry -->
-
-          <div class="partner-pagination">
-            <ul class="d-flex justify-content-center">
-             
-              {{ $partners->links() }}
-            </ul>
-          </div>
-
+          
+          
         </div><!-- End company entries list -->
-
-        @if (count($partners) > 0)
-            
-        <div class="col-lg-4">
-
-          <div class="sidebar">
-            <h3 class="sidebar-title">Recent Partners</h3>
-            @foreach ($partners as $partner)
-            <div class="sidebar-item recent-posts">
-              <div class="post-item clearfix">
-                <img src="{{ asset('laravel/storage/app/'.$partner->img) }}" alt="">
-                <h4><a href="{{ route('user-singlepartner', $partner->id) }}">{{ $partner->company }}</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-            </div>
-            @endforeach
-            <!-- End sidebar company-->
-
-          </div>
-          <!-- End sidebar -->
-
-        </div>
-        <!-- End company sidebar -->
-        @else
-        <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/comingsoonnnn.png') }}" class="img-fluid" alt=""></div>
-        @endif
+        @endforeach
         
+        <div class="partner-pagination">
+          <ul class="d-flex justify-content-center">
+           
+            {{ $partners->links() }}
+          </ul>
+        </div>
       </div>
 
     </div>

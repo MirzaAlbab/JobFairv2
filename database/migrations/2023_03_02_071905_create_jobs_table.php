@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('job_title');
+            $table->string('title');
             $table->string('type');
-            $table->enum('status', ['part-time', 'full-time'])->default('full-time');
+            $table->enum('category', ['part-time', 'full-time'])->default('full-time');
             $table->enum('salary',['2-3','3-5','6-8', '8-10'])->nullable();
-            $table->enum('graduation',['SMA/SMK','D3/D4','S1', 'S2'])->nullable();
-            $table->string('deskripsi');
-            $table->string('kota')->nullable();
+            $table->enum('education',['SMA/SMK','D3/D4','S1', 'S2'])->nullable();
+            $table->string('description');
+            $table->string('city')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->foreignId('partner_id');

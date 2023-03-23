@@ -82,6 +82,26 @@
   <script src="{{ asset('assets/js/admin/main.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(function(){
+  $("#upload_image").on('click', function(e){
+      e.preventDefault();
+      $("#image").trigger('click');
+  });
+});
+  </script>
+  <script>
+    $(function(){
+  $("#delete_profile").on('click', function(e){
+      e.preventDefault();
+      const imgprev = document.querySelector('.img-preview');
+      
+      imgprev.style.display = 'block';
+      imgprev.src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      
+  });
+});
+  </script>
   {{-- <script>
       $(document).ready(function() {
         $('.search-select').select2({
@@ -124,7 +144,8 @@
     function previewImage(){
       const image = document.querySelector('#image');
       const imgprev = document.querySelector('.img-preview');
-
+      
+      
       imgprev.style.display = 'block';
 
       const OFReader = new FileReader();
@@ -132,6 +153,7 @@
 
       OFReader.onload = (OFReaderEvent) => {
         imgprev.src = OFReaderEvent.target.result;
+        image.val = OFReaderEvent.target.result
       }
       
     }

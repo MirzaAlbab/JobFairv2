@@ -59,15 +59,12 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td class="align-middle">{{ $user->name }}</td>
                     <td class="align-middle">{{ $user->email }}</td>
-                    @if($user->role == 'superAdmin')
-                      <td class="align-middle">Super Admin</td>
+                    <td class="align-middle">{{ $user->role }}</td>
+                   
+                    @if($user->email_verified_at != null)
+                      <td class="align-middle"><span class="badge rounded-pill bg-primary">active</span></td>
                     @else
-                      <td class="align-middle">Admin</td>
-                    @endif
-                    @if($user->status == 'active')
-                      <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $user->status }}</span></td>
-                    @else
-                      <td class="align-middle"><span class="badge rounded-pill bg-secondary">{{ $user->status }}</span></td>
+                      <td class="align-middle"><span class="badge rounded-pill bg-secondary">inactive</span></td>
                     @endif
                     <td class="align-middle">   
                       <a href="{{ route('user-view',$user->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>

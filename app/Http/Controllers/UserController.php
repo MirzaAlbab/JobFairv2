@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $this->authorize('admin');
         $users = User::latest()->get();
-
+       
         return view('admin.user', compact('users'));
     }
 

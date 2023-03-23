@@ -15,13 +15,13 @@ class JobSeeder extends Seeder
     public function run()
     {
         Job::create([
-          'job_title' => 'IT',
+          'title' => 'IT',
           'type' => 'Technology',
-          'status' => 'full-time',
+          'category' => 'full-time',
           'salary' => '2-3',
-          'graduation' => 'SMA/SMK',
-          'deskripsi' => 'deskripsi',
-          'kota' => 'Sby',
+          'education' => 'SMA/SMK',
+          'description' => 'deskripsi',
+          'city' => 'Sby',
           'partner_id' => 1,
         ]);
         

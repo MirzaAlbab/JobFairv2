@@ -21,8 +21,12 @@ class Admin
         if ($request->user()->role == 'admin') {
             return $next($request);
         }
-        else if($request->user()->role == 'umum'){
+        else if(in_array($request->user()->role, ['umum','mhs','alumni'])){
             return redirect('user');
+        }
+        else if($request->user()->role == 'company'){
+            return redirect('user');
+
         }
     
        abort(403);

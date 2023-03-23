@@ -10,7 +10,7 @@
     
     <li class="nav-heading">Lamaran</li>
       <li class="nav-item">
-        <a class="nav-link @yield('rundown', 'collapsed')" href="{{ route('rundown') }}">
+        <a class="nav-link @yield('jobApplication', 'collapsed')" href="{{ route('jobApplication') }}">
           <i class="bi bi-card-list"></i>
           <span>Lamaran</span>
         </a>
@@ -22,6 +22,16 @@
         </a>
       </li>
     </li>
+    @can('company')
+    <li class="nav-heading">Jobs</li>
+      <li class="nav-item">
+        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
+          <i class="bi bi-ui-checks-grid"></i>
+          <span>Jobs</span>
+        </a>
+      </li>
+    </li>
+    @endcan
 
     <li class="nav-heading">Profile</li>
       <li class="nav-item">

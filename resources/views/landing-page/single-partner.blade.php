@@ -48,16 +48,58 @@
               {!! $partner->description !!}
 
             </div>
-            <ul>
-              @foreach ($jobs as $job)
-              <li>
-               {{ $job->position }}
-               <button class="btn btn-small badge btn-primary">Lamar</button>
-              </li>
-              @endforeach
-            </ul>
+           
+             
+           
 
           </article><!-- End blog entry -->
+
+          <div class="row">
+           
+              @foreach ($jobs as $job)
+              <div class="col-md-4">
+                <article class="entry">
+                  
+      
+                  <h2 class="entry-title">
+                    {{ $job->title }}
+                  </h2>
+      
+                  <div class="entry-meta">
+                    <ul>     
+                      <li class="d-flex align-items-center">{{ $job->category }}</li>
+                      <li class="d-flex align-items-center">{{ $job->education }}</li>
+                    </ul>
+                  </div>
+      
+                  <div class="entry-content">
+                    <p>
+                      {!! $job->description !!}
+                    </p>
+                    <div class="read-more">
+                      <form action="{{ route('applyjob') }}" method="post">
+                        @csrf
+                        <input hidden value={{ $job->id }} name="job_id"/>
+                        <input hidden value={{ $partner->id }} name="partner_id"/>
+                        
+                        <button class="btn btn-small btn-primary" type="submit">     
+                          <span>Lamar</span>
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+      
+                </article>
+                
+                <!-- End company entry -->
+                
+                
+              </div><!-- End company entries list -->
+    
+              
+              @endforeach
+           
+          </div>
 
         </div><!-- End blog entries list -->
 

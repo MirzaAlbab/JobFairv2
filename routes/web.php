@@ -11,7 +11,10 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\CareerfairController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobProposalController;
+use App\Models\Job_Proposal;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +38,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'cv'])->name('profile.cv');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -52,10 +56,35 @@ Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery'
 Route::get('/counter/{id}', [FrontController::class, 'counter']);
 Route::get('/teams',[FrontController::class, 'team'])->name('teams');
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
     // route: user/dashboard
+    Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
+    Route::get('/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
+    Route::post('/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
+    
+    
     
 });
+Route::middleware(['auth', 'verified'])->group(function () {
+    // route: partner
+    Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
+    Route::get('/dashboard/partner/getPartners/', [PartnerController::class, "getPartners"])->name('partner.getPartners');
+    Route::post('/dashboard/partner', [PartnerController::class, 'store'])->name('partner-store');
+    Route::get('/dashboard/partner-new', [PartnerController::class, 'create'])->name('partner-new');
+    Route::get('/dashboard/partner-view/{partner}', [PartnerController::class, 'show'])->name('partner-view');
+    Route::get('/dashboard/partner-update/{partner}/edit', [PartnerController::class, 'edit'])->name('partner-edit');
+    Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
+    Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
+
+    // route: job
+    Route::get('/dashboard/job', [JobController::class, 'index'])->name('job');
+    Route::post('/dashboard/job', [JobController::class, 'store'])->name('job-store');
+    Route::get('/dashboard/job-new', [JobController::class, 'create'])->name('job-new');
+    Route::get('/dashboard/job-view/{job}', [JobController::class, 'show'])->name('job-view');
+    Route::get('/dashboard/job-update/{job}/edit', [JobController::class, 'edit'])->name('job-edit');
+    Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
+    Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
+});
+
 Route::middleware(['auth', 'verified','admin'])->group(function () {
     // route: admin/dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -87,16 +116,6 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/career-fair-update/{id}', [CareerfairController::class, 'update'])->name('career-fair-update');
     Route::delete('/dashboard/career-fair/delete', [CareerfairController::class, 'destroy'])->name('career-fair-delete');
     
-    // route: admin/partner
-    Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
-    Route::get('/dashboard/partner/getPartners/', [PartnerController::class, "getPartners"])->name('partner.getPartners');
-    Route::post('/dashboard/partner', [PartnerController::class, 'store'])->name('partner-store');
-    Route::get('/dashboard/partner-new', [PartnerController::class, 'create'])->name('partner-new');
-    Route::get('/dashboard/partner-view/{partner}', [PartnerController::class, 'show'])->name('partner-view');
-    Route::get('/dashboard/partner-update/{partner}/edit', [PartnerController::class, 'edit'])->name('partner-edit');
-    Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
-    Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
-    
     // route: admin/event
     Route::get('/dashboard/event', [EventController::class, 'index'])->name('event');
     Route::post('/dashboard/event', [EventController::class, 'store'])->name('event-store');
@@ -123,14 +142,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/dashboard/user-update/{user}/edit', [UserController::class, 'edit'])->name('user-edit');
     Route::post('/dashboard/user-update/{user}', [UserController::class, 'update'])->name('user-update');
     Route::delete('/dashboard/user/delete', [UserController::class, 'destroy'])->name('user-delete');
-    
-    // Job
-    Route::get('/dashboard/job', [JobController::class, 'index'])->name('job');
-    Route::post('/dashboard/job', [JobController::class, 'store'])->name('job-store');
-    Route::get('/dashboard/job-new', [JobController::class, 'create'])->name('job-new');
-    Route::get('/dashboard/job-view/{job}', [JobController::class, 'show'])->name('job-view');
-    Route::get('/dashboard/job-update/{job}/edit', [JobController::class, 'edit'])->name('job-edit');
-    Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
-    Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
+
+    Route::get('/qrcode', [QrCodeController::class, 'index']);
 });
 // end route: admin
