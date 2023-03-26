@@ -27,7 +27,6 @@ class JobController extends Controller
     public function create()
     {
         $partner = Partner::all();
-     
         return view ('admin.job-new', compact('partner'));
     }
 
@@ -39,7 +38,32 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $request->validate([
+            'title' => 'required',
+            'type'=> 'required',
+            'category'=>'required',
+            'education'=> 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'partner_id' => 'required',
+        ]);
+      
+        Job::create([
+            'title' => $request->title,
+            'type'=> $request->type,
+            'category' => $request->category,
+            'salary' => $request->salary,
+            'education' => $request->education,
+            'description' => $request->description,
+            'city' => $request->city,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'partner_id' => $request->partner_id,
+        
+        ]);
+        return redirect('/dashboard/job')->with('status', 'Job berhasil ditambah');
     }
 
     /**
@@ -61,7 +85,9 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+        $job = Job::find($job->id);
+        $partner = Partner::all();
+        return view('admin.job-update', compact('partner','job'));
     }
 
     /**
@@ -73,7 +99,32 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'type'=> 'required',
+            'category'=>'required',
+            'education'=> 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'partner_id' => 'required',
+        ]);
+        
+       
+        Job::where('id', $job->id)
+                ->update([
+                    'title' => $request->title,
+                    'type'=> $request->type,
+                    'category' => $request->category,
+                    'salary' => $request->salary,
+                    'education' => $request->education,
+                    'description' => $request->description,
+                    'city' => $request->city,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                    'partner_id' => $request->partner_id,
+                ]);
+        return redirect('/dashboard/job')->with('status', 'Job berhasil diperbarui');
     }
 
     /**
@@ -82,8 +133,10 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(Job $job, Request $request)
     {
-        //
+      
+        Job::destroy($request->id);
+        return redirect('/dashboard/job')->with('status', 'Job berhasil dihapus');
     }
 }

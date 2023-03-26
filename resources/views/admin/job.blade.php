@@ -38,23 +38,20 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Posisi</th>
+                    <th scope="col">Perusahaan</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($jobs as $job)
                   <tr>
                     <th scope="row">{{ $loop->iteration }} </th>
-                    <td class="align-middle">{{ $job->position }}</td>
+                    <td class="align-middle">{{ $job->title }}</td>
                     <td class="align-middle">{{ $job->Jobsin->company }}</td>
-                    @if($job->status == 'active')
-                      <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>
-                    @else
-                      <td class="align-middle"><span class="badge rounded-pill bg-secondary">{{ $job->status }}</span></td>
-                    @endif
+                    <td class="align-middle">{{ $job->category }}</td>
+                   
                     <td class="align-middle">                       
                       <a href="{{ route('job-view',$job->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>
                       <a href="{{ route('job-edit',$job->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
@@ -72,12 +69,12 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Delete Partner</h5>
+                      <h5 class="modal-title">Delete Job</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <div class="modal-body">
-                      Are you sure you want to delete this Partner?
+                      Are you sure you want to delete this Job?
                     </div>
 
                     <div class="modal-footer">
