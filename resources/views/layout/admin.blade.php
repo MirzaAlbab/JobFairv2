@@ -25,7 +25,7 @@
   <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
  
@@ -82,31 +82,32 @@
   <script src="{{ asset('assets/js/admin/main.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  {{-- <script>
+   <script>
       $(document).ready(function() {
         $('.search-select').select2({
-          placeholder: 'Select an option',
+          placeholder: 'Pilih salah satu',
           theme: 'bootstrap-5',
     });
   });
-  $(document).ready(function() {
-    $('#tabel').DataTable( {
-        dom: 'Bfrtip',
-        buttons: {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'copy',
-                    'excel',
-                    'csv',
-                    'pdf',
-                    'print'
-                ]
-            }
-    } );
-} );
+  
+//   $(document).ready(function() {
+//     $('#tabel').DataTable( {
+//         dom: 'Bfrtip',
+//         buttons: {
+//                 extend: 'collection',
+//                 text: 'Export',
+//                 buttons: [
+//                     'copy',
+//                     'excel',
+//                     'csv',
+//                     'pdf',
+//                     'print'
+//                 ]
+//             }
+//     } );
+// } );
 
-  </script> --}}
+//   </script>
 
 
   <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
