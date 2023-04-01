@@ -75,12 +75,27 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">User Role</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="role" required>
+                <select class="form-select" onchange="yesnoCheck(this)"  aria-label="Default select example" aria-placeholder="Open this select menu" name="role" required>
                   <option value="" selected>Select an option</option>
                   {{-- <option value="superAdmin">Super Admin</option> --}}
                   <option value="admin">Admin</option>
                   <option value="company">Company</option>
                 </select>
+              </div>
+            </div>
+
+            <div class="row mb-3 assign invisible">
+              <label class="col-sm-2 col-form-label">Perusahaan</label>
+              <div class="col-sm-10">
+                <select class="form-select search-select perusahaan" aria-label="Default select example" name="partner_id">
+                  <option value=""></option>
+                  {{-- @foreach ($partner as $par)
+                    <option value="{{ $par->id }}">{{ $par->company }}</option>
+                  @endforeach --}}
+                </select>
+                @error('partner_id')
+                  <p class="text-danger">{{ $message }}</p>
+                @enderror
               </div>
             </div>
 
@@ -139,4 +154,6 @@
       </div>
     </section>
   </main>
+
+ 
 @endsection

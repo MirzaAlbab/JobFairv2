@@ -137,7 +137,17 @@
       
     }
   </script>
+  <script>
+   function yesnoCheck(that) {
+    const role = document.querySelector(".assign");
+    if (that.value == "company") {
+      role.classList.toggle("invisible");   
+    } else {
+      role.classList.add("invisible");     
+    }
+  }
   
+  </script>
  
 </body>
 </html> 
