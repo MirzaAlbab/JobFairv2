@@ -9,10 +9,13 @@ class JobApplication extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'job_id', 'partner_id', 'status'];
-    public function Company(){
-        return $this->hasOne(Partner::class,'id','partner_id');
+    public function company(){
+        return $this->belongsTo(Partner::class, 'partner_id', 'id');
     }
-    public function JobApply(){
-        return $this->hasOne(Job::class,'id','job_id');
+    public function job(){
+        return $this->belongsTo(Job::class,'job_id','id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }

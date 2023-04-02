@@ -13,4 +13,9 @@ class Job extends Model
     public function Jobsin(){
         return $this->hasOne(Partner::class,'id','partner_id');
     }
+
+    public function Jobsapp(){
+        return $this->hasMany(JobApplication::class,'id','job_id');
+    }
+   
 }

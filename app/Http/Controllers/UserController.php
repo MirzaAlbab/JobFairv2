@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Partner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class UserController extends Controller
     {
         $this->authorize('admin');
         $users = User::all();
-        return view('admin.user-new', compact('users'));
+        $partner = Partner::all();
+        return view('admin.user-new', compact('users','partner'));
     }
 
     /**
@@ -55,6 +57,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email'=> $request->email,
+            'address'=>$request->partner_id,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'status' => $request->status,

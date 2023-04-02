@@ -20,10 +20,7 @@ class JobApplicationController extends Controller
 
             $jobs = JobApplication::where('user_id','=',$id)->get();
         }
-        else if(Auth()->user()->role == 'company'){
-            $jobs = JobApplication::where('partner_id','=',$id)->get();
-
-        }else{
+        else{
             $job = JobApplication::all();
         }
         

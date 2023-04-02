@@ -10,6 +10,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\CareerfairController;
+use App\Http\Controllers\CompanyJobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
@@ -61,28 +62,19 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
     Route::post('/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
     
-    
-    
-});
-Route::middleware(['auth', 'verified'])->group(function () {
-    // route: partner
-    Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
-    Route::get('/dashboard/partner/getPartners/', [PartnerController::class, "getPartners"])->name('partner.getPartners');
-    Route::post('/dashboard/partner', [PartnerController::class, 'store'])->name('partner-store');
-    Route::get('/dashboard/partner-new', [PartnerController::class, 'create'])->name('partner-new');
-    Route::get('/dashboard/partner-view/{partner}', [PartnerController::class, 'show'])->name('partner-view');
-    Route::get('/dashboard/partner-update/{partner}/edit', [PartnerController::class, 'edit'])->name('partner-edit');
-    Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
-    Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
+    // route: company/dashboard
+    Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
+   // route: job
+   Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
+   Route::get('/company/jobapplication', [CompanyJobController::class, 'list'])->name('company-job-application');
+   Route::post('/company/job', [CompanyJobController::class, 'store'])->name('company-job-store');
+   Route::get('/company/job-new', [CompanyJobController::class, 'create'])->name('company-job-new');
+   Route::get('/company/job-view/{job}', [CompanyJobController::class, 'show'])->name('company-job-view');
+   Route::get('/company/job-update/{job}/edit', [CompanyJobController::class, 'edit'])->name('company-job-edit');
+   Route::post('/company/job-update/{job}', [CompanyJobController::class, 'update'])->name('company-job-update');
+   Route::delete('/company/job/delete', [CompanyJobController::class, 'destroy'])->name('company-job-delete');
 
-    // route: job
-    Route::get('/dashboard/job', [JobController::class, 'index'])->name('job');
-    Route::post('/dashboard/job', [JobController::class, 'store'])->name('job-store');
-    Route::get('/dashboard/job-new', [JobController::class, 'create'])->name('job-new');
-    Route::get('/dashboard/job-view/{job}', [JobController::class, 'show'])->name('job-view');
-    Route::get('/dashboard/job-update/{job}/edit', [JobController::class, 'edit'])->name('job-edit');
-    Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
-    Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
+
 });
 
 Route::middleware(['auth', 'verified','admin'])->group(function () {
@@ -142,6 +134,25 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/dashboard/user-update/{user}/edit', [UserController::class, 'edit'])->name('user-edit');
     Route::post('/dashboard/user-update/{user}', [UserController::class, 'update'])->name('user-update');
     Route::delete('/dashboard/user/delete', [UserController::class, 'destroy'])->name('user-delete');
+
+    // route: job
+    Route::get('/dashboard/job', [JobController::class, 'index'])->name('job');
+    Route::post('/dashboard/job', [JobController::class, 'store'])->name('job-store');
+    Route::get('/dashboard/job-new', [JobController::class, 'create'])->name('job-new');
+    Route::get('/dashboard/job-view/{job}', [JobController::class, 'show'])->name('job-view');
+    Route::get('/dashboard/job-update/{job}/edit', [JobController::class, 'edit'])->name('job-edit');
+    Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
+    Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
+
+    // route: partner
+    Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
+    Route::get('/dashboard/partner/getPartners/', [PartnerController::class, "getPartners"])->name('partner.getPartners');
+    Route::post('/dashboard/partner', [PartnerController::class, 'store'])->name('partner-store');
+    Route::get('/dashboard/partner-new', [PartnerController::class, 'create'])->name('partner-new');
+    Route::get('/dashboard/partner-view/{partner}', [PartnerController::class, 'show'])->name('partner-view');
+    Route::get('/dashboard/partner-update/{partner}/edit', [PartnerController::class, 'edit'])->name('partner-edit');
+    Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
+    Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
 
     Route::get('/qrcode', [QrCodeController::class, 'index']);
 });

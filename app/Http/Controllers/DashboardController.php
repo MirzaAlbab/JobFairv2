@@ -32,4 +32,8 @@ class DashboardController extends Controller
         $user = auth()->user();
         return view('user.dashboard', compact('user'));
     }
+    public function company(){
+        $user = auth()->user();
+        return view('company.dashboard', compact('user'));
+    }
 }

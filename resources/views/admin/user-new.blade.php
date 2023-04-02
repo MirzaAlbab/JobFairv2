@@ -89,9 +89,9 @@
               <div class="col-sm-10">
                 <select class="form-select search-select perusahaan" aria-label="Default select example" name="partner_id">
                   <option value=""></option>
-                  {{-- @foreach ($partner as $par)
+                  @foreach ($partner as $par)
                     <option value="{{ $par->id }}">{{ $par->company }}</option>
-                  @endforeach --}}
+                  @endforeach
                 </select>
                 @error('partner_id')
                   <p class="text-danger">{{ $message }}</p>

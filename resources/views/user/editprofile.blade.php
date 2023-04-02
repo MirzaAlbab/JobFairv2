@@ -29,16 +29,7 @@
            
             <img src=" {{ asset('laravel/storage/app/'.Auth::user()->photo) }} " alt="Profile" class="rounded-circle">
             <h2>{{ Auth::user()->name }}</h2>
-            <div class="row mb-3">
-              <label for="password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="password" type="password" class="form-control" id="password">
-                
-              </div>
-            </div>
-            @error('password')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
+          
            
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>

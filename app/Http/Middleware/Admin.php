@@ -25,7 +25,7 @@ class Admin
             return redirect('user');
         }
         else if($request->user()->role == 'company'){
-            return redirect('user');
+            return redirect('company');
 
         }
     
