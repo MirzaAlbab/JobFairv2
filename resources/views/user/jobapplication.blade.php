@@ -40,8 +40,8 @@
                   @foreach ($jobs as $job)
                   <tr>
                     <th scope="row">{{ $loop->iteration }} </th>
-                    <td class="align-middle">{{ $job->JobApply->title }}</td>
-                    <td class="align-middle">{{ $job->Company->company }}</td>
+                    <td class="align-middle">{{ $job->job->title }}</td>
+                    <td class="align-middle">{{ $job->company->company }}</td>
                     <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>
                    
                     

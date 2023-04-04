@@ -16,7 +16,7 @@
         </a>
       </li><!-- End Rundown Page Nav -->
       <li class="nav-item">
-        <a class="nav-link @yield('faq', 'collapsed')" href="{{ route('faq') }}">
+        <a class="nav-link @yield('cv', 'collapsed')" href="{{ route('user-cv') }}">
           <i class="bi bi-question-circle"></i>
           <span>CV</span>
         </a>

@@ -28,14 +28,14 @@
     </li>
     @endcan
 
-    <li class="nav-heading">Profile</li>
+    {{-- <li class="nav-heading">Profile</li>
       <li class="nav-item">
         <a class="nav-link @yield('profile', 'collapsed')" href="{{ route('profile.edit') }}">
           <i class="bi bi-ui-checks-grid"></i>
           <span>Profile</span>
         </a>
       </li>
-    </li>
+    </li> --}}
      
     
    

@@ -37,10 +37,10 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile', [ProfileController::class, 'cv'])->name('profile.cv');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/user/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/user/profile', [ProfileController::class, 'cv'])->name('profile.cv');
+    Route::delete('/user/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
@@ -59,8 +59,9 @@ Route::get('/teams',[FrontController::class, 'team'])->name('teams');
 Route::middleware(['auth','verified'])->group(function () {
     // route: user/dashboard
     Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
-    Route::get('/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
-    Route::post('/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
+    Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
+    Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
+    Route::post('/user/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
     
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');

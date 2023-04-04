@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobApplication;
 use Illuminate\Http\Request;
 use Auth;
+use Response;
 
 class JobApplicationController extends Controller
 {
@@ -17,16 +18,20 @@ class JobApplicationController extends Controller
     {
         $id = Auth()->user()->id;
         if(in_array(Auth()->user()->role, ['mhs','umum','alumni'])){
-
             $jobs = JobApplication::where('user_id','=',$id)->get();
-        }
-        else{
-            $job = JobApplication::all();
         }
         
         return view('user.jobapplication', compact('jobs'));
 
     }
+    
+    public function viewcv(){
+        $cv = Auth()->user()->cv;
+        return Response::make(file_get_contents($cv), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+    }
+    
 
     /**
      * Show the form for creating a new resource.

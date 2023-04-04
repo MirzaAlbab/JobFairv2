@@ -38,7 +38,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Partner Name</th>
+                    <th scope="col">Company</th>
                     <th scope="col">Career Fair</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>

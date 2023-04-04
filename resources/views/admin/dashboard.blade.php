@@ -27,7 +27,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Welcome back, {{ $auth->name }}!</h5>
+                  <h5 class="card-title">Welcome back, {{ Auth::user()->name }}!</h5>
                 </div>
               </div>
             </div><!-- End Welcoming -->
@@ -73,7 +73,7 @@
             </div><!-- End Webinar Card -->
 
             <!-- Peserta Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <div class="col-xxl-4 col-md-6">
               <div class="card info-card customers-card">
                 <div class="card-body">
                   <h5 class="card-title">Peserta</h5>
@@ -82,30 +82,34 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6 id="peserta">0</h6>
+                      <h6 id="peserta">{{ $countuser }}</h6>
                       <span class="text-muted small pt-2 ps-1">peserta</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div><!-- End Peserta Card -->
-
+            
+            <!-- Job Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Pekerjaan</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-briefcase"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id="Job">{{ $countjob }}</h6>
+                      <span class="text-muted small pt-2 ps-1">Pekerjaan</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Job Card -->
       </div>
     </section>
   </main>
 
-  <script>
-    onload = function() {
-      $(document).ready(function(){
-        $.ajax({
-          url: '/counter/{{ $aocf->id }}',
-          type: 'GET',
-          success: function(data){
-            console.log(data);
-            $("#peserta").text(data.user)
-          }
-        });
-      });
-    }
-  </script>
+  
 @endsection

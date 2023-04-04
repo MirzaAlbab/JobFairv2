@@ -25,7 +25,7 @@ class CompanyJobController extends Controller
     {
         $user = auth()->user();
         $jobapps = JobApplication::where('partner_id','=',$user->address )->get();
-        
+  
         return view('company.jobapplication', compact('jobapps'));
     }
 
