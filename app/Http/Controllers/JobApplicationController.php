@@ -26,10 +26,7 @@ class JobApplicationController extends Controller
     }
     
     public function viewcv(){
-        $cv = Auth()->user()->cv;
-        return Response::make(file_get_contents($cv), 200, [
-            'content-type'=>'application/pdf',
-        ]);
+        
     }
     
 

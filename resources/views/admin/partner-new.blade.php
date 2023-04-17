@@ -25,7 +25,7 @@
         <div class="card-body">
           <h5 class="card-title">New Partner</h5>
           <!-- General Form Elements -->
-          <form action="{{ route('partner-store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('partner-store') }}" method="POST" enctype="multipart/form-data" id="formnew">
             @csrf
             <div class="row mb-3">
               <label for="nama" class="col-sm-2 col-form-label">Partner Name</label>
@@ -40,16 +40,17 @@
             </div>
 
             <div class="row mb-3">
-              <label for="inputDescription" class="col-sm-2 col-form-label">Partner Profile</label>
+              <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
                 <div>
                   <textarea class="form-control" id="editor" name="deskripsi">{{ old('deskripsi') }}</textarea>
                   @error('deskripsi')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
-                </div>  
+                </div>
               </div>
             </div>
+
             
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">AOCF Period</label>

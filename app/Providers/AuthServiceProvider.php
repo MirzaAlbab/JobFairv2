@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 // use Illuminate\Support\Facades\Gate;
@@ -36,5 +38,6 @@ class AuthServiceProvider extends ServiceProvider
                 ->salutation('Hormat Kami, DPKKA Universitas Airlangga');
 
         });
+       
     }
 }
