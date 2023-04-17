@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
     use HasFactory;
-    protected $fillable = ['company', 'description', 'position','careerfair_id', 'img', 'status'];
+    protected $fillable = ['company', 'description', 'position','careerfair_id', 'img', 'status','views'];
 
     public function AOCF()
     {
@@ -16,6 +16,10 @@ class Partner extends Model
     }
     public function Jobs(){
         return $this->hasMany(Job::class);
+    }
+    public function incrementReadCount() {
+        $this->views++;
+        return $this->save();
     }
     
 }
