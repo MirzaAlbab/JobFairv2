@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Careerfair;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CareerfairController extends Controller
 {
@@ -141,4 +142,14 @@ class CareerfairController extends Controller
         Careerfair::destroy($request->id);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil dihapus');
     }
+    public function generateqrcode(Request $request){
+        $careerfair = Careerfair::find($request->id);
+        $qr = QrCode::format('png')->size(300)->generate($careerfair->id);
+        
+        // $qr = 'data:image/png;base64,' . $qr;
+        $img = base64_encode($qr);
+        return view('admin.career-fair-qrcode', compact('img', 'careerfair'));
+    }
+
+   
 }

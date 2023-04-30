@@ -36,6 +36,7 @@ class DashboardController extends Controller
     public function company(){
         $user = auth()->user();
         $countlamaran = JobApplication::where("partner_id","=",$user->address)->count();
-        return view('company.dashboard', compact('countlamaran'));
+        $views = Partner::where('id','=',$user->address )->get(['views']);
+        return view('company.dashboard', compact('countlamaran','views'));
     }
 }

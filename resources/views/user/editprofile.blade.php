@@ -269,7 +269,7 @@
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
-                  </div>web
+                  </div>
 
                   <div class="row mb-3">
                     <label for="password_confirmation" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>

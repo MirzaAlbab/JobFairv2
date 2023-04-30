@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.company')
 
 @section('title')
   <title>New Job | DPKKA - Universitas Airlangga</title>
@@ -14,7 +14,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Home</li>
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item"><a href="{{ route('job') }}" data-bs-toggle="modal" data-bs-target="#cancelFormModal">Rundown</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('company-job') }}" data-bs-toggle="modal" data-bs-target="#cancelFormModal">Job</a></li>
           <li class="breadcrumb-item active">New Job</li>
         </ol>
       </nav>

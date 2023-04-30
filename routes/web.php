@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobProposalController;
+use App\Http\Controllers\QRCodeController;
 use App\Models\Job_Proposal;
 
 /*
@@ -154,7 +155,9 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/dashboard/partner-update/{partner}/edit', [PartnerController::class, 'edit'])->name('partner-edit');
     Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
     Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
-
-    Route::get('/qrcode', [QrCodeController::class, 'index']);
+    
+    Route::get('/qrcode/{id}', [CareerfairController::class, 'generateQRCode'])->name('qrcode');
+    Route::get('/qrcode/{id}/download', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
+   
 });
 // end route: admin
