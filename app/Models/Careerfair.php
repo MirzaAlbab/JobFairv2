@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Careerfair extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'start_date', 'end_date','img', 'status', 'user'];
+    protected $fillable = ['title', 'description', 'start_date', 'end_date','img', 'status', 'user', 'qr'];
 
     public function Partnership()
     {

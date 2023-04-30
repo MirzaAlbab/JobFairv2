@@ -39,7 +39,7 @@ class CareerfairController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $request->validate([
             'judul' => 'required',
             'tglmulai' => 'required',
@@ -53,6 +53,11 @@ class CareerfairController extends Controller
         }else{
             $img = null;
         }
+        $qr = QrCode::format('png')->size(300)->generate($request->judul);
+        $output_file = 'public/uploads/img/img-' . time() . '.png';
+        Storage::disk('public')->put($output_file, $qr);
+       
+
         Careerfair::create([
             'title' => $request->judul,
             'description' => $request->deskripsi,
@@ -60,6 +65,8 @@ class CareerfairController extends Controller
             'end_date' => $request->tglselesai,
             'img' => $img,
             'status' => $request->status,
+            'qr' =>$output_file,
+           
         ]);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil ditambah');
     }
@@ -142,13 +149,24 @@ class CareerfairController extends Controller
         Careerfair::destroy($request->id);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil dihapus');
     }
-    public function generateqrcode(Request $request){
-        $careerfair = Careerfair::find($request->id);
-        $qr = QrCode::format('png')->size(300)->generate($careerfair->id);
+
+    public function viewQRCode(Request $request)
+    {
+        $qr = Careerfair::find($request->id);
+        return view('admin.career-fair-qr', compact('qr'));
+    }
+    
+    public function downloadQRCode (Request $request)
+    {
+        $qr = Careerfair::find($request->id);
+        $file = public_path()."/storage/".$qr->qr;
         
-        // $qr = 'data:image/png;base64,' . $qr;
-        $img = base64_encode($qr);
-        return view('admin.career-fair-qrcode', compact('img', 'careerfair'));
+        $filename = $qr->title . '.png';
+        
+        $headers = array(
+             'Content-Type: application/png',
+         );
+        return response()->download($file, $filename, $headers);
     }
 
    

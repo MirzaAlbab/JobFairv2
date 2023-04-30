@@ -156,8 +156,9 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
     Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
     
-    Route::get('/qrcode/{id}', [CareerfairController::class, 'generateQRCode'])->name('qrcode');
-    Route::get('/qrcode/{id}/download', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
+   
+    Route::get('/qrcode/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
+    Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
    
 });
 // end route: admin

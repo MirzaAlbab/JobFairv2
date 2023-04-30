@@ -22,10 +22,14 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-         <img src="{{ 'data:image/jpeg;base64,'.$img }}" alt="">
-         <a href="data:image/png;base64, {!! base64_encode($img) !!} " download>Downloads</a>
+         <img src="{{ asset('storage/'. $qr->qr) }}" alt="qr-code">
          
         </div>
+       <div class="row mt-3">
+        <div class="col-lg-4 d-flex justify-content-center">
+          <a class="btn btn-primary" href="{{ route('qrcode-download',$qr->id) }}">Downloads</a>
+        </div>
+       </div>
       </div>
     </section>
   </main>

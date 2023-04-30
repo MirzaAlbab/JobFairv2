@@ -23,6 +23,7 @@ return new class extends Migration
             // $table->foreignId('user_id')->constrained()->default(1);
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->integer('user')->default(0);
+            $table->string('qr')->nullable();
             $table->timestamps();
         });
     }
