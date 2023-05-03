@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobApplication;
-use Illuminate\Http\Request;
 use Auth;
-use Response;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\JobApplication;
+use Illuminate\Support\Facades\Response;
+
+use function Pest\Laravel\get;
 
 class JobApplicationController extends Controller
 {
@@ -26,6 +29,18 @@ class JobApplicationController extends Controller
     }
     
     public function viewcv(){
+        $id = Auth()->user()->id;
+        $cv = User::where('id','=',$id)->first();
+        $file = public_path()."/storage/".$cv->cv;
+        $headers = array(
+            'Content-Type: application/pdf',
+            
+            
+        );
+        $file = PDF::loadFile($file);
+        return Response::make(file_get_contents($file), 200, $headers);
+
+
         
     }
     

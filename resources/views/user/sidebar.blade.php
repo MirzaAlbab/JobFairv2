@@ -22,22 +22,21 @@
         </a>
       </li>
     </li>
-    @can('company')
-    <li class="nav-heading">Jobs</li>
-      <li class="nav-item">
-        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
-          <i class="bi bi-ui-checks-grid"></i>
-          <span>Jobs</span>
-        </a>
-      </li>
-    </li>
-    @endcan
-
+   
     <li class="nav-heading">Profile</li>
       <li class="nav-item">
         <a class="nav-link @yield('profile', 'collapsed')" href="{{ route('profile.edit') }}">
           <i class="bi bi-ui-checks-grid"></i>
           <span>Profile</span>
+        </a>
+      </li>
+    </li>
+
+    <li class="nav-heading">Presensi</li>
+      <li class="nav-item">
+        <a class="nav-link @yield('profile', 'collapsed')" href="{{ route('presensi') }}">
+          <i class="bi bi-ui-checks-grid"></i>
+          <span>Presensi</span>
         </a>
       </li>
     </li>

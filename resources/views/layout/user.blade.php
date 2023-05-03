@@ -28,7 +28,7 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
- 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/admin/style.css') }}" rel="stylesheet">
 
@@ -127,8 +127,69 @@
 } );
 
   </script> --}}
+  <script>
+    // $('#result').val('test');
+    function onScanSuccess(decodedText, decodedResult) {
+        // alert(decodedText);
+        $('#result').val(decodedText);
+        let id = decodedText;                
+        html5QrcodeScanner.clear().then(_ => {
+         
+          
+          let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+           
+          $.ajax({
 
+            
+            url: "{{ route('presensi-store') }}",
+            type: 'POST',            
+            data: {
+                _method : "POST",
+                _token: CSRF_TOKEN, 
+                
+            },
 
+            success: function (response) { 
+                console.log(response);
+                if(response.status == 200){
+                  $('#mysuccessModal').modal('show');
+                  setTimeout(() => {
+                    
+                    location.reload();
+                  }, 2000);
+
+                }else{
+                  $('#myfailModal').modal('show');
+                  
+                  
+                }
+                
+            }
+            });   
+        }).catch(error => {
+          $('#myfailModal').modal('show');
+          
+        });
+        
+    }
+
+    function onScanFailure(error) {
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
+        // console.warn(`Code scan error = ${error}`);
+        alert('QR Code tidak valid, silahkan scan ulang ')
+    }
+    
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: {width: 250, height: 250} },
+   
+    /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
   <script>
 

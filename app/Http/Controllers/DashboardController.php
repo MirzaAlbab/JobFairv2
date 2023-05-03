@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Partner;
 use App\Models\Careerfair;
+use App\Models\Presence;
 use App\Models\JobApplication;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,4 +40,30 @@ class DashboardController extends Controller
         $views = Partner::where('id','=',$user->address )->get(['views']);
         return view('company.dashboard', compact('countlamaran','views'));
     }
+
+    public function presence (){
+     
+        $user = auth()->user();
+        $status = Presence::where('user_id', $user->id)->latest()->get();
+        return view ('user.presence', compact('status'));
+    }
+
+    public function presencestore (){
+        $user = auth()->user();
+        $careerfair = Careerfair::where('status', 'active')->latest()->first();
+        try {
+            
+            $presence = Presence::create([
+                'user_id' => $user->id,
+                'careerfair_id' => $careerfair->id,
+            ]);
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+           return response()->json(['status' => 404], 404);
+        }
+
+       
+    }
+
 }

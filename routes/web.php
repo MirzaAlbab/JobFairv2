@@ -63,6 +63,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
     Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
     Route::post('/user/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
+    Route::get('/user/presence', [DashboardController::class, 'presence'])->name('presensi');
+    Route::post('/user/presence', [DashboardController::class, 'presencestore'])->name('presensi-store');
     
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');

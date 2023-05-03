@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Careerfair;
+use App\Models\Presence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -153,7 +154,9 @@ class CareerfairController extends Controller
     public function viewQRCode(Request $request)
     {
         $qr = Careerfair::find($request->id);
+        
         return view('admin.career-fair-qr', compact('qr'));
+
     }
     
     public function downloadQRCode (Request $request)
