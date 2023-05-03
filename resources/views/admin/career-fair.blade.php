@@ -58,9 +58,9 @@
                     <td class="align-middle"><span class="badge rounded-pill bg-secondary">{{ $career->status }}</span></td>
                     @endif
                     <td class="align-middle">   
-                      <a href="{{ route('qrcode',$career->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="QRCode"><i class="bi bi-upc"></i></a>
+                      <a href="{{ route('qrcode',$career->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="QRCode"><i class="bi bi-qr-code"></i></a>
                       <a href="{{ route('career-fair-view',$career->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>
-                      <a href="{{ route('career-fair-edit',$career->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('career-fair-edit',$career->id) }}" class="btn btn-warning btn-sm text-white" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
                       <!-- Delete Modal -->
                       <a type="button" class="btn btn-danger btn-sm" id="delete-modal" data-value="{{$career->id}}" data-bs-toggle="modal"  data-bs-target="#deleteFormModal"><i class="bi bi-trash"></i></a>
                       

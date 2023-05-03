@@ -68,7 +68,7 @@
                     @endif
                     <td class="align-middle">   
                       <a href="{{ route('user-view',$user->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>
-                      <a href="{{ route('user-edit',$user->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('user-edit',$user->id) }}" class="btn btn-warning btn-sm text-white" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
                       <!-- Delete Modal -->
                       <a type="button" class="btn btn-danger btn-sm" id="delete-modal" data-value="{{$user->id}}" data-bs-toggle="modal"  data-bs-target="#deleteFormModal">
                         <i class="bi bi-trash"></i>
