@@ -65,5 +65,9 @@ class DashboardController extends Controller
 
        
     }
+    public function indexAdmin(){
+        $presence = Presence::whereDate('created_at', '=', date('Y-m-d'))->get();
+        return view('admin.presence', compact('presence'));
+    }
 
 }

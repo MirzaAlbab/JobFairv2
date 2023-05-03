@@ -48,13 +48,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                 
                   @foreach ($jobapps as $job)
                   <tr>
                     <th scope="row">{{ $loop->iteration }} </th>
                     <td class="align-middle">{{ $job->user->name }}</td>  
                     <td class="align-middle">{{ $job->job->title }}</td>
                     <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>  
-                    
+                     
+                    </td>
                   </tr>
                   @endforeach
                   

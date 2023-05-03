@@ -31,17 +31,23 @@ class JobApplicationController extends Controller
     public function viewcv(){
         $id = Auth()->user()->id;
         $cv = User::where('id','=',$id)->first();
-        $file = public_path()."/storage/".$cv->cv;
-        $headers = array(
-            'Content-Type: application/pdf',
-            
-            
-        );
-        $file = PDF::loadFile($file);
-        return Response::make(file_get_contents($file), 200, $headers);
-
-
+      
         
+        return view('user.cv', compact('cv'));
+        
+    }
+    public function indexCompany()
+    {
+        $user = auth()->user();
+        $jobapps = JobApplication::where('partner_id','=',$user->address )->get();
+        return view('company.jobapplication', compact('jobapps'));
+    }
+
+    public function indexAdmin()
+    {
+        $user = auth()->user();
+        $jobapps = JobApplication::all();
+        return view('admin.jobapplication', compact('jobapps'));
     }
     
 

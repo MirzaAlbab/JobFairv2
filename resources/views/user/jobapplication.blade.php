@@ -43,8 +43,6 @@
                     <td class="align-middle">{{ $job->job->title }}</td>
                     <td class="align-middle">{{ $job->company->company }}</td>
                     <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>
-                   
-                    
                      
                     </td>
                   </tr>

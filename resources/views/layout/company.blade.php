@@ -121,7 +121,7 @@
         
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf'
+          'csv', 'excel', 'pdf'
         ],
         "searching": false
     } );
@@ -138,9 +138,9 @@
 
   </script>
   <script>
-    $(".dropdown ul li").click(function() {
-    var i = $(this).index() + 1
-    var table = $('#tabel').DataTable();
+    $(".export ul li").click(function() {
+    let i = $(this).index() + 1
+    let table = $('#tabel').DataTable();
     console.log(table);
     if (i == 1) {
         table.button('.buttons-csv').trigger();

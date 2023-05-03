@@ -20,13 +20,6 @@ class CompanyJobController extends Controller
         $jobs = Job::where('partner_id','=',$user->address )->get();
         return view('company.job', compact('jobs'));
     }
-    
-    public function list()
-    {
-        $user = auth()->user();
-        $jobapps = JobApplication::where('partner_id','=',$user->address )->get();
-        return view('company.jobapplication', compact('jobapps'));
-    }
 
     /**
      * Show the form for creating a new resource.

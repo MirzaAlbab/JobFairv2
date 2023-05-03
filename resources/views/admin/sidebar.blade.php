@@ -23,13 +23,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
+        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('admin-jobapplication') }}">
           <i class="bi bi-people"></i>
           <span>Job Application</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('job') }}">
+        <a class="nav-link @yield('jobs', 'collapsed')" href="{{ route('admin-presence') }}">
           <i class="bi-clipboard-check"></i>
           <span>Presence</span>
         </a>

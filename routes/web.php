@@ -70,7 +70,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
    // route: job
    Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
-   Route::get('/company/jobapplication', [CompanyJobController::class, 'list'])->name('company-job-application');
+   Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
    Route::post('/company/job', [CompanyJobController::class, 'store'])->name('company-job-store');
    Route::get('/company/job-new', [CompanyJobController::class, 'create'])->name('company-job-new');
    Route::get('/company/job-view/{job}', [CompanyJobController::class, 'show'])->name('company-job-view');
@@ -158,6 +158,8 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
     Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
     
+    Route::get('dashboard/jobapplication', [JobApplicationController::class, 'indexAdmin'])->name('admin-jobapplication');
+    Route::get('dashboard/presence', [DashboardController::class, 'indexAdmin'])->name('admin-presence');
    
     Route::get('/qrcode/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
     Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
