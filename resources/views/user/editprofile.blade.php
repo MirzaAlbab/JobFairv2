@@ -232,7 +232,7 @@
                   @method('put')
                   <div class="mb-3">
                     <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
-                    <label for="formFileSm" class="form-label">{{ Auth::user()->cv }}</label>
+                   
                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="cv">
                   </div>
 

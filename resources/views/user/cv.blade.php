@@ -25,21 +25,29 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">CV</h5>
+
+              @if($cv->cv == null || $cv->cv == '')
+                <p class="card-text">You haven't uploaded your CV yet.</p>
+                <a href="{{ route('user.cv.create') }}" class="btn btn-primary">Upload CV</a>
+              @else
               
-              {{-- <iframe id="pdf-js-viewer"
-              src="{{ asset('assets/vendor/pdf/viewer/web/viewer.html?file=../../../../../storage/'.$cv->cv) }}"
+            
+            {{-- update cv --}}
+           
+            
+              <iframe id="pdf-js-viewer"
+              src="{{ asset('storage/'.$cv->cv) }}"
               width="800px"
               height="600px"
               style="border: none;"
-            /> --}}
-              {{-- <iframe id="pdf-js-viewer"
-              src="{{ asset('assets/vendor/pdf/viewer/web/viewer.html?file=http%3A%2F%2Fcareer_fair.test%2Fstorage%2Fpublic%2Fuploads%2Fcv%2FdE2l02Sl8jPjrbDf0lVKYJ84wobGZ5jucnM1ta2g.pdf') }}"
-              width="800px"
-              height="600px"
-              style="border: none;"
-            /> --}}
-            <iframe id="pdf-js-viewer" src="{{ asset('assets/vendor/pdf/viewer/web/viewer.html?file=http%3A%2F%2Fcareer_fair.test%2Fstorage%2Fpublic%2Fuploads%2Fcv%2FdE2l02Sl8jPjrbDf0lVKYJ84wobGZ5jucnM1ta2g.pdf') }}" title="webviewer" frameborder="0" width="500" height="600"></iframe>
-            http://career_fair.test/public/storage/public/uploads/cv/dE2l02Sl8jPjrbDf0lVKYJ84wobGZ5jucnM1ta2g.pdf
+            />
+            </iframe>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <a href="{{ route('profile.edit') }}" class="btn btn-primary me-md-2" type="button">Update CV</a>
+             
+            </div>
+            @endif
+             
            
               
             </div>

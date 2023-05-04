@@ -4,7 +4,7 @@
   <title>Presence | DPKKA - Universitas Airlangga</title>
 @endsection
 
-@section('Presence', '')
+@section('presence', '')
 
 @section('main')
   <main id="main" class="main">

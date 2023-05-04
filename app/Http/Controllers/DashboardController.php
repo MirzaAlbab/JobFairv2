@@ -44,7 +44,8 @@ class DashboardController extends Controller
     public function presence (){
      
         $user = auth()->user();
-        $status = Presence::where('user_id', $user->id)->latest()->get();
+        $status = Presence::where('user_id', $user->id)->whereDate('created_at','=', date('Y-m-d'))->get();
+       
         return view ('user.presence', compact('status'));
     }
 
