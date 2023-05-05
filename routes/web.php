@@ -164,5 +164,6 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/qrcode/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
     Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
    
+    Route::get('/api/company',[DashboardController::class, 'getCompany'])->name('api.company');
 });
 // end route: admin

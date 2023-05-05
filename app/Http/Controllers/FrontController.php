@@ -18,6 +18,7 @@ class FrontController extends Controller
     public function index()
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
+       
         $partners = Partner::where([
             ['status', 'active'],
             ['position', '1'],

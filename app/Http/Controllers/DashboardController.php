@@ -6,9 +6,10 @@ use App\Models\Job;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Partner;
-use App\Models\Careerfair;
 use App\Models\Presence;
+use App\Models\Careerfair;
 use App\Models\JobApplication;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -21,12 +22,14 @@ class DashboardController extends Controller
         // $events = Event::latest()->get();
         // $test[] = $partners->merge($events);
         // // dd($test);
-        // $aocf = Careerfair::where('status', 'active')->latest()->first();
-        $countpartner = Partner::where('status', 'active')->count();
-        $counterevent = Event::where('status', 'active')->count();
-        $countuser = User::select("*")->whereIn('role', ["mhs","alumni","umum"])->count();
-        $countjob = Job::all()->count();
-        return view('admin.dashboard', compact('countpartner', 'counterevent', 'countuser','countjob'));
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $countpartner = Partner::where('careerfair_id','=',$aocf->id)->count();
+        $counterevent = Event::where('status', 'active')->where('careerfair_id', '=', $aocf->id)->count();
+        $countuser = User::whereIn('role', ["mhs","alumni","umum"])->count();
+        $countjob = Job::join('partners', 'partners.id', '=', 'jobs.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->count();
+
+        
+        return view('admin.dashboard', compact('countpartner', 'counterevent', 'countuser','countjob','aocf'));
     }
 
     public function user(){
@@ -70,5 +73,29 @@ class DashboardController extends Controller
         $presence = Presence::whereDate('created_at', '=', date('Y-m-d'))->get();
         return view('admin.presence', compact('presence'));
     }
+
+    public function getCompany(){
+        // query join table orm to join between company and user
+    //    $sumcompany = Careerfair::select("careerfairs.title","sum")->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get();
+    //    selectcount company
+    // orm select count company
+        //  $company = Partner::select("partners.company","partners.careerfair_id","careerfairs.title",DB::raw("count(partners.id) as sum"))->join('careerfairs', 'partners.careerfair_id', '=', 'careerfairs.id')->groupBy('partners.careerfair_id')->get();
+        $company = Careerfair::select(DB::raw('count(partners.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get()->pluck('sum');
+        $job = Careerfair::select( DB::raw('count(jobs.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->join('jobs', 'jobs.partner_id','=','partners.id')->groupBy('careerfairs.id')->get()->pluck('sum');
+
+        $careerfair = Careerfair::select('title')->get()->pluck('title');
+    //   str replace careerfair
+        // $careerfair = str_replace('"', "", $careerfair);
+        // $careerfair = str_replace('[', '', $careerfair);
+        // $careerfair = str_replace(']', '', $careerfair);
+      
+        
+        return response()->json(['company' => $company,'job' => $job,'careerfair' => $careerfair], 200);
+    //    return view('admin.dummy', compact('company','job','careerfair'));
+       
+       
+    }
+
+
 
 }
