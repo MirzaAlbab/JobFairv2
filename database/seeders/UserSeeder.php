@@ -26,7 +26,8 @@ class UserSeeder extends Seeder
             'photo'=> '',
             'instagram'=> '',
             'linkedin'=>'',
-            'status' => 'active'
+            'status' => 'active',
+            'careerfair_id' => 1,
         ]);
         
     }

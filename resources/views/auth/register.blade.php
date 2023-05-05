@@ -2,6 +2,8 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+            <x-text-input id="name" class="hidden" type="text" name="careerfair_id" value="{{ $aocf->id }}" />
+            
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />

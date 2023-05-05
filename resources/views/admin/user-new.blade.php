@@ -27,6 +27,7 @@
           <!-- General Form Elements -->
           <form action="{{ route('user') }}" method="POST">
             @csrf
+            <input type="text" name="careerfair_id" value="{{ $aocf->id }}" hidden>
             <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Name</label>
               <div class="col-sm-10">

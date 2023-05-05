@@ -25,7 +25,10 @@ class UserFactory extends Factory
             'role'=> fake()->randomElement(['mhs','alumni','umum']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'education' => fake()->randomElement(['SMA/SMK','D3','D4','S1','S2','S3']),
             'email_verified_at' => now(),
+            'status' => fake()->randomElement(['active','inactive']),
+            'careerfair_id' => mt_rand(1,5),
         ];
     }
 

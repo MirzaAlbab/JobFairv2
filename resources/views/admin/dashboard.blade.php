@@ -107,8 +107,8 @@
                 </div>
               </div>
             </div><!-- End Job Card -->
-             <!-- Reports -->
-             <div class="col-12">
+             <!-- Full Reports -->
+             {{-- <div class="col-12">
               <div class="card">
 
                 <div class="card-body">
@@ -179,8 +179,10 @@
                 </div>
 
               </div>
-            </div><!-- End Reports -->
-
+            </div> --}}
+            <!-- End Reports -->
+            
+            <!-- Current Reports -->
             <div class="col-12">
               <div class="card">
 
@@ -251,6 +253,55 @@
                        
                       }).render();
                         });
+                    
+                   
+                  </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+            
+            <!-- Education Chart -->
+            <div class="col-12">
+              <div class="card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Reports <span>/Today</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="eduChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('http://career_fair.test/api/edureport')
+                        .then((response) => response.json())
+                        .then((data) => {
+                          new ApexCharts(document.querySelector("#eduChart"), {
+                        series: data.edu,
+                        chart: {
+                          width: 380,
+                          type: 'pie',
+                        },
+                        labels: data.education,
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            chart: {
+                              width: 200
+                            },
+                            legend: {
+                              position: 'bottom'
+                            }
+                          }
+                        }]                       
+
+                      }).render();
+
+                        });
+                     
+                    });
                     
                    
                   </script>

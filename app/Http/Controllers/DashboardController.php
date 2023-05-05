@@ -18,17 +18,13 @@ class DashboardController extends Controller
     public function index()
     {
         
-        // $partners = Partner::latest()->get();
-        // $events = Event::latest()->get();
-        // $test[] = $partners->merge($events);
-        // // dd($test);
+        $this->authorize('admin');
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $countpartner = Partner::where('careerfair_id','=',$aocf->id)->count();
         $counterevent = Event::where('status', 'active')->where('careerfair_id', '=', $aocf->id)->count();
-        $countuser = User::whereIn('role', ["mhs","alumni","umum"])->count();
+        $countuser = User::whereIn('role', ["mhs","alumni","umum"])->where('careerfair_id','=', $aocf->id)->count();
         $countjob = Job::join('partners', 'partners.id', '=', 'jobs.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->count();
 
-        
         return view('admin.dashboard', compact('countpartner', 'counterevent', 'countuser','countjob','aocf'));
     }
 
@@ -74,7 +70,7 @@ class DashboardController extends Controller
         return view('admin.presence', compact('presence'));
     }
 
-    public function getCompany(){
+    public function getFullReport(){
         // query join table orm to join between company and user
     //    $sumcompany = Careerfair::select("careerfairs.title","sum")->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get();
     //    selectcount company
@@ -94,6 +90,14 @@ class DashboardController extends Controller
     //    return view('admin.dummy', compact('company','job','careerfair'));
        
        
+    }
+
+    public function getEduReport(){
+        // $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
+        $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('education');
+       
+        $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
+        return response()->json(['edu' => $edu,'education' => $education], 200);
     }
 
 

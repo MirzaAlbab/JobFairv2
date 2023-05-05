@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('status')->default('active');
+            $table->foreignId('careerfair_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

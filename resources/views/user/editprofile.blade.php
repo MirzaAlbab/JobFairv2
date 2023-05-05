@@ -177,6 +177,17 @@
                      
                     </div>
                   </div>
+                  <div class="row mb-3">
+                    <label for="provinsi" class="col-md-4 col-lg-3 col-form-label">Provinsi</label>
+                    <div class="col-md-8 col-lg-9">
+                      <select class="form-select" aria-label="Default select example" id="province" name="province">
+                        <option id="province" selected>Pilih salah satu</option>
+                       
+                        
+                      </select>
+                     
+                    </div>
+                  </div>
 
                   <div class="row mb-3">
                     <label for="jurusan" class="col-md-4 col-lg-3 col-form-label">Jurusan</label>
@@ -298,6 +309,20 @@
   </section>
 
 </main><!-- End #main -->
+<script>
+  $(document).ready(function (e) {
+    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      let provinces = data.map(province => {
+        return `<option value="${province.id}">${province.name}</option>`
+      })
+      console.log($('#province'))
+      $('#province').append(provinces)
+    })
+  });
+</script>
 
 
 @endsection

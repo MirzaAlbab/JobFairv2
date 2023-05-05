@@ -28,7 +28,7 @@
 
               @if($cv->cv == null || $cv->cv == '')
                 <p class="card-text">You haven't uploaded your CV yet.</p>
-                <a href="{{ route('user.cv.create') }}" class="btn btn-primary">Upload CV</a>
+                <a href="{{ route('profile.edit') }}" class="btn btn-primary">Upload CV</a>
               @else
               
             

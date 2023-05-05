@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Partner;
 use App\Models\User;
+use App\Models\Partner;
+use App\Models\Careerfair;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class UserController extends Controller 
 {
@@ -34,7 +35,8 @@ class UserController extends Controller
         $this->authorize('admin');
         $users = User::all();
         $partner = Partner::all();
-        return view('admin.user-new', compact('users','partner'));
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        return view('admin.user-new', compact('users','partner','aocf'));
     }
 
     /**
