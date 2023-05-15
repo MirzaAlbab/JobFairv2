@@ -29,7 +29,7 @@
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/front/style.css') }}" rel="stylesheet">
 
-
+ 
 </head>
 
 <body>
@@ -185,7 +185,7 @@
       }, 2000);
     });
   </script> --}}
-
+  
 </body>
 
 </html>

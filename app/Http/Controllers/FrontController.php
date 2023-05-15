@@ -60,14 +60,61 @@ class FrontController extends Controller
         ])->get();
         return view('landing-page.about',compact('aocf', 'partners', 'participant'));
     }
-    public function partner()
+    public function partner(Request $request)
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
-        $partners = Partner::where([
-            ['status','active'],
-            ['careerfair_id', $aocf->id],
-        ])->latest()->paginate(5);
+        // $partners = Partner::where([
+        //     ['status','active'],
+        //     ['careerfair_id', $aocf->id],
+        // ])->latest()->paginate(6);
+        $partners = Partner::query()->paginate(6);
+        
+        if($request->ajax()){
+            $partners = Job::query()
+                        ->when($request->seach_term, function($q)use($request){
+                            $q->where('title', 'like', '%'.$request->seach_term.'%');})
+                        ->when($request->status, function($q)use($request){
+                            $q->where('status',$request->status);
+                        })
+                        ->paginate(6);
+            return response()->json($partners);
+        }
+        
         return view('landing-page.partners', compact('partners', 'aocf'));
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $category = $request->input('category');
+        // how to separate when user only filter by categories without using any query
+        $results = Job::query()
+            ->when($query, function ($query, $search) {
+                return $query->where('title', 'like', "%{$search}%");
+            })
+            ->when($category, function ($query, $category) {
+                return $query->where('education', $category);
+            })->get();
+            // get partner_id of each results
+            $partner_ids = $results->pluck('partner_id');
+            $partner_ids = $partner_ids->unique();
+
+        
+        // $results = Job::query()
+        //     ->when($query, function ($query, $search) {
+        //         return $query->where('title', 'like', "%{$search}%");
+        //     })
+        //     ->when($category, function ($query, $category) {
+        //         return $query->where('education', $category);
+        //     })->get();
+        //     // get partner_id of each results
+        //     $partner_ids = $results->pluck('partner_id');
+        //     $partner_ids = $partner_ids->unique();
+            
+            // get partners with the ids
+            $partners = Partner::whereIn('id', $partner_ids)->paginate(6);
+            
+        
+        return view('landing-page.partners-filter', compact('partners'));
     }
     public function singlepartner($id)
     {
@@ -77,6 +124,15 @@ class FrontController extends Controller
         $partner->incrementReadCount();
         $jobs = Job::where('partner_id', $partner->id)->get();  
         return view('landing-page.single-partner', compact('partner', 'sidebar','aocf','jobs'));
+    }
+    public function jobdetails($id)
+    {
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $job = Job::findorFail($id);
+        $sidebar = Partner::latest()->limit(10)->get();
+        $partner = Partner::findorFail($job->partner_id);
+       
+        return view('landing-page.job-details', compact('job', 'partner','aocf','sidebar'));
     }
     public function events()
     {
@@ -120,5 +176,7 @@ class FrontController extends Controller
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         return view('landing-page.teams',compact('aocf'));
     }
+
+    
 
 }

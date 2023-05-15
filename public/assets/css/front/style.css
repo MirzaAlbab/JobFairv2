@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Nunito", sans-serif;
     color: #444444;
 }
 
@@ -1117,12 +1117,8 @@ section {
     padding: 0 0 30px 0;
     font-size: 14px;
 }
-.footer .footer-newsletter {
-    padding: 50px 0;
-    background: #f6f9ff;
-    border-top: 1px solid #e1ecff;
-}
-.footer .footer-newsletter h4 {
+
+.search-btn h4 {
     font-size: 24px;
     margin: 0 0 10px 0;
     padding: 0;
@@ -1130,7 +1126,7 @@ section {
     font-weight: 700;
     color: #012970;
 }
-.footer .footer-newsletter form {
+.search-btn form {
     margin-top: 20px;
     background: #fff;
     padding: 6px 10px;
@@ -1138,12 +1134,12 @@ section {
     border-radius: 4px;
     border: 1px solid #e1ecff;
 }
-.footer .footer-newsletter form input[type="email"] {
+.search-btn form input[type="text"] {
     border: 0;
     padding: 8px;
     width: calc(100% - 140px);
 }
-.footer .footer-newsletter form input[type="submit"] {
+.search-btn form input[type="submit"] {
     position: absolute;
     top: 0;
     right: 0;
@@ -1158,7 +1154,7 @@ section {
     transition: 0.3s;
     border-radius: 4px;
 }
-.footer .footer-newsletter form input[type="submit"]:hover {
+.search-btn form input[type="submit"]:hover {
     background: #5969f3;
 }
 .footer .footer-top {
@@ -1167,6 +1163,12 @@ section {
     border-top: 1px solid #e1ecff;
     border-bottom: 1px solid #e1ecff;
     padding: 60px 0 30px 0;
+}
+.search-btn .form-select {
+    width: auto;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: -10px;
 }
 @media (max-width: 992px) {
     .footer .footer-top {

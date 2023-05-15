@@ -20,7 +20,7 @@
   <!-- ======= Company Section ======= -->
   <section id="partner" class="partner">
     <div class="container" data-aos="fade-up">
-      
+
       <div class="search-btn">
         <div class="container">
           <div class="row justify-content-center">
@@ -31,14 +31,14 @@
             <div class="col-lg-6">
               <form action="{{ route('search') }}" method="get" class="mb-5">
         
-                <input type="text" name="query" placeholder="Search...">
+                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
                 
                 <select class="form-select" name="category" >
                     <option value="">Education</option>
-                    <option value="SMA/SMK">SMA/SMK</option>
-                    <option value="D3">D3</option>
-                    <option value="D4">D4</option>
-                    <option value="S1">S1</option>
+                    <option value="SMA/SMK" {{ request('category') == "SMA/SMK" ? 'selected': '' }}>SMA/SMK</option>
+                    <option value="D3" {{ request('category') == "D3" ? 'selected': '' }}>D3</option>
+                    <option value="D4" {{ request('category') == "D4" ? 'selected': '' }}>D4</option>
+                    <option value="S1" {{ request('category') == "S1" ? 'selected': '' }}>S1</option>
                 </select>
                 
                 <input type="submit" value="Search">
@@ -49,7 +49,13 @@
           </div>
         </div>
       </div>
-   
+      
+      
+       @if (count($partners) > 0)
+
+      
+
+
       <div class="row mt-5">
         @foreach ($partners as $partner)
         <div class="col-md-4">
@@ -93,6 +99,13 @@
           </ul>
         </div>
       </div>
+      @else
+      <div class="row mt-5">
+        <div class="col-md-12 text-center">
+          <h5>Pencarian tidak ditemukan...</h5>
+        </div>
+      </div>
+      @endif
 
     </div>
   </section>
@@ -100,60 +113,14 @@
 
 </main>
 <!-- End #main -->
-{{-- import jquery from cdn --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
 <script>
   // catch value on search button
   $(document).ready(function() {
-    const fetch_data = (page, status, seach_term) => {
-        if(status === undefined){
-            status = "";
-        }
-        if(seach_term === undefined){
-            seach_term = "";
-        }
-        $.ajax({ 
-            url:"http://career_fair.test/partner"+"&status="+status+"&seach_term="+seach_term,
-            
-            success:function(data){
-              console.log(data);
-                $('tbody').html('');
-                $('tbody').html(data);
-            }
-        })
-    }
-
-    $('body').on('keyup', '#serach', function(){
-        var status = $('#status').val();
-        var seach_term = $('#serach').val();
-        var page = $('#hidden_page').val();
-        console.log(status);
-        console.log(seach_term);
-        
-        fetch_data(page, status, seach_term);
-    });
-
-    $('body').on('change', '#status', function(){
-        var status = $('#status').val();
-        var seach_term = $('#serach').val();
-        var page = $('#hidden_page').val();
-        console.log(status);
-        console.log(seach_term);
-        fetch_data(page, status, seach_term);
-    });
-
-    $('body').on('click', '.pager a', function(event){
-        event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
-        $('#hidden_page').val(page);
-        var serach = $('#serach').val();
-        var seach_term = $('#status').val();
-        fetch_data(page,status, seach_term);
-    });
-
-      
+    $('#search').click(function() {
+      let search = $('#search').val();
+      let edu = $('#edu').val();
+     
       
       // var _token = $('input[name="_token"]').val();
       // $.ajax({
@@ -168,7 +135,7 @@
       //     $('#company').html(data);
       //   }
       // });
-    // });
+    });
   });
 </script>
 @endsection
