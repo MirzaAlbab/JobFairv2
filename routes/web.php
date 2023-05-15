@@ -167,6 +167,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
    
     Route::get('/api/getfullreport',[DashboardController::class, 'getFullReports'])->name('api.fullreport');
-    Route::get('/api/edureport',[DashboardController::class, 'getEduReport'])->name('api.edureport');
+    Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('api.useredureport');
+    Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('api.jobedureport');
 });
 // end route: admin

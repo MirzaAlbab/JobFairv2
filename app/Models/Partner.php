@@ -22,4 +22,5 @@ class Partner extends Model
         return $this->save();
     }
     
+    
 }

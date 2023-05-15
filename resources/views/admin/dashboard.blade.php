@@ -32,81 +32,7 @@
               </div>
             </div><!-- End Welcoming -->
 
-            <!-- Perusahaan Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-                <div class="card-body">
-                  <h5 class="card-title">Perusahaan</h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-journal-richtext"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $countpartner }}</h6>
-                      <span class="text-muted small pt-2 ps-1">perusahaan</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Perusahaan Card -->
 
-            <!-- Webinar Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Webinar</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-headset"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $counterevent }}</h6>
-                      <span class="text-muted small pt-2 ps-1">webinar</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Webinar Card -->
-
-            <!-- Peserta Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card customers-card">
-                <div class="card-body">
-                  <h5 class="card-title">Peserta</h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="peserta">{{ $countuser }}</h6>
-                      <span class="text-muted small pt-2 ps-1">peserta</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Peserta Card -->
-            
-            <!-- Job Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card customers-card">
-                <div class="card-body">
-                  <h5 class="card-title">Pekerjaan</h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-briefcase"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="Job">{{ $countjob }}</h6>
-                      <span class="text-muted small pt-2 ps-1">Pekerjaan</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Job Card -->
              <!-- Full Reports -->
              {{-- <div class="col-12">
               <div class="card">
@@ -187,7 +113,7 @@
               <div class="card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Career Fair Reports <span>/Today</span></h5>
 
                   <!-- Line Chart -->
                   <div id="aocfChart"></div>
@@ -262,55 +188,106 @@
 
               </div>
             </div><!-- End Reports -->
-            
-            <!-- Education Chart -->
-            <div class="col-12">
-              <div class="card">
+           
 
-                <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="eduChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      fetch('http://career_fair.test/api/edureport')
-                        .then((response) => response.json())
-                        .then((data) => {
-                          new ApexCharts(document.querySelector("#eduChart"), {
-                        series: data.edu,
-                        chart: {
-                          width: 380,
-                          type: 'pie',
-                        },
-                        labels: data.education,
-                        responsive: [{
-                          breakpoint: 480,
-                          options: {
-                            chart: {
-                              width: 200
-                            },
-                            legend: {
-                              position: 'bottom'
+              <!-- User Education Chart -->
+              <div class="col-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">User Education Reports <span>/Today</span></h5>
+  
+                    <!-- Line Chart -->
+                    <div id="eduChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('http://career_fair.test/api/useredureport')
+                          .then((response) => response.json())
+                          .then((data) => {
+                            new ApexCharts(document.querySelector("#eduChart"), {
+                          series: data.edu,
+                          chart: {
+                            width: 380,
+                            type: 'pie',
+                          },
+                          labels: data.education,
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
                             }
-                          }
-                        }]                       
-
-                      }).render();
-
-                        });
+                          }]                       
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
                      
-                    });
-                    
-                   
-                  </script>
-                  <!-- End Line Chart -->
-
+                    </script>
+                    <!-- End Line Chart -->
+  
+                  </div>
+  
                 </div>
+              </div><!-- End Reports -->
+              <!-- Job Qualification Chart -->
+              <div class="col-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">Job Qualification <span>/Today</span></h5>
+  
+                    <!-- Line Chart -->
+                    <div id="JobeduChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('http://career_fair.test/api/jobedureport')
+                          .then((response) => response.json())
+                          .then((data) => {
+                            new ApexCharts(document.querySelector("#JobeduChart"), {
+                          series: data.edu,
+                          chart: {
+                            width: 380,
+                            type: 'pie',
+                          },
+                          labels: data.education,
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          }]                       
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
+                     
+                    </script>
+                    <!-- End Line Chart -->
+  
+                  </div>
+  
+                </div>
+              </div><!-- End Reports -->
+           
 
-              </div>
-            </div><!-- End Reports -->
       </div>
     </section>
   </main>

@@ -86,8 +86,11 @@
               <div class="col-sm-10">
                 <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis">
                   <option value="" selected>Select an option</option>
-                  <option value="1">Sponsor</option>
-                  <option value="2">Participant</option>
+                  <option value="1">Platinum</option>
+                  <option value="2">Gold</option>
+                  <option value="3">Silver</option>
+                  <option value="4">Bronze</option>
+                  <option value="5">Participant</option>
                 </select>
                 @error('jenis')
                   <p class="text-danger">{{ $message }}</p>

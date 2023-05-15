@@ -92,11 +92,20 @@ class DashboardController extends Controller
        
     }
 
-    public function getEduReport(){
+    public function getUserEduReport(){
         // $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
         $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('education');
        
         $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
+        return response()->json(['edu' => $edu,'education' => $education], 200);
+    }
+
+    
+    public function getJobEduReport(){
+        
+        $education = Job::select('education')->groupBy('jobs.education')->get()->pluck('education');
+       
+        $edu = Job::select(DB::raw('count(jobs.id) as sum'))->groupBy('jobs.education')->get()->pluck('sum');
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
 
