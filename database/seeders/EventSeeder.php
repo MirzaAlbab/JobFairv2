@@ -20,7 +20,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[AOCF CAREER WORKSHOP WITH ANTERAJA]<br><br>Halo, career fighters! Anteraja (PT. Tri Adi Bersama) telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di Anteraja? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday1<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833193/CareerFair/2022-04-13_065953_Company-Session-Day-1-Anter-Aja-20220307-FILEminimizer.jpg',
             'time' => Carbon::parse('2022-03-15 09:30:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 5,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
@@ -40,7 +40,7 @@ class EventSeeder extends Seeder
             'description' => '<p><br>[AOCF CAREER WORKSHOP WITH MEGA PERSADA GROUP]<br><br>Halo, career fighters! Mega Persada Group telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di Mega Persada Group? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday1<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833549/CareerFair/2022-04-13_070548_Company-Session-Day-1-Mega-Persada-20220310-FILEminimizer-1-980x980.jpg',
             'time' => Carbon::parse('2022-03-15 12:00:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
@@ -60,7 +60,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[AOCF CAREER WORKSHOP WITH BANK MUAMALAT]<br><br>Halo, career fighters! Bank Muamalat telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di Bank Muamalat? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday1<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img'=>'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833739/CareerFair/2022-04-13_070859_Company-Session-Day-1-Kalla-20220310-FILEminimizer-1-980x980.jpg',
             'time' => Carbon::parse('2022-03-15 14:30:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 4,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
@@ -70,7 +70,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[WEBINAR BERSERTIFIKAT 10SKP]<br><br>Seberapa penting sih work-life balance itu? Terus, bagaimana cara mewujudkannya agar kita nggak burnout?<br><br>Yuk cari tau jawabannya di 35th AOCF Webinar Day 2 yang satu ini!<br><br>Eits nggak cuma itu! Di sini kamu juga bakal bertemu dengan perusahaan-perusahaan keren yang sedang membuka kesempatan berkarir di 35th AOCF ini lho~<br><br>Geser ke kiri untuk info lebih lengkapnya!<br><br>GRATIS DAN TERBUKA UNTUK UMUM! Daftarkan dirimu di: bit.ly/aocfday2</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833824/CareerFair/2022-04-13_071023_Company-Session-Day-2-KOL-2-20220310-FILEminimizer-980x980.jpg',
             'time' => Carbon::parse('2022-03-16 09:30:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 2,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
@@ -80,7 +80,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[AOCF CAREER WORKSHOP WITH PT ARTA BOGA CEMERLANG]<br><br>Halo, career fighters! PT Arta Boga Cemerlang telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di PT Arta Boga Cemerlang? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday2<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833824/CareerFair/2022-04-13_071023_Company-Session-Day-2-KOL-2-20220310-FILEminimizer-980x980.jpg',
             'time' => Carbon::parse('2022-03-16 10:30:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
@@ -90,7 +90,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[AOCF CAREER WORKSHOP WITH PT PEGADAIAN]<br><br>Halo, career fighters! PT Pegadaian telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di PT Pegadaian? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday2<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649833969/CareerFair/2022-04-13_071248_Company-Session-Day-2-Pegadaian-20220310-FILEminimizer-980x980.jpg',
             'time' => ('2022-03-16 11:30:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
@@ -100,7 +100,7 @@ class EventSeeder extends Seeder
             'description' => '<p>[AOCF CAREER WORKSHOP WITH BANK BRI]<br><br>Halo, career fighters! Bank BRI telah resmi bergabung sebagai perusahaan mitra 35th AOCF lho!<br><br>Pengen tau prospek karir yang ada di Bank BRI? Yuk ikuti Company Sessionnya! Daftarkan dirimu di: bit.ly/aocfday2<br><br>GRATIS DAN TERBUKA UNTUK UMUM!!!<br><br>See you!</p>',
             'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649834026/CareerFair/2022-04-13_071346_Company-Session-Day-2-BRI-20220310-FILEminimizer-980x980.jpg',
             'time' => Carbon::parse('2022-03-16 13:00:00'),
-            'careerfair_id' => 1,
+            'careerfair_id' => 2,
             'location' => 'Zoom Meeting',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'

@@ -13,7 +13,7 @@
     <h1>Profile</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
         
         <li class="breadcrumb-item active">Profile</li>
       </ol>
@@ -42,7 +42,21 @@
                 <strong>{{ session('status') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-            @endif
+              @endif
+              @if ($errors->any())
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Update failed</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+              {{-- detect errps with message bag --}}
+
+              @if ($errors->hasBag('updatePassword'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Change password failed</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
             </div>
           </div>
         </div>
@@ -76,23 +90,23 @@
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                <h5 class="card-title">About</h5>
+                <h5 class="card-title">Deskripsi Diri</h5>
                 <p class="small fst-italic">{{ Auth::user()->about }}</p>
 
                 <h5 class="card-title">Profile Details</h5>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                  <div class="col-lg-3 col-md-4 label ">Nama Lengkap</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Address</div>
+                  <div class="col-lg-3 col-md-4 label">Alamat</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->address }}</div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Phone</div>
+                  <div class="col-lg-3 col-md-4 label">No. Telepon</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
                 </div>
 
@@ -103,12 +117,12 @@
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Tingkat Pendidikan</div>
-                  <div class="col-lg-9 col-md-8">S1</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->education }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Jurusan</div>
-                  <div class="col-lg-9 col-md-8">Sistem Informasi</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->major }}</div>
                 </div>
 
                 
@@ -123,7 +137,7 @@
                   @method('patch')
                   <div class="row mb-3">
                     <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
-                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto Profil</label>
                     <div class="col-md-8 col-lg-9">
                       <img src="{{ asset('laravel/storage/app/'.Auth::user()->photo) }} || assets/img/profile-img.jpg" alt="Profile" class="img-preview">
                       <div class="pt-2">
@@ -135,30 +149,71 @@
                   </div>
 
                   <div class="row mb-3">
-                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
+                      @error('name')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                    <label for="about" class="col-md-4 col-lg-3 col-form-label">Deskripsi Diri</label>
                     <div class="col-md-8 col-lg-9">
                       <textarea name="about" class="form-control" id="about" style="height: 100px">{{ Auth::user()->about }}</textarea>
+                      @error('about')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
-                  <div class="row mb-3">
-                    <label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="address" type="text" class="form-control" id="address" value="{{ Auth::user()->address }}">
-                    </div>
-                  </div>
+                 
 
                   <div class="row mb-3">
-                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">No. Telepon</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="phone" type="text" class="form-control" id="phone" value="{{ Auth::user()->phone }}">
+                      @error('phone')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+
+                 
+
+                  
+                  <div class="row mb-3">
+                    <label for="province" class="col-md-4 col-lg-3 col-form-label">Provinsi</label>
+                    <div class="col-md-8 col-lg-9">
+                      <select class="form-select" aria-label="Default select example" id="province" name="province">
+                        <option id="province" value="" selected>Pilih salah satu</option>
+                      </select>
+                      @error('province')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                     
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="city" class="col-md-4 col-lg-3 col-form-label">Kota/Kab</label>
+                    <div class="col-md-8 col-lg-9">
+                      <select class="form-select" aria-label="Default select example" id="city" name="city" disabled>
+                        <option id="city" value="" selected>Pilih salah satu</option>
+                      </select>
+                      @error('city')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                     
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="address" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="address" type="text" class="form-control" id="address" value="{{ Auth::user()->address }}">
+                      @error('address')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
@@ -167,25 +222,16 @@
                     <div class="col-md-8 col-lg-9">
                       <select class="form-select" aria-label="Default select example" id="pendidikan" name="education">
                         <option selected>Pilih salah satu</option>
-                        <option value="SMA/SMK">SMA/SMK</option>
-                        <option value="D3">D3</option>
-                        <option value="D4">D4</option>
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="S3">S3</option>
+                        <option value="SMA/SMK" {{ Auth::user()->education == "SMA/SMK" ? 'selected' :'' }}>SMA/SMK</option>
+                        <option value="D3"{{ Auth::user()->education == "D3" ? 'selected' :'' }}>D3</option>
+                        <option value="D4"{{ Auth::user()->education == "D4" ? 'selected' :'' }}>D4</option>
+                        <option value="S1"{{ Auth::user()->education == "S1" ? 'selected' :'' }}>S1</option>
+                        <option value="S2"{{ Auth::user()->education == "S2" ? 'selected' :'' }}>S2</option>
+                        <option value="S3"{{ Auth::user()->education == "S3" ? 'selected' :'' }}>S3</option>
                       </select>
-                     
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="provinsi" class="col-md-4 col-lg-3 col-form-label">Provinsi</label>
-                    <div class="col-md-8 col-lg-9">
-                      <select class="form-select" aria-label="Default select example" id="province" name="province">
-                        <option id="province" selected>Pilih salah satu</option>
-                       
-                        
-                      </select>
-                     
+                      @error('education')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
 
@@ -194,7 +240,7 @@
                     <div class="col-md-8 col-lg-9">
                       
                       <select class="form-select" aria-label="Default select example" id="jurusan" name="major">
-                        <option selected>Pilih salah satu</option>
+                        <option selected value="">Pilih salah satu</option>
                         <option value="Manajemen">Manajemen</option>
                         <option value="Administrasi">Administrasi</option>
                         <option value="Akutansi">Akutansi</option>
@@ -202,16 +248,20 @@
                         <option value="Teknik Mesin">S2</option>
                         <option value="Teknik Robotika">Teknik Robotika</option>
                       </select>
+                      @error('major')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
-
-                
 
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}">
                     </div>
+                    @error('email')
+                      <p class="text-danger">{{ $message }}</p>
+                    @enderror
                   </div>
 
                   <div class="row mb-3">
@@ -245,6 +295,9 @@
                     <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
                    
                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="cv">
+                    @error('cv')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
                   </div>
 
                   <div class="text-center">
@@ -314,12 +367,28 @@
     fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+     
       let provinces = data.map(province => {
         return `<option value="${province.id}">${province.name}</option>`
       })
-      console.log($('#province'))
+     
       $('#province').append(provinces)
+    })
+  });
+  // make script to fetch city after province selected
+  $('#province').change(function (e) {
+    let province_id = $(this).val()
+    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${province_id}.json`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      let cities = data.map(city => {
+        return `<option value="${city.id}">${city.name}</option>`
+      })
+      console.log($('#city'))
+      $('#city').removeAttr('disabled')
+      $('#city').html('<option selected>Pilih salah satu</option>')
+      $('#city').append(cities)
     })
   });
 </script>

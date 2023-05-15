@@ -31,6 +31,18 @@ class ProfileController extends Controller
         
         $request->validate([
             'photo' => 'image|file|max:2048',
+            'name' => 'required',
+            'address' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'about' => 'required',
+            'phone' => 'required',
+            'education' => 'required',
+            'major' => 'required',
+            // 'instagram' => 'required',
+            // 'linkedin' => 'required',
+
+
         ]);
         if($request->file('photo')){
             $img = $request->file('photo')->store('public/uploads/profile');
@@ -49,6 +61,8 @@ class ProfileController extends Controller
         ->update([
             'name' => $request->name,
             'address' => $request->address,
+            'province' => $request->province,
+            'city' => $request->city,
             'about' => $request->about,
             'phone' => $request->phone,
             'photo' => $img,
@@ -65,7 +79,7 @@ class ProfileController extends Controller
     {
         
         $request->validate([
-            'cv' => 'file|max:2048',
+            'cv' => 'required|file|max:2048|mimes:pdf',
         ]);
        
         $request->user()->fill($request->validated());
