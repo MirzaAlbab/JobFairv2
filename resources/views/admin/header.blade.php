@@ -16,14 +16,7 @@
         </a><!-- End Profile Name Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <li>
-              <a class="dropdown-item d-flex align-items-center" 
-                 href="{{ route('profile.edit') }}">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Profile</span>
-              </a>
-           
-          </li>
+         
           <li>
             <form action="{{ route('logout') }}" method="post">
               @csrf

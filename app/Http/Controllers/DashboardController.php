@@ -69,31 +69,39 @@ class DashboardController extends Controller
         $presence = Presence::whereDate('created_at', '=', date('Y-m-d'))->get();
         return view('admin.presence', compact('presence'));
     }
+    // current career fair
+    public function getCurrentUserEducation(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.education')->get()->pluck('sum');
+        $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.education')->get()->pluck('education');
+       
+        return response()->json(['edu' => $edu,'education' => $education], 200);
+    }
 
+    public function getCurrentJobQualification(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $education = Careerfair::select('education')->join('partners','partners.careerfair_id', '=', 'careerfairs.id')->join('jobs', 'jobs.partner_id', '=', 'partners.id')->groupBy('jobs.education')->get()->pluck('education');
+       
+        $edu = Careerfair::select(DB::raw('count(jobs.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->join('jobs', 'jobs.partner_id','=','partners.id')->where('careerfairs.id','=',$aocf->id)->groupBy('jobs.education')->get()->pluck('sum');
+        return response()->json(['edu' => $edu,'education' => $education], 200);
+    }
+    
+    // all time career fair
     public function getFullReport(){
-        // query join table orm to join between company and user
-    //    $sumcompany = Careerfair::select("careerfairs.title","sum")->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get();
-    //    selectcount company
-    // orm select count company
-        //  $company = Partner::select("partners.company","partners.careerfair_id","careerfairs.title",DB::raw("count(partners.id) as sum"))->join('careerfairs', 'partners.careerfair_id', '=', 'careerfairs.id')->groupBy('partners.careerfair_id')->get();
+     
         $company = Careerfair::select(DB::raw('count(partners.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get()->pluck('sum');
         $job = Careerfair::select( DB::raw('count(jobs.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->join('jobs', 'jobs.partner_id','=','partners.id')->groupBy('careerfairs.id')->get()->pluck('sum');
 
         $careerfair = Careerfair::select('title')->get()->pluck('title');
-    //   str replace careerfair
-        // $careerfair = str_replace('"', "", $careerfair);
-        // $careerfair = str_replace('[', '', $careerfair);
-        // $careerfair = str_replace(']', '', $careerfair);
-      
-        
+
         return response()->json(['company' => $company,'job' => $job,'careerfair' => $careerfair], 200);
-    //    return view('admin.dummy', compact('company','job','careerfair'));
+   
        
        
     }
 
     public function getUserEduReport(){
-        // $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
+      
         $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('education');
        
         $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
@@ -108,6 +116,8 @@ class DashboardController extends Controller
         $edu = Job::select(DB::raw('count(jobs.id) as sum'))->groupBy('jobs.education')->get()->pluck('sum');
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
+
+    
 
 
 

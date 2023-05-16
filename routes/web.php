@@ -61,7 +61,7 @@ Route::get('/counter/{id}', [FrontController::class, 'counter']);
 Route::get('/teams',[FrontController::class, 'team'])->name('teams');
 Route::middleware(['auth','verified'])->group(function () {
     // route: user/dashboard
-    Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
+    Route::get('/user', [DashboardController::class, 'user'])->name('user-area')->middleware('user');
     Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
     Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
     Route::post('/user/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
@@ -165,9 +165,14 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
    
     Route::get('/qrcode/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
     Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
-   
-    Route::get('/api/getfullreport',[DashboardController::class, 'getFullReports'])->name('api.fullreport');
-    Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('api.useredureport');
-    Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('api.jobedureport');
+    
+    // current career fair
+    Route::get('/api/getcurrentuseredu',[DashboardController::class, 'getCurrentUserEducation']);
+    Route::get('/api/getcurrentjobedu',[DashboardController::class, 'getCurrentJobQualification']);
+
+    // all time career fair
+    Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport']);
+    Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport']);
+    Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport']);
 });
 // end route: admin
