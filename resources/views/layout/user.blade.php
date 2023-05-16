@@ -132,24 +132,23 @@
     // $('#result').val('test');
     function onScanSuccess(decodedText, decodedResult) {
         // alert(decodedText);
-        $('#result').val(decodedText);
-        let id = decodedText;                
+       
+        let id = decodedText;  
+                  
         html5QrcodeScanner.clear().then(_ => {
          
           
           let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
            
           $.ajax({
-
-            
             url: "{{ route('presensi-store') }}",
             type: 'POST',            
             data: {
                 _method : "POST",
-                _token: CSRF_TOKEN, 
+                _token: CSRF_TOKEN,
+                id: id
                 
             },
-
             success: function (response) { 
                 console.log(response);
                 if(response.status == 200){
@@ -157,22 +156,31 @@
                   setTimeout(() => {
                     
                     location.reload();
-                  }, 2000);
+                  }, 1000);
 
                 }else{
                   $('#myfailModal').modal('show');
-                  
+                  setTimeout(() => {
+                    
+                    location.reload();
+                  }, 3000);
                   
                 }
                 
             }
+            }).catch(error => {
+            $('#myfailModal').modal('show');
+            setTimeout(() => {
+                    
+                    location.reload();
+                  }, 3000);
+            
+            
             });   
-        }).catch(error => {
-          $('#myfailModal').modal('show');
-          
-        });
         
-    }
+        
+        });
+      }
 
     function onScanFailure(error) {
     // handle scan failure, usually better to ignore and keep scanning.

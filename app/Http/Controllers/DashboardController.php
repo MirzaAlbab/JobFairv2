@@ -11,6 +11,8 @@ use App\Models\Careerfair;
 use App\Models\JobApplication;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class DashboardController extends Controller
 {   
@@ -48,20 +50,25 @@ class DashboardController extends Controller
         return view ('user.presence', compact('status'));
     }
 
-    public function presencestore (){
+    public function presencestore (Request $request){
+       
         $user = auth()->user();
         $careerfair = Careerfair::where('status', 'active')->latest()->first();
-        try {
-            
-            $presence = Presence::create([
-                'user_id' => $user->id,
-                'careerfair_id' => $careerfair->id,
-            ]);
-            return response()->json(['status' => 200], 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-           return response()->json(['status' => 404], 404);
+        if($request->id == 'http://career_fair.test/presence'){
+            try {
+                
+                Presence::create([
+                    'user_id' => $user->id,
+                    'careerfair_id' => $careerfair->id,
+                ]);
+                return response()->json(['status' => 200], 200);
+            } catch (\Throwable $th) {
+                //throw $th;
+               return response()->json(['status' => 404], 404);
+            }
+           
         }
+        
 
        
     }

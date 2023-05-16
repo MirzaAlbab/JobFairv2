@@ -68,7 +68,9 @@
             
           </div>
           <div class="modal-body text-center">
-            <h4>Gagal!</h4>	
+            <h4>Gagal!</h4>
+            <p>Halaman akan refresh otomatis setelah 3 detik.</p>
+            <p>Silahkan scan ulang</p>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">OK</button>
           
           </div>

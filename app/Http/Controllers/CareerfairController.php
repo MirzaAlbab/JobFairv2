@@ -6,6 +6,7 @@ use App\Models\Careerfair;
 use App\Models\Presence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CareerfairController extends Controller
@@ -54,7 +55,11 @@ class CareerfairController extends Controller
         }else{
             $img = null;
         }
-        $qr = QrCode::format('png')->size(300)->generate($request->judul);
+        // generate qr code with url of present
+        // $qr = QrCode::format('png')->size(300)->generate('https://career_fair.test/presence');
+        // merege with image
+        $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('/presence'));
+            // $qr = QrCode::format('png')->size(300)->generate($request->judul);
         $output_file = 'public/uploads/img/img-' . time() . '.png';
         Storage::disk('public')->put($output_file, $qr);
        
