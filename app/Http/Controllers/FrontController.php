@@ -9,6 +9,7 @@ use App\Models\Gallery;
 use App\Models\Partner;
 use App\Models\Rundown;
 use App\Models\Careerfair;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -116,12 +117,16 @@ class FrontController extends Controller
         
         return view('landing-page.partners-filter', compact('partners'));
     }
-    public function singlepartner($id)
+    public function singlepartner(Request $request)
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $sidebar = Partner::latest()->limit(10)->get();
-        $partner = Partner::findorFail($id);
-        $partner->incrementReadCount();
+        $partner = Partner::findorFail($request->id);
+        View::create([
+            'ip' => $request->ip(),
+            'user_agent' => $request->header('User-Agent'),
+            'partner_id' => $partner->id,
+        ]);
         $jobs = Job::where('partner_id', $partner->id)->get();  
         return view('landing-page.single-partner', compact('partner', 'sidebar','aocf','jobs'));
     }

@@ -49,7 +49,7 @@
                   <div class="row">
 
                  
-                   <div class="col-12">
+                   <div class="col-md-12">
                     <div class="card">
 
                       <div class="card-body">
@@ -130,7 +130,7 @@
             </div><!-- End Reports -->
             
             <!-- User Education Chart -->
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="card">
 
                 <div class="card-body">
@@ -179,7 +179,7 @@
             </div><!-- End User Education -->
 
             <!-- Job Qualification Chart -->
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="card">
 
                 <div class="card-body">

@@ -21,8 +21,8 @@
     <section class="section dashboard">
       <div class="row">
         <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
+        
+         
             <!-- Welcoming -->
             <div class="col-12">
               <div class="card">
@@ -31,39 +31,147 @@
                 </div>
               </div>
             </div><!-- End Welcoming -->
+           
 
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+            <div class="col-12">
+              <div class="card">
+
                 <div class="card-body">
-                  <h5 class="card-title">Lamaran</h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-journal-richtext"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $countlamaran }}</h6>
-                      <span class="text-muted small pt-2 ps-1">Lamaran</span>
-                    </div>
-                  </div>
+                  <h5 class="card-title">Company Reports <span>/Today</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="currentPartner"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#currentPartner"), {
+                        series: [{
+                        data: [{{ $countlamaran }}, {{ $countjob }} ] 
+                        }],
+                        
+                        chart: {
+                          height: 350,
+                         
+                          type: 'bar',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 4,
+                            horizontal: false,
+                            endingShape: 'rounded',
+                            distributed: true,
+                            columnWidth: '40%',
+                            
+                            
+                          }
+                        },
+                        stroke:{
+                          show: true,
+                          width: 1,
+                          colors: ['transparent']
+                        },
+                        
+                        dataLabels: {
+                          enabled: false
+                        },
+                        xaxis: {
+                          categories: ['Lamaran', 'Job', ],
+                        },
+                        yaxis: {
+                          title: {
+                            text: 'Total'
+                          }
+                        },
+                        fill: {
+                          opacity: 1
+                        },
+                        tooltip: {
+                          y: {
+                            formatter: function(val) {
+                              return val
+                            },
+                            title: {
+                              formatter: function (seriesName) {
+                                return ''
+                              }
+                            }
+                          }
+                        }
+                        
+
+                      
+                      
+                      }).render();
+                        });
+                    
+                  
+                  </script>
                 </div>
               </div>
-            </div><!-- End Lamaran Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+            </div>
+
+            <div class="col-12">
+              <div class="card">
+
                 <div class="card-body">
-                  <h5 class="card-title">View</h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-journal-richtext"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $views[0]->views }}</h6>
-                      <span class="text-muted small pt-2 ps-1">View</span>
-                    </div>
-                  </div>
+                  <h5 class="card-title">Page Views <span>/Today</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="viewsChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('http://career_fair.test/api/getviews')
+                        .then((response) => response.json())
+                        .then((data) => {
+                          new ApexCharts(document.querySelector("#viewsChart"), {
+                            series: [{
+                              name: "Page Views",
+                              data: data.views,
+                            },
+                            {
+                              name: "Unique Views",
+                              data: data.unique,
+                            },
+                            
+                          ],
+                            chart: {
+                            height: 350,
+                            type: 'line',
+                            zoom: {
+                              enabled: false
+                            },
+                          },
+                          dataLabels: {
+                            enabled: false
+                          },
+                          stroke: {
+                            width: [4, 4],
+                            curve: 'smooth',
+                            dashArray: [0, 0]
+                          },
+                         
+                         
+                         
+                          xaxis: {
+                            categories: data.time,
+                          },
+                          
+                      }).render();
+                        });
+                    
+                    });
+                  </script>
+                  <!-- End Line Chart -->
+
                 </div>
+
               </div>
-            </div><!-- End Lamaran Card -->
+            </div>
 
             
 

@@ -9,6 +9,7 @@ use App\Models\Partner;
 use App\Models\Presence;
 use App\Models\Careerfair;
 use App\Models\JobApplication;
+use App\Models\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -38,8 +39,8 @@ class DashboardController extends Controller
     public function company(){
         $user = auth()->user();
         $countlamaran = JobApplication::where("partner_id","=",$user->address)->count();
-        $views = Partner::where('id','=',$user->address )->get(['views']);
-        return view('company.dashboard', compact('countlamaran','views'));
+        $countjob = Job::where('partner_id','=',$user->address)->count();
+        return view('company.dashboard', compact('countlamaran','countjob'));
     }
 
     public function presence (){
@@ -124,7 +125,18 @@ class DashboardController extends Controller
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
 
-    
+    // company
+    public function getViews(){
+        $user = auth()->user();
+        // created at to ymd  and group by created at
+
+
+        $views = View::select(DB::raw('count(views.id) as sum'))->where('partner_id','=',$user->address)->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('sum');
+        $unique = View::select(DB::raw('count(DISTINCT ip) as sum'))->where('partner_id','=',$user->address)->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('sum');
+        $times = View::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as time"))->where('partner_id','=',$user->address)->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('time');
+       
+        return response()->json(['views' => $views, 'unique' => $unique, 'time' => $times], 200);
+    }
 
 
 

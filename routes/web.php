@@ -70,16 +70,17 @@ Route::middleware(['auth','verified'])->group(function () {
     
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
-   // route: job
-   Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
-   Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
-   Route::post('/company/job', [CompanyJobController::class, 'store'])->name('company-job-store');
-   Route::get('/company/job-new', [CompanyJobController::class, 'create'])->name('company-job-new');
-   Route::get('/company/job-view/{job}', [CompanyJobController::class, 'show'])->name('company-job-view');
-   Route::get('/company/job-update/{job}/edit', [CompanyJobController::class, 'edit'])->name('company-job-edit');
-   Route::post('/company/job-update/{job}', [CompanyJobController::class, 'update'])->name('company-job-update');
-   Route::delete('/company/job/delete', [CompanyJobController::class, 'destroy'])->name('company-job-delete');
-
+    // route: job
+    Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
+    Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
+    Route::post('/company/job', [CompanyJobController::class, 'store'])->name('company-job-store');
+    Route::get('/company/job-new', [CompanyJobController::class, 'create'])->name('company-job-new');
+    Route::get('/company/job-view/{job}', [CompanyJobController::class, 'show'])->name('company-job-view');
+    Route::get('/company/job-update/{job}/edit', [CompanyJobController::class, 'edit'])->name('company-job-edit');
+    Route::post('/company/job-update/{job}', [CompanyJobController::class, 'update'])->name('company-job-update');
+    Route::delete('/company/job/delete', [CompanyJobController::class, 'destroy'])->name('company-job-delete');
+    
+    Route::get('/api/getviews',[DashboardController::class, 'getViews']);
 
 });
 
