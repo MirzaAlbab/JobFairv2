@@ -141,7 +141,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('https://career_fair.test/api/getcurrentuseredu')
+                      fetch('{{ route('getcurrentuseredu')  }}')
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#currentUserEduChart"), {
@@ -190,7 +190,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('https://career_fair.test/api/getcurrentjobedu')
+                      fetch('{{ route('getcurrentjobedu')  }}')
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#currentJobEduChart"), {
@@ -247,7 +247,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('https://career_fair.test/api/getfullreport')
+                      fetch('{{ route('alltimereport')  }}')
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#reportsChart"), {
@@ -321,7 +321,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('https://career_fair.test/api/useredureport')
+                      fetch('{{ route('useredureport') }}')
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#eduChart"), {
@@ -370,7 +370,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('https://career_fair.test/api/jobedureport')
+                      fetch('{{ route('jobedureport') }} ' )
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#JobeduChart"), {

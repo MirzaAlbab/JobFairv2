@@ -82,7 +82,9 @@ class DashboardController extends Controller
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.education')->get()->pluck('sum');
         $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.education')->get()->pluck('education');
-       
+   
+        
+
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
 

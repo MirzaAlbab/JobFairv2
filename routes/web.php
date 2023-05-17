@@ -168,12 +168,12 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
     
     // current career fair
-    Route::get('/api/getcurrentuseredu',[DashboardController::class, 'getCurrentUserEducation']);
-    Route::get('/api/getcurrentjobedu',[DashboardController::class, 'getCurrentJobQualification']);
+    Route::get('/api/getcurrentuseredu',[DashboardController::class, 'getCurrentUserEducation'])->name('getcurrentuseredu');
+    Route::get('/api/getcurrentjobedu',[DashboardController::class, 'getCurrentJobQualification'])->name('getcurrentjobedu');
 
     // all time career fair
-    Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport']);
-    Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport']);
-    Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport']);
+    Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport'])->name('alltimereport');
+    Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('useredureport');
+    Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('jobedureport');
 });
 // end route: admin
