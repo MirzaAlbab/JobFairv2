@@ -141,7 +141,11 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
                       fetch('{{ route('getcurrentuseredu')  }}')
+=======
+                      fetch('{{ route('current-user-edu') }}')
+>>>>>>> 83522d60f7bae9f921cc52d68639caf377bf50e5
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#currentUserEduChart"), {
@@ -190,7 +194,11 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
                       fetch('{{ route('getcurrentjobedu')  }}')
+=======
+                      fetch('{{ route('current-job-edu') }}')
+>>>>>>> 83522d60f7bae9f921cc52d68639caf377bf50e5
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#currentJobEduChart"), {
@@ -247,7 +255,11 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
                       fetch('{{ route('alltimereport')  }}')
+=======
+                      fetch('{{ route('alltime-report') }}')
+>>>>>>> 83522d60f7bae9f921cc52d68639caf377bf50e5
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#reportsChart"), {
@@ -321,7 +333,11 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
                       fetch('{{ route('useredureport') }}')
+=======
+                      fetch('{{ route('user-edu-report') }}' )
+>>>>>>> 83522d60f7bae9f921cc52d68639caf377bf50e5
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#eduChart"), {
@@ -370,7 +386,11 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
                       fetch('{{ route('jobedureport') }} ' )
+=======
+                      fetch('{{ route('job-edu-report') }} ')
+>>>>>>> 83522d60f7bae9f921cc52d68639caf377bf50e5
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#JobeduChart"), {
