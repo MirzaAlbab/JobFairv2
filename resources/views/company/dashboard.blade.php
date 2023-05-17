@@ -125,7 +125,7 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch('http://career_fair.test/api/getviews')
+                      fetch('https://career_fair.test/api/getviews')
                         .then((response) => response.json())
                         .then((data) => {
                           new ApexCharts(document.querySelector("#viewsChart"), {
