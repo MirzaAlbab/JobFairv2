@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Faq;
 use App\Models\Job;
 use App\Models\Event;
@@ -10,6 +11,7 @@ use App\Models\Partner;
 use App\Models\Rundown;
 use App\Models\Careerfair;
 use App\Models\View;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -39,12 +41,13 @@ class FrontController extends Controller
             $rd->time = Carbon::parse($rd->time)->isoFormat('dddd, D MMMM YYYY');
             return $rd;
         });
+        $countuser = User::whereIn('role', ["mhs","alumni","umum"])->where('careerfair_id','=', $aocf->id)->count();
         $countpartner = Partner::where('status', 'active')->count();
         $countevent = Event::where('status', 'active')->count();
         $gallery = Gallery::where('status', 'active')->take(3)->get();
         $faq = Faq::where('status', 'active')->get();
         $faqs = $faq->split(2);
-        return view('landing-page.landing', compact('aocf', 'partners', 'rundown', 'countpartner', 'countevent', 'gallery', 'faqs', 'participant'));
+        return view('landing-page.landing', compact('aocf', 'partners', 'rundown', 'countpartner', 'countevent', 'gallery', 'faqs', 'participant','countuser'));
         
     }
     public function about()

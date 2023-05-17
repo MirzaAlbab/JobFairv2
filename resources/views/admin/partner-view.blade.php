@@ -25,7 +25,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">{{ $partner->company }}</h5>
           <div class="text-center">
-            <img class="img-fluid mb-3" src="{{ asset('laravel/storage/app/'. $partner->img) }}" alt="...">
+            <img class="img-fluid mb-3" src="{{ asset('storage/'. $partner->img) }}" alt="...">
           </div>
           <div class="card-text">
             <p>{!! $partner->description !!}</p>

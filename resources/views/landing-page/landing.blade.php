@@ -46,7 +46,7 @@
   <section id="values" class="values">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <p>What's On AOCF</p>
+          <p>What's On</p>
         </header>
         <div class="row">
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
@@ -70,7 +70,7 @@
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
-            <a href="https://dpkka.unair.ac.id/vacancy/lowongan-" target="_blank">
+            <a href="{{ route('user-partners') }}" >
               <div class="box">
                 <img src="assets/img/values-3.png" class="img-fluid" alt="">
                 <h3>Job Vacancies</h3>
@@ -95,7 +95,7 @@
     <div class="container" data-aos="fade-up">
 
       <header class="section-header">
-        <p>Jadwal AOCF</p>
+        <p>Jadwal</p>
       </header>
 
       <div class="row">
@@ -134,7 +134,7 @@
       </div> 
       <!-- / row -->
       <header class="section-header mt-5">
-        <p>Registrasi AOCF</p>
+        <p>Registrasi</p>
       </header>
 
       <div class="row">
@@ -144,7 +144,7 @@
             <div class="col-md-4" data-aos="zoom-out" data-aos-delay="200">
               <div class="feature-box d-flex align-items-center">
                 <i class="ri-number-1"></i>
-                <h3>Mendaftar pada menu "Daftar Sekarang" di website DPKKA atau klik <a href="https://dpkka.unair.ac.id/v2/jobseeker/registration" target="blank">Daftar</a> </h3>
+                <h3>Mendaftar pada menu "Daftar Sekarang" di <a href="{{ route('login') }}" target="blank">Daftar</a> </h3>
                 
               </div>
             </div>
@@ -173,7 +173,7 @@
             <div class="col-md-4" data-aos="zoom-out" data-aos-delay="600">
               <div class="feature-box d-flex align-items-center">
                 <i class="ri-number-5"></i>
-                <h3>Anda akan mendapatkan pesan melalui email yang sudah didaftarkan (cek spam bila tidak ada di kontak masuk)</h3>
+                <h3>Anda akan mendapatkan verifikasi melalui email yang sudah didaftarkan (cek spam bila tidak ada di kontak masuk)</h3>
               </div>
             </div>
 
@@ -225,7 +225,7 @@
           <div class="count-box">
             <i class="bi bi-people" style="color: #bb0852;"></i>
             <div>
-              <span data-purecounter-start="0" data-purecounter-end="" data-purecounter-duration="1" class="purecounter" id="peserta"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{ $countuser }}" data-purecounter-duration="1" class="purecounter" id="peserta"></span>
               <p>Peserta</p>
             </div>
           </div>
@@ -243,7 +243,7 @@
     <div class="container" data-aos="fade-up">
   
       <header class="section-header">
-        <p>Partisipan AOCF</p>
+        <p>Perusahaan</p>
       </header>
   
       <div class="clients-slider swiper">
@@ -272,7 +272,7 @@
 
       <header class="section-header">
        
-        <p>Galeri AOCF</p>
+        <p>Galeri</p>
       </header>
 
       <div class="row gy-4 gallery-container" data-aos="fade-up" data-aos-delay="200">

@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ $gallery->title }}</h5>
-          <img  src="{{ src="{{ asset('laravel/storage/app/'. $gallery->img) }} }}" class="img-fluid mb-3" alt="...">
+          <img  src="{{  asset('storage/'. $gallery->img) }} " class="img-fluid mb-3" alt="...">
           <div class="text-center">
             <a href="{{ route('gallery') }}" class="btn btn-primary" role="button" aria-pressed="true">Back</a>
           </div>

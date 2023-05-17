@@ -79,7 +79,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Event Image</label>
               <div class="col-sm-10">
                 @if ($event->img)
-                  <img src="{{ asset('laravel/storage/app/'. $event->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
+                  <img src="{{ asset('storage/'. $event->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
                 @else
                   <img class="img-preview img-fluid mb-3 col-sm-5">
                 @endif

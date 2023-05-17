@@ -29,7 +29,7 @@
                 <div class="">
                   <div class=" align-items-center">
                     <div class="">
-                      <img class="img-fluid" src="{{ asset('laravel/storage/app/'. $event->img) }}" alt="">
+                      <img class="img-fluid" src="{{ asset('storage/'. $event->img) }}" alt="">
                     </div>
                   </div>
                 </div>

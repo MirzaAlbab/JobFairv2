@@ -59,7 +59,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Partner Image</label>
               <div class="col-sm-10">
                 @if ($partner->img)
-                  <img src="{{ asset('laravel/storage/app/'. $partner->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
+                  <img src="{{ asset('storage/'. $partner->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
                 @else
                   <img class="img-preview img-fluid mb-3 col-sm-5">
                 @endif
