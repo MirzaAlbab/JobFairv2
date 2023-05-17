@@ -78,7 +78,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Upload Poster</label>
               <div class="col-sm-10">
               @if ($careerfair->img)
-                <img src="{{ asset('laravel/storage/app/'. $careerfair->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
+                <img src="{{ asset('storage/'. $careerfair->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
               @else
                 <img class="img-preview img-fluid mb-3 col-sm-5">
               @endif

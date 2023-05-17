@@ -25,7 +25,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">{{ $careerfair->title }}</h5>
           <div class="text-center">
-            <img class="img-fluid mb-3" src="{{ asset('laravel/storage/app/'. $careerfair->img) }}" alt="...">
+            <img class="img-fluid mb-3" src="{{ asset('storage/'. $careerfair->img) }}" alt="...">
           </div>
           <div class="card-text">
             <p>{!! $careerfair->description !!}</p>

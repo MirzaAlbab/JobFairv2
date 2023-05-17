@@ -373,8 +373,14 @@
                       fetch('{{ route('job-edu-report') }} ')
                         .then((response) => response.json())
                         .then((data) => {
+                        //  convert json data.edu to array of number
+                         let edu = Object.values(data.edu);
+                        //  parse into number
+                          let eduNum = edu.map(Number);
+                          
+
                           new ApexCharts(document.querySelector("#JobeduChart"), {
-                        series: data.edu,
+                        series: eduNum||data.edu,
                         chart: {
                           width: 380,
                           type: 'pie',

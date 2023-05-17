@@ -6,7 +6,7 @@
 <section id="hero" class="hero d-flex align-items-center">
   <div class="container-fluid px-0 py-0">
       <div class="row">
-        <img src="{{ asset('laravel/storage/app/'.$aocf->img) }}" alt="">
+        <img src="{{ asset('storage/'.$aocf->img) }}" alt="">
       </div>
   </div>
 </section>
@@ -24,7 +24,7 @@
         @if (count($partners) > 0)
             
         @foreach ($partners as $sponsor)
-        <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('laravel/storage/app/'. $sponsor->img) }}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('storage/'. $sponsor->img) }}" class="img-fluid" alt=""></a></div>
         {{-- <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="assets/img/dummy.png" class="img-fluid" alt=""></div>
          --}}
         @endforeach
@@ -279,10 +279,10 @@
         @foreach($gallery as $g)
         <div class="col-lg-4 col-md-6 gallery-item filter-app">
           <div class="gallery-wrap">
-            <img src="{{ asset('laravel/storage/app/'.$g->img) }}" class="img-fluid" alt="">
+            <img src="{{ asset('storage/'.$g->img) }}" class="img-fluid" alt="">
             <div class="gallery-info">
               <div class="gallery-links">
-                <a href="{{ asset('laravel/storage/app/'.$g->img) }}" data-gallery="portfolioGallery" class="portfokio-lightbox"><i class="bi-zoom-in position-absolute" style="font-size: 1rem;"></i></a>
+                <a href="{{ asset('storage/'.$g->img) }}" data-gallery="portfolioGallery" class="portfokio-lightbox"><i class="bi-zoom-in position-absolute" style="font-size: 1rem;"></i></a>
                 <a href="{{ route('user-gallery') }}" title="More Details"><i class="bi bi-link position-absolute"></i></a>
               </div>
             </div>
