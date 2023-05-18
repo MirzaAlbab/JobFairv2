@@ -28,7 +28,13 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             RundownSeeder::class,
             UserSeeder::class,
+        FacultySeeder::class,
+        MajorSeeder::class,
+        JobTypeSeeder::class,
        
         ]);
+       
+           
+         
     }
 }
