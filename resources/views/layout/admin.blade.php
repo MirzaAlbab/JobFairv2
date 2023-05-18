@@ -28,7 +28,10 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
- 
+  
+  <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/admin/style.css') }}" rel="stylesheet">
 
@@ -73,7 +76,29 @@
   <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 
+  <script>
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+     $('#start_date').datepicker({
+         uiLibrary: 'bootstrap5',
+         minDate: today,
+         format: 'yyyy-mm-dd',
+         header:true,
+         modal:true,
+         footer:true,
+        
+         
+     });
+     
+     $('#end_date').datepicker({
+       uiLibrary: 'bootstrap5',
+         minDate: today,
+         format: 'yyyy-mm-dd',
+         header:true,
+         modal:true,
+         footer:true,
+     });
  
+ </script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/admin/main.js') }}"></script>
@@ -256,6 +281,7 @@
       });
     });
   </script>
+  
  
  
 </body>

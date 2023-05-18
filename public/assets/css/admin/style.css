@@ -1134,3 +1134,21 @@ h6 {
     display: block;
     background-color: #eaeaea;
 }
+/* date picker */
+.gj-picker-bootstrap.datepicker [role="header"] {
+    border-radius: 10px;
+}
+.gj-modal div {
+    border-radius: 10px;
+}
+.gj-picker-bootstrap [role="header"] {
+    background: #0023ff;
+    color: white;
+}
+.gj-picker-bootstrap .selected {
+    color: white;
+}
+.btn-outline-secondary:hover {
+    background-color: darkblue;
+    border-color: lightblue;
+}

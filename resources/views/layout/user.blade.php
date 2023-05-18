@@ -186,7 +186,7 @@
     // handle scan failure, usually better to ignore and keep scanning.
     // for example:
         // console.warn(`Code scan error = ${error}`);
-        alert('QR Code tidak valid, silahkan scan ulang ')
+        // alert('QR Code tidak valid, silahkan scan ulang ')
     }
     
 

@@ -50,11 +50,12 @@ class JobController extends Controller
             'category'=>'required',
             'education'=> 'required',
             'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
             'partner_id' => 'required',
         ]);
-      
+       
+        
         Job::create([
             'title' => $request->title,
             'type'=> $request->type,

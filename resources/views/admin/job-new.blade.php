@@ -80,7 +80,7 @@
             <div class="row mb-3">
               <label for="start_date" class="col-sm-2 col-form-label">Tanggal Mulai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" value="{{ old('start_date') }}">
+                <input type="text" class="form-control" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" value="{{ old('start_date') }}">
                 @error('start_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -89,7 +89,7 @@
             <div class="row mb-3">
               <label for="end_date" class="col-sm-2 col-form-label">Tanggal Selesai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" value="{{ old('end_date') }}">
+                <input type="text" class="form-control" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" value="{{ old('end_date') }}">
                 @error('end_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -190,4 +190,5 @@
       </div>
     </section>
   </main>   
+  
 @endsection
