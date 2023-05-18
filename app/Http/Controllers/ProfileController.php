@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Faculty;
+use App\Models\Major;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,8 +20,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $faculties = Faculty::all();
+        $majors = Major::all();
         return view('user.editprofile', [
             'user' => $request->user(),
+            'faculties' => $faculties,
+              
         ]);
     }
 
@@ -121,5 +127,10 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function getMajor ($id){
+        $majors = Major::where("faculty_id",$id)->pluck("name","id");
+        return response()->json(['major'=>$majors]);
     }
 }

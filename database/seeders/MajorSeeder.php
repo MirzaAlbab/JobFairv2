@@ -16,7 +16,7 @@ class MajorSeeder extends Seeder
     public function run()
     {
         Major::truncate();
-        $csvFile = fopen(base_path("database/data/program_studi.csv"), "r");
+        $csvFile = fopen(base_path("database/data/prodi.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {

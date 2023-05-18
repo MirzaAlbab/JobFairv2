@@ -236,17 +236,27 @@
                   </div>
 
                   <div class="row mb-3">
-                    <label for="jurusan" class="col-md-4 col-lg-3 col-form-label">Jurusan</label>
+                    <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Fakultas</label>
                     <div class="col-md-8 col-lg-9">
                       
-                      <select class="form-select" aria-label="Default select example" id="jurusan" name="major">
+                      <select class="form-select" aria-label="Default select example" id="faculty" name="faculty">
                         <option selected value="">Pilih salah satu</option>
-                        <option value="Manajemen">Manajemen</option>
-                        <option value="Administrasi">Administrasi</option>
-                        <option value="Akutansi">Akutansi</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Mesin">S2</option>
-                        <option value="Teknik Robotika">Teknik Robotika</option>
+                       @foreach ($faculties as $faculty)
+                        <option value="{{ $faculty->id }}" {{ Auth::user()->faculty == $faculty->id ? 'selected' :'' }}>{{ $faculty->name }}</option>
+                        @endforeach
+                      </select>
+                      @error('major')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="major" class="col-md-4 col-lg-3 col-form-label">Jurusan</label>
+                    <div class="col-md-8 col-lg-9">
+                      
+                      <select class="form-select" aria-label="Default select example" id="major" name="major" disabled>
+                        <option id="major" selected value="">Pilih salah satu</option>
+                       
                       </select>
                       @error('major')
                       <p class="text-danger">{{ $message }}</p>
@@ -367,7 +377,6 @@
     fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
     .then(res => res.json())
     .then(data => {
-     
       let provinces = data.map(province => {
         return `<option value="${province.id}">${province.name}</option>`
       })
@@ -381,14 +390,39 @@
     fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${province_id}.json`)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      
       let cities = data.map(city => {
         return `<option value="${city.id}">${city.name}</option>`
       })
-      console.log($('#city'))
+      
       $('#city').removeAttr('disabled')
       $('#city').html('<option selected>Pilih salah satu</option>')
       $('#city').append(cities)
+    })
+  });
+  // make script to fetch major after faculty selected
+  $('#faculty').change(function (e) {
+    // take faculty id
+    let faculty = $(this).val()
+    // fetch with api request and parameter
+    fetch(`http://career_fair.test/user/major/${faculty}`)
+    .then(res => res.json())
+    .then(data => {
+      // json decode
+      data = Object.entries(data.major);
+      // map data to html
+
+      console.log(data)
+      let majors = data.map(major => {
+        return `<option value="${major[0]}">${major[1]}</option>`
+      })
+      
+      console.log(majors)
+      
+      
+      $('#major').removeAttr('disabled')
+      $('#major').html('<option selected>Pilih salah satu</option>')
+      $('#major').append(majors)
     })
   });
 </script>
