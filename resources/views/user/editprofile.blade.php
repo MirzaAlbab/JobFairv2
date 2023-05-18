@@ -26,8 +26,11 @@
 
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-           
-            <img src=" {{ asset('laravel/storage/app/'.Auth::user()->photo) }} " alt="Profile" class="rounded-circle">
+           @if(Auth::user()->photo)
+            <img src=" {{ asset('storage/'.Auth::user()->photo) }} " alt="Profile" class="rounded-circle">
+            @else
+            <img src=" {{ asset('assets/img/profile-img.jpg') }} " alt="Profile" class="rounded-circle">
+            @endif
             <h2>{{ Auth::user()->name }}</h2>
           
            
@@ -101,6 +104,10 @@
                 </div>
 
                 <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Kota</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->city }}</div>
+                </div>
+                <div class="row">
                   <div class="col-lg-3 col-md-4 label">Alamat</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->address }}</div>
                 </div>
@@ -116,13 +123,18 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Tingkat Pendidikan</div>
+                  <div class="col-lg-3 col-md-4 label">Pendidikan</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->education }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Fakultas</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->Faculty->name }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Jurusan</div>
-                  <div class="col-lg-9 col-md-8">{{ Auth::user()->major }}</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->Major->name }}</div>
+                 
                 </div>
 
                 
@@ -139,7 +151,11 @@
                     <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto Profil</label>
                     <div class="col-md-8 col-lg-9">
-                      <img src="{{ asset('laravel/storage/app/'.Auth::user()->photo) }} || assets/img/profile-img.jpg" alt="Profile" class="img-preview">
+                      @if(Auth::user()->photo)
+                      <img src="{{ asset('storage/'.Auth::user()->photo) }}" alt="Profile" class="img-preview">
+                      @else
+                      <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="img-preview">
+                      @endif
                       <div class="pt-2">
                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="photo" onchange="previewImage()" hidden>
                         <a href="#" id="upload_image" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
@@ -151,7 +167,7 @@
                   <div class="row mb-3">
                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
+                      <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}" required>
                       @error('name')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -161,7 +177,7 @@
                   <div class="row mb-3">
                     <label for="about" class="col-md-4 col-lg-3 col-form-label">Deskripsi Diri</label>
                     <div class="col-md-8 col-lg-9">
-                      <textarea name="about" class="form-control" id="about" style="height: 100px">{{ Auth::user()->about }}</textarea>
+                      <textarea name="about" class="form-control" id="about" style="height: 100px" required>{{ Auth::user()->about }}</textarea>
                       @error('about')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -173,7 +189,7 @@
                   <div class="row mb-3">
                     <label for="phone" class="col-md-4 col-lg-3 col-form-label">No. Telepon</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control" id="phone" value="{{ Auth::user()->phone }}">
+                      <input name="phone" type="text" class="form-control" id="phone" value="{{ Auth::user()->phone }}" required>
                       @error('phone')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -186,7 +202,7 @@
                   <div class="row mb-3">
                     <label for="province" class="col-md-4 col-lg-3 col-form-label">Provinsi</label>
                     <div class="col-md-8 col-lg-9">
-                      <select class="form-select" aria-label="Default select example" id="province" name="province">
+                      <select class="form-select" aria-label="Default select example" id="province" name="province" required>
                         <option id="province" value="" selected>Pilih salah satu</option>
                       </select>
                       @error('province')
@@ -198,7 +214,7 @@
                   <div class="row mb-3">
                     <label for="city" class="col-md-4 col-lg-3 col-form-label">Kota/Kab</label>
                     <div class="col-md-8 col-lg-9">
-                      <select class="form-select" aria-label="Default select example" id="city" name="city" disabled>
+                      <select class="form-select" aria-label="Default select example" id="city" name="city" disabled required>
                         <option id="city" value="" selected>Pilih salah satu</option>
                       </select>
                       @error('city')
@@ -210,7 +226,7 @@
                   <div class="row mb-3">
                     <label for="address" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="address" type="text" class="form-control" id="address" value="{{ Auth::user()->address }}">
+                      <input name="address" type="text" class="form-control" id="address" value="{{ Auth::user()->address }}" required>
                       @error('address')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -220,7 +236,7 @@
                   <div class="row mb-3">
                     <label for="pendidikan" class="col-md-4 col-lg-3 col-form-label">Tingkat Pendidikan</label>
                     <div class="col-md-8 col-lg-9">
-                      <select class="form-select" aria-label="Default select example" id="pendidikan" name="education">
+                      <select class="form-select" aria-label="Default select example" id="pendidikan" name="education" required>
                         <option selected>Pilih salah satu</option>
                         <option value="SMA/SMK" {{ Auth::user()->education == "SMA/SMK" ? 'selected' :'' }}>SMA/SMK</option>
                         <option value="D3"{{ Auth::user()->education == "D3" ? 'selected' :'' }}>D3</option>
@@ -239,7 +255,7 @@
                     <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Fakultas</label>
                     <div class="col-md-8 col-lg-9">
                       
-                      <select class="form-select" aria-label="Default select example" id="faculty" name="faculty">
+                      <select class="form-select" aria-label="Default select example" id="faculty" name="faculty" required>
                         <option selected value="">Pilih salah satu</option>
                        @foreach ($faculties as $faculty)
                         <option value="{{ $faculty->id }}" {{ Auth::user()->faculty == $faculty->id ? 'selected' :'' }}>{{ $faculty->name }}</option>
@@ -254,7 +270,7 @@
                     <label for="major" class="col-md-4 col-lg-3 col-form-label">Jurusan</label>
                     <div class="col-md-8 col-lg-9">
                       
-                      <select class="form-select" aria-label="Default select example" id="major" name="major" disabled>
+                      <select class="form-select" aria-label="Default select example" id="major" name="major" disabled required>
                         <option id="major" selected value="">Pilih salah satu</option>
                        
                       </select>
@@ -267,7 +283,7 @@
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}">
+                      <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}" required>
                     </div>
                     @error('email')
                       <p class="text-danger">{{ $message }}</p>
@@ -380,7 +396,7 @@
       let provinces = data.map(province => {
         return `<option value="${province.id}">${province.name}</option>`
       })
-     
+      console.log(provinces)
       $('#province').append(provinces)
     })
   });
@@ -392,7 +408,7 @@
     .then(data => {
       
       let cities = data.map(city => {
-        return `<option value="${city.id}">${city.name}</option>`
+        return `<option value="${city.name}">${city.name}</option>`
       })
       
       $('#city').removeAttr('disabled')

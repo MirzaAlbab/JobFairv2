@@ -16,14 +16,14 @@ class JobTypeSeeder extends Seeder
     public function run()
     {
         JobType::truncate();
-        $csvFile = fopen(base_path("database/data/job_type.csv"), "r");
+        $csvFile = fopen(base_path("database/data/jobtype.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 JobType::create([
-                    "id" => $data['0'],
-                    "name" => $data['1'],
+                    "id" => $data['1'],
+                    "name" => $data['2'],
                     
                 ]);    
             }

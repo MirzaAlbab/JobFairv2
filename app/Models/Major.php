@@ -11,4 +11,13 @@ class Major extends Model
     protected $fillable = [
         'id','name', 'faculty_id',
     ];
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

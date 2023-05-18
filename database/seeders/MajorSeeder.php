@@ -22,9 +22,9 @@ class MajorSeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 Major::create([
-                    "id" => $data['0'],
-                    "name" => $data['1'],
-                    "faculty_id" => $data['4'],
+                    "id" => $data['1'],
+                    "name" => $data['2'],
+                    "faculty_id" => $data['5'],
                     
                 ]);    
             }

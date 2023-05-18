@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Partner;
+use App\Models\Careerfair;
+use App\Models\JobType;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -26,8 +28,11 @@ class JobController extends Controller
      */
     public function create()
     {
-        $partner = Partner::all();
-        return view ('admin.job-new', compact('partner'));
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $partner = Partner::where('careerfair_id', $aocf->id)->get();
+        $jobtype = JobType::all();
+
+        return view ('admin.job-new', compact('partner','jobtype'));
     }
 
     /**

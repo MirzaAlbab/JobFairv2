@@ -16,20 +16,21 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address')->nullable();
             $table->string('province')->nullable();
+            $table->string('address')->nullable();
             $table->string('city')->nullable();
-            $table->string('email')->unique();
             $table->string('about')->nullable();
+            $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('education')->nullable();
+            $table->string('faculty')->nullable();
             $table->string('major')->nullable();
             $table->string('cv')->nullable();
-            $table->string('role');
             $table->string('photo')->nullable();
-            $table->string('password');
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
+            $table->string('role');
+            $table->string('password');
             $table->string('status')->default('active');
             $table->foreignId('careerfair_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();

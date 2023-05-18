@@ -21,20 +21,21 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'photo',
         'about',
-        'address',
-        'province',
-        'city',
         'email',
         'phone',
+        'province',
+        'city',
+        'address',
+        'faculty',
         'education',
         'major',
         'cv',
-        'password',
-        'role',
-        'photo',
         'instagram',
         'linkedin',
+        'role',
+        'password',
         'status',
         'careerfair_id',
 
@@ -58,4 +59,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Major()
+    {
+        return $this->hasOne(Major::class, 'id', 'major');
+    }
+    public function Faculty(){
+        return $this->hasOne(Faculty::class, 'id', 'faculty');
+
+    }
 }

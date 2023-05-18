@@ -40,10 +40,11 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Jenis Pekerjaan</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" name="type">
+                <select class="form-select search-select" aria-label="Default select example" name="type" >
                   <option value="">Pilih salah satu</option>
-                  <option value="tech">Technology</option>
-                  <option value="finance">Finance</option>
+                  @foreach ($jobtype as $typ)
+                    <option value="{{ $typ->id }}">{{ $typ->name }}</option>
+                  @endforeach
                 </select>
                 @error('type')
                   <p class="text-danger">{{ $message }}</p>
@@ -56,7 +57,8 @@
                 <select class="form-select" aria-label="Default select example" name="education">
                   <option value="">Pilih salah satu</option>
                   <option value="SMA/SMK">SMA/SMK</option>
-                  <option value="D3/D4">D3/D4</option>
+                  <option value="D3">D3</option>
+                  <option value="D4">D4</option>
                   <option value="S1">S1</option>
                   <option value="S2">S2</option>
                   <option value="S3">S3</option>
@@ -78,7 +80,7 @@
             <div class="row mb-3">
               <label for="start_date" class="col-sm-2 col-form-label">Tanggal Mulai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="start_date" id="start_date" value="{{ old('start_date') }}">
+                <input type="date" class="form-control" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" value="{{ old('start_date') }}">
                 @error('start_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -87,7 +89,7 @@
             <div class="row mb-3">
               <label for="end_date" class="col-sm-2 col-form-label">Tanggal Selesai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="end_date" id="end_date" value="{{ old('end_date') }}">
+                <input type="date" class="form-control" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" value="{{ old('end_date') }}">
                 @error('end_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror

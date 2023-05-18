@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $faculties = Faculty::all();
-        $majors = Major::all();
+        
         return view('user.editprofile', [
             'user' => $request->user(),
             'faculties' => $faculties,
@@ -34,17 +34,19 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        
+       
         $request->validate([
             'photo' => 'image|file|max:2048',
             'name' => 'required',
-            'address' => 'required',
-            'province' => 'required',
-            'city' => 'required',
             'about' => 'required',
             'phone' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'address' => 'required',
             'education' => 'required',
+            'faculty' => 'required',
             'major' => 'required',
+           
             // 'instagram' => 'required',
             // 'linkedin' => 'required',
 
@@ -56,6 +58,8 @@ class ProfileController extends Controller
             $img = null;
         }
        
+       
+       
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -65,14 +69,15 @@ class ProfileController extends Controller
         // $request->user()->save();
         User::where('id', $request->id)
         ->update([
+            'photo' => $img,
             'name' => $request->name,
-            'address' => $request->address,
-            'province' => $request->province,
-            'city' => $request->city,
             'about' => $request->about,
             'phone' => $request->phone,
-            'photo' => $img,
+            'province' => $request->province,
+            'city' => $request->city,
+            'address' => $request->address,
             'education' => $request->education,
+            'faculty' => $request->faculty,
             'major' => $request->major,
             'instagram' => $request->instagram,
             'linkedin' => $request->linkedin,
