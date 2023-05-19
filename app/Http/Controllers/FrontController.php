@@ -134,10 +134,10 @@ class FrontController extends Controller
         $jobs = Job::where('partner_id', $partner->id)->get();  
         return view('landing-page.single-partner', compact('partner', 'sidebar','aocf','jobs'));
     }
-    public function jobdetails($id)
+    public function jobdetails($partner,$id)
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
-        $job = Job::findorFail($id);
+        $job = Job::where('partner_id', $partner)->where('id', $id)->first();
         $sidebar = Partner::latest()->limit(10)->get();
         $partner = Partner::findorFail($job->partner_id);
         $status = JobApplication::where('user_id', auth()->user()->id)->where('job_id', $id)->first();

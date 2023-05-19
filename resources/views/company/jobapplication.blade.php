@@ -43,6 +43,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Edu</th>
                     <th scope="col">Job</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -53,6 +54,8 @@
                   <tr>
                     <th scope="row">{{ $loop->iteration }} </th>
                     <td class="align-middle">{{ $job->user->name }}</td>  
+                    <td class="align-middle">{{ $job->user->education }}</td>  
+                    
                     <td class="align-middle">{{ $job->job->title }}</td>
                     <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>  
                      

@@ -144,8 +144,13 @@
                       fetch('{{ route('current-user-edu') }}')
                         .then((response) => response.json())
                         .then((data) => {
+                          // parse json data to array of number
+                          let edu = Object.values(data.edu);
+                        //  parse into number
+                          let eduNum = edu.map(Number);
+                         
                           new ApexCharts(document.querySelector("#currentUserEduChart"), {
-                        series: data.edu,
+                        series: eduNum||data.edu,
                         chart: {
                           width: 380,
                           type: 'pie',
@@ -193,8 +198,11 @@
                       fetch('{{ route('current-job-edu') }}')
                         .then((response) => response.json())
                         .then((data) => {
+                          let edu = Object.values(data.edu);
+                        //  parse into number
+                          let eduNum = edu.map(Number);
                           new ApexCharts(document.querySelector("#currentJobEduChart"), {
-                        series: data.edu,
+                        series: eduNum||data.edu,
                         chart: {
                           width: 380,
                           type: 'pie',
@@ -324,8 +332,12 @@
                       fetch('{{ route('user-edu-report') }}' )
                         .then((response) => response.json())
                         .then((data) => {
+
+                          let edu = Object.values(data.edu);
+                        //  parse into number
+                          let eduNum = edu.map(Number);
                           new ApexCharts(document.querySelector("#eduChart"), {
-                        series: data.edu,
+                        series: eduNum||data.edu,
                         chart: {
                           width: 380,
                           type: 'pie',

@@ -84,7 +84,13 @@
                         yaxis: {
                           title: {
                             text: 'Total'
+                          },
+                          labels: {
+                            formatter: function (val) {
+                              return val
+                            }
                           }
+                        
                         },
                         fill: {
                           opacity: 1
@@ -125,9 +131,10 @@
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      fetch({{ route('company.views') }} )
+                      fetch('{{ route('company.views') }} ')
                         .then((response) => response.json())
                         .then((data) => {
+                         
                           new ApexCharts(document.querySelector("#viewsChart"), {
                             series: [{
                               name: "Page Views",
@@ -138,30 +145,35 @@
                               data: data.unique,
                             },
                             
-                          ],
-                            chart: {
-                            height: 350,
-                            type: 'line',
-                            zoom: {
+                            ],
+                              chart: {
+                              height: 350,
+                              type: 'line',
+                              zoom: {
+                                enabled: false
+                              },
+                            },
+                            dataLabels: {
                               enabled: false
                             },
-                          },
-                          dataLabels: {
-                            enabled: false
-                          },
-                          stroke: {
-                            width: [4, 4],
-                            curve: 'smooth',
-                            dashArray: [0, 0]
-                          },
+                            stroke: {
+                              width: [4, 4],
+                              curve: 'smooth',
+                              dashArray: [0, 0]
+                            },
+                            yaxis:{
+                              labels: {
+                            formatter: function (val) {
+                              return val
+                            }
+                          }
+                            },
                          
-                         
-                         
-                          xaxis: {
-                            categories: data.time,
-                          },
+                            xaxis: {
+                              categories: data.time,
+                            },
                           
-                      }).render();
+                          }).render();
                         });
                     
                     });
