@@ -43,8 +43,9 @@
               <div class="col-sm-10">
                 <select class="form-select" aria-label="Default select example" name="type">
                   <option value="">Pilih salah satu</option>
-                  <option value="tech"{{ $job->type == 'tech' ? 'selected':'' }}>Technology</option>
-                  <option value="finance"{{ $job->type == 'finance' ? 'selected':'' }}>Finance</option>
+                  @foreach ($jobtype as $typ)
+                  <option value="{{ $typ->id }}" {{ $typ->id == $job->type ? 'selected':'' }}>{{ $typ->name }}</option>
+                @endforeach
                 </select>
                 @error('type')
                   <p class="text-danger">{{ $message }}</p>
@@ -57,7 +58,8 @@
                 <select class="form-select" aria-label="Default select example" name="education">
                   <option value="">Pilih salah satu</option>
                   <option value="SMA/SMK" {{ $job->education == "SMA/SMK" ? 'selected':'' }}>SMA/SMK</option>
-                  <option value="D3/D4"{{ $job->education == "D3/D4" ? 'selected':'' }}>D3/D4</option>
+                  <option value="D3"{{ $job->education == "D3" ? 'selected':'' }}>D3</option>
+                  <option value="D4"{{ $job->education == "D4" ? 'selected':'' }}>D4</option>
                   <option value="S1"{{ $job->education == "S1" ? 'selected':'' }}>S1</option>
                   <option value="S2"{{ $job->education == "S2" ? 'selected':'' }}>S2</option>
                   <option value="S3"{{ $job->education == "S3" ? 'selected':'' }}>S3</option>
@@ -79,7 +81,7 @@
             <div class="row mb-3">
               <label for="start_date" class="col-sm-2 col-form-label">Tanggal Mulai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $job->start_date }}">
+                <input type="text" class="form-control" name="start_date" id="start_date" value="{{ $job->start_date }}">
                 @error('start_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -88,7 +90,7 @@
             <div class="row mb-3">
               <label for="end_date" class="col-sm-2 col-form-label">Tanggal Selesai</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $job->end_date }}">
+                <input type="text" class="form-control" name="end_date" id="end_date" value="{{ $job->end_date }}">
                 @error('end_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror

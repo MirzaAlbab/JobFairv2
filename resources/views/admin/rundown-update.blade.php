@@ -28,9 +28,9 @@
           <form action="{{ route('rundown-update', $rundown->id) }}" method="POST">
             @csrf
             <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Time</label>
+              <label for="start_date" class="col-sm-2 col-form-label">Time</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control @error('hari_tanggal') is_invalid @enderror" value="{{ old('hari_tanggal', $rundown->time) }}" name="hari_tanggal">
+                <input type="text" class="form-control @error('hari_tanggal') is_invalid @enderror" id="start_date" value="{{ old('hari_tanggal', $rundown->time) }}" name="hari_tanggal">
                 @error('hari_tanggal')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror

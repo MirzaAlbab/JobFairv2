@@ -58,10 +58,10 @@ class CareerfairController extends Controller
         // generate qr code with url of present
         // $qr = QrCode::format('png')->size(300)->generate('https://career_fair.test/presence');
         // merege with image
-        $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('/presence'));
-            // $qr = QrCode::format('png')->size(300)->generate($request->judul);
-        $output_file = 'public/uploads/img/img-' . time() . '.png';
-        Storage::disk('public')->put($output_file, $qr);
+        // $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('/presence'));
+        //     // $qr = QrCode::format('png')->size(300)->generate($request->judul);
+        // $output_file = 'public/uploads/img/img-' . time() . '.png';
+        // Storage::disk('public')->put($output_file, $qr);
        
 
         Careerfair::create([
@@ -71,7 +71,7 @@ class CareerfairController extends Controller
             'end_date' => $request->tglselesai,
             'img' => $img,
             'status' => $request->status,
-            'qr' =>$output_file,
+            
            
         ]);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil ditambah');
@@ -151,6 +151,7 @@ class CareerfairController extends Controller
     public function destroy(Request $request)
     {
         $careerfair = Careerfair::find($request->id);
+        
         Storage::delete($careerfair->img);
         Careerfair::destroy($request->id);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil dihapus');
@@ -158,8 +159,21 @@ class CareerfairController extends Controller
 
     public function viewQRCode(Request $request)
     {
+       
         $qr = Careerfair::find($request->id);
-        
+        if($qr->qr == null){
+            $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('/presence'));
+            // $qr = QrCode::format('png')->size(300)->generate($request->judul);
+            $output_file = 'public/uploads/img/img-' . time() . '.png';
+            Storage::disk('public')->put($output_file, $qr);
+    
+            Careerfair::where('id', $request->id)
+                    ->update([
+                        'qr' => $output_file,
+                    ]);
+            $qr = Careerfair::find($request->id);
+        }
+       
         return view('admin.career-fair-qr', compact('qr'));
 
     }

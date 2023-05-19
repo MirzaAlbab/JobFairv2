@@ -84,6 +84,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                       <form action="{{ route('career-fair-delete') }}" method="POST">
                         <input type="text" id="id" name="id" hidden>
+                        
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" role="button" aria-pressed="true">Delete</button>

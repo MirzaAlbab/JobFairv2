@@ -55,7 +55,7 @@
             <div class="row mb-3">
               <label for="inputStartDate" class="col-sm-2 col-form-label">Start Date</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control @error('tglmulai') is-invalid @enderror" name="tglmulai" value="{{ old('tglmulai', $careerfair->start_date) }}">
+                <input type="text" class="form-control @error('tglmulai') is-invalid @enderror" id="start_date" name="tglmulai" value="{{ old('tglmulai', $careerfair->start_date) }}">
                 @error('tglmulai')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -67,7 +67,7 @@
             <div class="row mb-3">
               <label for="inputEndDate" class="col-sm-2 col-form-label">End Date</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control @error('tglselesai') is-invalid @enderror" name="tglselesai" value="{{ old('tglselesai', $careerfair->end_date) }}">
+                <input type="text" class="form-control @error('tglselesai') is-invalid @enderror" id="end_date" name="tglselesai" value="{{ old('tglselesai', $careerfair->end_date) }}">
                 @error('tglselesai')
                   {{ $message }}
                 @enderror

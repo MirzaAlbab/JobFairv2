@@ -28,9 +28,9 @@
           <form action="{{ route('rundown') }}" method="POST">
             @csrf
             <div class="row mb-3">
-              <label for="hari_tanggal" class="col-sm-2 col-form-label">Hari, Tanggal</label>
+              <label for="start_date" class="col-sm-2 col-form-label">Hari, Tanggal</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="hari_tanggal" id="hari_tanggal" value="{{ old('hari_tanggal') }}">
+                <input type="text" class="form-control" name="hari_tanggal" id="start_date" value="{{ old('hari_tanggal') }}">
                 @error('hari_tanggal')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror

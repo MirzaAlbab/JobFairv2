@@ -92,8 +92,10 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         $job = Job::find($job->id);
-        $partner = Partner::all();
-        return view('admin.job-update', compact('partner','job'));
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $partner = Partner::where('careerfair_id', $aocf->id)->get();
+        $jobtype = JobType::all();
+        return view('admin.job-update', compact('partner','job','jobtype'));
     }
 
     /**
