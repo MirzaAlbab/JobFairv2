@@ -10,6 +10,7 @@ use App\Models\Gallery;
 use App\Models\Partner;
 use App\Models\Rundown;
 use App\Models\Careerfair;
+use App\Models\JobApplication;
 use App\Models\View;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -139,8 +140,9 @@ class FrontController extends Controller
         $job = Job::findorFail($id);
         $sidebar = Partner::latest()->limit(10)->get();
         $partner = Partner::findorFail($job->partner_id);
+        $status = JobApplication::where('user_id', auth()->user()->id)->where('job_id', $id)->first();
        
-        return view('landing-page.job-details', compact('job', 'partner','aocf','sidebar'));
+        return view('landing-page.job-details', compact('job', 'partner','aocf','sidebar','status'));
     }
     public function events()
     {

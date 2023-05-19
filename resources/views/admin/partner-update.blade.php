@@ -71,8 +71,13 @@
               <label class="col-sm-2 col-form-label">Partner Type</label>
               <div class="col-sm-10">
                 <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis">
-                  <option value="1" {{ ($partner->position == 1) ? 'selected' : '' }}>Sponsor</option>
-                  <option value="2" {{ ($partner->position == 2) ? 'selected' : '' }}>Participant</option>
+                  <option value="1" {{ ($partner->position == 1) ? 'selected' : '' }}>Platinum</option>
+                  <option value="2" {{ ($partner->position == 2) ? 'selected' : '' }}>Gold</option>
+                  <option value="2" {{ ($partner->position == 3) ? 'selected' : '' }}>Silver</option>
+                  <option value="2" {{ ($partner->position == 4) ? 'selected' : '' }}>Bronze</option>
+                  <option value="2" {{ ($partner->position == 5) ? 'selected' : '' }}>Participant</option>
+                  
+                  
                 </select>
               </div>
             </div>

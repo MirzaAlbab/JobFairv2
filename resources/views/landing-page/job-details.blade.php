@@ -23,13 +23,19 @@
   <!-- ======= Partner Single Section ======= -->
   <section id="partner" class="partner">
     <div class="container" data-aos="fade-up">
+    
 
       <div class="row">
 
         <div class="col-lg-8 entries">
 
           <article class="entry entry-single">
-
+            @if (session('status'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session('status') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
             <h2 class="entry-title">
               <a href="#">{{ $job->title }}</a>
             </h2>
@@ -47,6 +53,8 @@
             <div class="entry-content">
               {!! $job->description !!}
 
+              
+
             </div>
             <div class="read-more text-end">
                      
@@ -54,10 +62,15 @@
                         @csrf
                         <input hidden value={{ $job->id }} name="job_id"/>
                         <input hidden value={{ $partner->id }} name="partner_id"/>
-                        
+                        @if($status == null)
                         <button class="btn btn-small btn-primary" type="submit">     
                           <span>Lamar</span>
                         </button>
+                        @else
+                        <button class="btn btn-small btn-secondary" type="submit" disabled>     
+                          <span>Anda sudah melamar pada job ini</span>
+                        </button>
+                        @endif
                       </form>
               
             </div>
