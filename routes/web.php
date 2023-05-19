@@ -54,7 +54,6 @@ Route::get('/about', [FrontController::class, 'about'])->name('user-about');
 Route::get('/partners', [FrontController::class, 'partner'])->name('user-partners');
 Route::get('/search', [FrontController::class, 'search'])->name('search');
 Route::get('/singlepartner/{id}', [FrontController::class, 'singlepartner'])->name('user-singlepartner');
-Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
 Route::get('/events', [FrontController::class, 'events'])->name('user-events');
 Route::get('/events-detail/{id}', [FrontController::class, 'eventdetail'])->name('user-event-detail');
 Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery');
@@ -70,6 +69,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/user/presence', [DashboardController::class, 'presence'])->name('presensi');
     Route::post('/user/presence', [DashboardController::class, 'presencestore'])->name('presensi-store');
     
+    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
     // route: job
