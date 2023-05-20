@@ -81,6 +81,14 @@
           </a>
         </li>
         <!-- End User Page Nav -->
+
+        <li class="nav-heading">Password</li>
+        <li class="nav-item">
+          <a class="nav-link @yield('password', 'collapsed')" href="{{ route('adminpassword') }}">
+            <i class="bi bi-key"></i>
+            <span>Password</span>
+          </a>
+        </li>  
     
     </ul>
   </aside>

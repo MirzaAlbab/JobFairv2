@@ -4,7 +4,7 @@
   <title>Job | DPKKA - Universitas Airlangga</title>
 @endsection
 
-@section('job', '')
+@section('jobs', '')
 
 @section('main')
   <main id="main" class="main">

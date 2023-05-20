@@ -30,8 +30,16 @@
     <li class="nav-heading">QR Code</li>
       <li class="nav-item">
         <a class="nav-link @yield('qr', 'collapsed')" href="{{ route('companyqrcode', Auth::user()->address) }}">
-          <i class="bi bi-ui-checks-grid"></i>
+          <i class="bi bi-qr-code"></i>
           <span>QR Code</span>
+        </a>
+      </li>
+    </li>
+    <li class="nav-heading">Password</li>
+      <li class="nav-item">
+        <a class="nav-link @yield('ChangePassword', 'collapsed')" href="{{ route('companypassword') }}">
+          <i class="bi bi-key"></i>
+          <span>Password</span>
         </a>
       </li>
     </li>

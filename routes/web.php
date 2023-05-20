@@ -68,6 +68,7 @@ Route::middleware(['auth','verified','user'])->group(function () {
 Route::middleware(['auth','verified'])->group(function () {
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
+    Route::get('/company/password', [DashboardController::class, 'companyPassword'])->name('companypassword');
     
     // route: company/job
     Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
@@ -92,6 +93,7 @@ Route::middleware(['auth','verified'])->group(function () {
 Route::middleware(['auth', 'verified','admin'])->group(function () {
     // route: admin/dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/password', [DashboardController::class, 'adminPassword'])->name('adminpassword');
     
     // route: admin/rundown
     Route::get('/dashboard/rundown', [RundownController::class, 'index'])->name('rundown');

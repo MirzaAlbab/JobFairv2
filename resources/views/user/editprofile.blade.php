@@ -321,7 +321,7 @@
                   <div class="mb-3">
                     <input type="text" name="id" id="id" hidden value="{{ Auth::user()->id }}">
                    
-                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="cv">
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="cv" required>
                     @error('cv')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -342,7 +342,7 @@
                   <div class="row mb-3">
                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="current_password" type="password" class="form-control" id="currentPassword">
+                      <input name="current_password" type="password" class="form-control" id="currentPassword" required>
                       @error('current_password', 'updatePassword')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -355,7 +355,7 @@
                   <div class="row mb-3">
                     <label for="password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="password" type="password" class="form-control" id="password">
+                      <input name="password" type="password" class="form-control" id="password" required>
                       @error('password', 'updatePassword')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -365,7 +365,7 @@
                   <div class="row mb-3">
                     <label for="password_confirmation" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="password_confirmation" type="password" class="form-control" id="password_confirmation">
+                      <input name="password_confirmation" type="password" class="form-control" id="password_confirmation" required>
                       @error('password_confirmation', 'updatePassword')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
