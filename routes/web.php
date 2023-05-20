@@ -177,5 +177,14 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport'])->name('alltime-report');
     Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('user-edu-report');
     Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('job-edu-report');
+
+    //maintenance
+    Route::get('/maintenance/{secret}', [DashboardController::class, 'maintenance'])->name('maintenance');
+    // maintenance status
+    Route::get('/maintenance-status', [DashboardController::class, 'maintenanceStatus'])->name('maintenance-status');
+    // live
+    Route::get('/live', [DashboardController::class, 'live'])->name('live');
+    
+
 });
 // end route: admin

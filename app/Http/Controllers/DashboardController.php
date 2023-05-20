@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\User;
+use App\Models\View;
 use App\Models\Event;
 use App\Models\Partner;
 use App\Models\Presence;
 use App\Models\Careerfair;
-use App\Models\JobApplication;
-use App\Models\View;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\JobApplication;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {   
@@ -139,6 +141,30 @@ class DashboardController extends Controller
        
         return response()->json(['views' => $views, 'unique' => $unique, 'time' => $times], 200);
     }
+
+    // call artisan maintenance
+    public function maintenance($secret){
+       
+        $this->authorize('admin');
+        $exitCode = Artisan::call('down', ['--secret' => $secret]);
+        
+        // rediret to url
+        return redirect()->route('dashboard', [$secret]);
+    }
+
+    public function maintenanceStatus(){
+        $this->authorize('admin');
+        $status = app() -> isDownForMaintenance();
+        return response()->json(['status' => $status], 200);
+    }
+
+    // call artisan live
+    public function live(){
+        $this->authorize('admin');
+        $exitCode = Artisan::call('up');
+        return redirect()->back();
+    }
+
 
 
 
