@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
     use HasFactory;
-    protected $fillable = ['company', 'description', 'position','careerfair_id', 'img', 'status'];
+    protected $fillable = ['company', 'description', 'position','careerfair_id', 'img', 'status', 'qr'];
 
     public function AOCF()
     {

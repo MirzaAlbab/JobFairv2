@@ -138,4 +138,25 @@ class CompanyJobController extends Controller
         Job::destroy($request->id);
         return redirect('/company/job')->with('status', 'Job berhasil dihapus');
     }
+
+    public function viewQRCode(Request $request)
+    {
+        
+        $qr = Partner::findorFail($request->id);      
+        return view('company.company-qr', compact('qr'));
+
+    }
+    
+    public function downloadQRCode (Request $request)
+    {
+        $qr = Partner::findorFail($request->id);
+        $file = public_path()."/storage/".$qr->qr;
+        
+        $filename = $qr->company . '.png';
+        
+        $headers = array(
+             'Content-Type: application/png',
+         );
+        return response()->download($file, $filename, $headers);
+    }
 }

@@ -27,7 +27,14 @@
       </li>
     </li>
     @endcan
-
+    <li class="nav-heading">QR Code</li>
+      <li class="nav-item">
+        <a class="nav-link @yield('qr', 'collapsed')" href="{{ route('companyqrcode', Auth::user()->address) }}">
+          <i class="bi bi-ui-checks-grid"></i>
+          <span>QR Code</span>
+        </a>
+      </li>
+    </li>
     {{-- <li class="nav-heading">Profile</li>
       <li class="nav-item">
         <a class="nav-link @yield('profile', 'collapsed')" href="{{ route('profile.edit') }}">

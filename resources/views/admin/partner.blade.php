@@ -55,7 +55,8 @@
                     @else
                       <td class="align-middle"><span class="badge rounded-pill bg-secondary">{{ $partner->status }}</span></td>
                     @endif
-                    <td class="align-middle">                       
+                    <td class="align-middle">   
+                      <a href="{{ route('company-qr',$partner->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="QRCode"><i class="bi bi-qr-code"></i></a>                    
                       <a href="{{ route('partner-view',$partner->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>
                       <a href="{{ route('partner-edit',$partner->id) }}" class="btn btn-warning btn-sm text-white" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
                       <!-- Delete Modal -->

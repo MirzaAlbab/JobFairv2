@@ -14,9 +14,6 @@ use App\Http\Controllers\CompanyJobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\JobProposalController;
-use App\Http\Controllers\QRCodeController;
-use App\Models\Job_Proposal;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,26 +26,9 @@ use App\Models\Job_Proposal;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/user/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/user/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/user/profile', [ProfileController::class, 'cv'])->name('profile.cv');
-    Route::delete('/user/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('user/major/{id}', [ProfileController::class, 'getMajor'])->name('getMajor');
-});
-
 require __DIR__.'/auth.php';
 
-
+// route landing page
 Route::get('/', [FrontController::class, 'index'])->name('user-landing');
 Route::get('/about', [FrontController::class, 'about'])->name('user-about');
 Route::get('/partners', [FrontController::class, 'partner'])->name('user-partners');
@@ -57,24 +37,40 @@ Route::get('/singlepartner/{id}', [FrontController::class, 'singlepartner'])->na
 Route::get('/events', [FrontController::class, 'events'])->name('user-events');
 Route::get('/events-detail/{id}', [FrontController::class, 'eventdetail'])->name('user-event-detail');
 Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery');
-// Route::get('/loginuser/{id}', [FrontController::class, 'login'])->name('loginuser');
-Route::get('/counter/{id}', [FrontController::class, 'counter']);
 Route::get('/teams',[FrontController::class, 'team'])->name('teams');
-Route::middleware(['auth','verified'])->group(function () {
+
+Route::middleware(['auth','verified','user'])->group(function () {
     // route: user/dashboard
-    Route::get('/user', [DashboardController::class, 'user'])->name('user-area')->middleware('user');
+    Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
+    
+    // route user show job proposal
     Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
-    Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
+    
+    // route: user job details and apply
+    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
     Route::post('/user/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
+    
+    // route: user/presence
     Route::get('/user/presence', [DashboardController::class, 'presence'])->name('presensi');
     Route::post('/user/presence', [DashboardController::class, 'presencestore'])->name('presensi-store');
     
-    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
+    // route: user/profile
+    Route::get('/user/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/user/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/user/profile', [ProfileController::class, 'cv'])->name('profile.cv');
+    Route::delete('/user/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
+
+    // api user major
+    Route::get('user/major/{id}', [ProfileController::class, 'getMajor'])->name('getMajor');
+});
+
+Route::middleware(['auth','verified'])->group(function () {
     // route: company/dashboard
     Route::get('/company', [DashboardController::class, 'company'])->name('company-area');
-    // route: job
+    
+    // route: company/job
     Route::get('/company/job', [CompanyJobController::class, 'index'])->name('company-job');
-    Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
     Route::post('/company/job', [CompanyJobController::class, 'store'])->name('company-job-store');
     Route::get('/company/job-new', [CompanyJobController::class, 'create'])->name('company-job-new');
     Route::get('/company/job-view/{job}', [CompanyJobController::class, 'show'])->name('company-job-view');
@@ -82,8 +78,15 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/company/job-update/{job}', [CompanyJobController::class, 'update'])->name('company-job-update');
     Route::delete('/company/job/delete', [CompanyJobController::class, 'destroy'])->name('company-job-delete');
     
+    // route: company show qr code
+    Route::get('/companyqrcode/{id}', [CompanyJobController::class, 'viewQRCode'])->name('companyqrcode');
+    Route::get('/downloadcompanyqrcode/{id}', [CompanyJobController::class, 'downloadQRCode'])->name('download-companyqr');
+    
+    // route: company show job proposal
+    Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
+    
+    // api company views
     Route::get('/api/getviews',[DashboardController::class, 'getViews'])->name('company.views');
-
 });
 
 Route::middleware(['auth', 'verified','admin'])->group(function () {
@@ -144,7 +147,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/user-update/{user}', [UserController::class, 'update'])->name('user-update');
     Route::delete('/dashboard/user/delete', [UserController::class, 'destroy'])->name('user-delete');
 
-    // route: job
+    // route: admin/job
     Route::get('/dashboard/job', [JobController::class, 'index'])->name('job');
     Route::post('/dashboard/job', [JobController::class, 'store'])->name('job-store');
     Route::get('/dashboard/job-new', [JobController::class, 'create'])->name('job-new');
@@ -153,7 +156,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
     Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
 
-    // route: partner
+    // route: admin/partner
     Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
     Route::get('/dashboard/partner/getPartners/', [PartnerController::class, "getPartners"])->name('partner.getPartners');
     Route::post('/dashboard/partner', [PartnerController::class, 'store'])->name('partner-store');
@@ -163,28 +166,29 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::post('/dashboard/partner-update/{partner}', [PartnerController::class, 'update'])->name('partner-update');
     Route::delete('/dashboard/partner/delete', [PartnerController::class, 'destroy'])->name('partner-delete');
     
+    // route: admin/jobproposal
     Route::get('dashboard/jobapplication', [JobApplicationController::class, 'indexAdmin'])->name('admin-jobapplication');
+    
+    // route: admin show presence
     Route::get('dashboard/presence', [DashboardController::class, 'indexAdmin'])->name('admin-presence');
    
-    Route::get('/qrcode/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
-    Route::get('/downloadqrcode/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
+    // route: admin qrcode
+    Route::get('/qrcodecf/{id}', [CareerfairController::class, 'viewQRCode'])->name('qrcode');
+    Route::get('/downloadqrcodecf/{id}', [CareerfairController::class, 'downloadQRCode'])->name('qrcode-download');
+    Route::get('/companyqr/{id}', [PartnerController::class, 'viewQRCode'])->name('company-qr');
+    Route::get('/downloadcompanyqr/{id}', [PartnerController::class, 'downloadQRCode'])->name('companyqr-download');
     
-    // current career fair
+    // route: api admin dashboard current career fair
     Route::get('/api/getcurrentuseredu',[DashboardController::class, 'getCurrentUserEducation'])->name('current-user-edu');
     Route::get('/api/getcurrentjobedu',[DashboardController::class, 'getCurrentJobQualification'])->name('current-job-edu');
 
-    // all time career fair
+    // route: api admin dashboard all time career fair
     Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport'])->name('alltime-report');
     Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('user-edu-report');
     Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('job-edu-report');
 
-    //maintenance
+    // route: api admin maintenance and live
     Route::get('/maintenance/{secret}', [DashboardController::class, 'maintenance'])->name('maintenance');
-    // maintenance status
     Route::get('/maintenance-status', [DashboardController::class, 'maintenanceStatus'])->name('maintenance-status');
-    // live
     Route::get('/live', [DashboardController::class, 'live'])->name('live');
-    
-
 });
-// end route: admin

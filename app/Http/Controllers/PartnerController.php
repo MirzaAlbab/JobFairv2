@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
-use Illuminate\Http\Request;
 use App\Models\Careerfair;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PartnerController extends Controller
 {
@@ -141,4 +143,40 @@ class PartnerController extends Controller
         Partner::destroy($request->id);
         return redirect('/dashboard/partner')->with('status', 'Partner berhasil dihapus');
     }
+
+    public function viewQRCode(Request $request)
+    {
+       
+        $qr = Partner::findorFail($request->id);
+        if($qr->qr == null){
+            $path = "/public/storage/".$qr->img;
+            $qr = QrCode::format('png')->merge($path)->errorCorrection('H')->size(300)->generate(URL::to('/singlepartner/'.$request->id));
+            // $qr = QrCode::format('png')->size(300)->generate($request->judul);
+            $output_file = 'public/uploads/img/img-' . time() . '.png';
+            Storage::disk('public')->put($output_file, $qr);
+    
+            Partner::where('id', $request->id)
+                    ->update([
+                        'qr' => $output_file,
+                    ]);
+            $qr = Partner::findorFail($request->id);
+        }
+       
+        return view('admin.partner-qr', compact('qr'));
+
+    }
+    
+    public function downloadQRCode (Request $request)
+    {
+        $qr = Partner::findorFail($request->id);
+        $file = public_path()."/storage/".$qr->qr;
+        
+        $filename = $qr->company . '.png';
+        
+        $headers = array(
+             'Content-Type: application/png',
+         );
+        return response()->download($file, $filename, $headers);
+    }
+
 }
