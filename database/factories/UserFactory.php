@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'education' => fake()->randomElement(['SMA/SMK','D3','D4','S1','S2','S3']),
             'email_verified_at' => now(),
             'status' => fake()->randomElement(['active','inactive']),
-            'careerfair_id' => mt_rand(1,5),
+            'careerfair_id' => mt_rand(1,3),
         ];
     }
 

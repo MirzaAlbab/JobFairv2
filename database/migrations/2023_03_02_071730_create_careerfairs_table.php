@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('careerfairs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('Career Fair');
-            $table->text('description')->nullable()->default(null);
+            $table->mediumText('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('img')->nullable();

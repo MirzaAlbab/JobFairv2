@@ -16,7 +16,7 @@ class FaqSeeder extends Seeder
     {
         Faq::create([
             'question' => 'Bagaimana cara mengikuti 35th AOCF?',
-            'answer' => '<p>Kunjungi <a href="https://news.getredy.id/aocf-35th-unair/">bit.ly/AOCF-35</a>&nbsp;lalu klik “<strong>Daftar Sekarang</strong>”.</p>',
+            'answer' => '<p>Kunjungi <a href="careerfair.dpkka.unair.ac.id">bit.ly/AOCF-35</a>&nbsp;lalu klik “<strong>Login</strong>”.</p>',
             'status' => 'active'
         ]);
         Faq::create([

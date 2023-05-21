@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('type');
-            $table->enum('category', ['part-time', 'full-time'])->nullable();
+            $table->enum('category', ['part-time', 'full-time','intern'])->nullable();
             $table->enum('salary',['2-3','3-5','6-8', '8-10'])->nullable();
             $table->enum('education',['SMA/SMK','D3','D4','S1', 'S2','S3'])->nullable();
-            $table->string('description');
+            $table->mediumText('description');
             $table->string('city')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

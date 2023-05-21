@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable()->default(null);
+            $table->mediumText('description')->nullable();
             $table->dateTime('time');
             $table->string('link');
-            $table->string('location')->nullable()->default(null);
-            $table->string('img')->nullable()->default(null);
+            $table->string('location')->nullable();
+            $table->string('img')->nullable();
             $table->foreignId('careerfair_id');
             $table->string('status');
             $table->timestamps();
