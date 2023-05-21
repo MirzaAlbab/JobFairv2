@@ -1110,14 +1110,8 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Footer
+# Search Page
 --------------------------------------------------------------*/
-.footer {
-    background: #f6f9ff;
-    padding: 0 0 30px 0;
-    font-size: 14px;
-}
-
 .search-btn h4 {
     font-size: 24px;
     margin: 0 0 10px 0;
@@ -1157,18 +1151,26 @@ section {
 .search-btn form input[type="submit"]:hover {
     background: #5969f3;
 }
+.search-btn .form-select {
+    width: auto;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: -10px;
+}
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+    background: #f6f9ff;
+    padding: 0 0 30px 0;
+    font-size: 14px;
+}
 .footer .footer-top {
     background: white;
     background-size: contain;
     border-top: 1px solid #e1ecff;
     border-bottom: 1px solid #e1ecff;
     padding: 60px 0 30px 0;
-}
-.search-btn .form-select {
-    width: auto;
-    position: absolute;
-    margin-top: 15px;
-    margin-left: -10px;
 }
 @media (max-width: 992px) {
     .footer .footer-top {
