@@ -27,7 +27,7 @@
           @if (count($partners) > 0)
             
           @foreach ($partners as $sponsor)
-          <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('laravel/storage/app/'.$sponsor->img) }}" class="img-fluid" alt=""></a></div>
+          <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('storage/'.$sponsor->img) }}" class="img-fluid" alt=""></a></div>
           {{-- <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="assets/img/dummy.png" class="img-fluid" alt=""></div>
            --}}
           @endforeach
@@ -53,7 +53,7 @@
 
       <div class="row justify-content-center">
         <div class="col-lg-10" data-aos="zoom-out" data-aos-delay="200">
-          <img src="{{ asset('laravel/storage/app/'.$aocf->img) }}" class="img-fluid" alt="">
+          <img src="{{ asset('storage/'.$aocf->img) }}" class="img-fluid" alt="">
         </div>
       </div>
 
@@ -82,7 +82,7 @@
         <div class="swiper-wrapper align-items-center justify-content-center mb-5">
           @if (count($participant) > 0)
           @foreach ($participant as $partici)
-          <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('laravel/storage/app/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
+          <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
           @endforeach
           @else
           <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>

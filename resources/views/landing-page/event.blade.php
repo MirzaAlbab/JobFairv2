@@ -22,7 +22,7 @@
 		@foreach ($events as $event)
 		<article class="postcard light blue">
 			<a class="postcard__img_link">
-				<img class="postcard__img rounded"  src="{{ asset('laravel/storage/app/'.$event->img) }}" alt="" />
+				<img class="postcard__img rounded"  src="{{ asset('storage/'.$event->img) }}" alt="" />
 			</a>
 			<div class="postcard__text t-dark" >
 				<h1 class="postcard__title blue"><a href="{{ route('user-event-detail', $event->id) }}">{{ $event->title }}</a> </h1>

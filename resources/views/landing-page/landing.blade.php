@@ -250,7 +250,7 @@
         <div class="swiper-wrapper align-items-center mb-5">
           @if (count($participant) > 0)
           @foreach ($participant as $partici)
-          <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('laravel/storage/app/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
+          <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
           @endforeach
           @else
           <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>

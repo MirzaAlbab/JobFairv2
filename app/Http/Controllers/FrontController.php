@@ -43,8 +43,8 @@ class FrontController extends Controller
             return $rd;
         });
         $countuser = User::whereIn('role', ["mhs","alumni","umum"])->where('careerfair_id','=', $aocf->id)->count();
-        $countpartner = Partner::where('status', 'active')->count();
-        $countevent = Event::where('status', 'active')->count();
+        $countpartner = Partner::where('careerfair_id', $aocf->id)->count();
+        $countevent = Event::where('careerfair_id', $aocf->id)->count();
         $gallery = Gallery::where('status', 'active')->take(3)->get();
         $faq = Faq::where('status', 'active')->get();
         $faqs = $faq->split(2);
