@@ -55,7 +55,7 @@
         <div class="col-md-4">
           <article class="entry">
             <div class=" text-center">
-              <img src="{{ asset('laravel/storage/app/'.$partner->img) }}" alt="" class=" entry-img img-fluid">
+              <img src="{{ asset('storage/'.$partner->img) }}" alt="" class=" entry-img img-fluid">
             </div>
 
             <h2 class="entry-title">

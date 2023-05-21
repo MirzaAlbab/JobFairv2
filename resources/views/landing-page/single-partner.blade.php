@@ -108,7 +108,7 @@
             <div class="sidebar-item recent-posts">
               @foreach($sidebar as $sidepartner)
               <div class="post-item clearfix">
-                <img src="{{ asset('laravel/storage/app/'.$sidepartner->img) }}" alt="">
+                <img src="{{ asset('storage/'.$sidepartner->img) }}" alt="">
                 <h4><a href="{{ route('user-singlepartner', $sidepartner->id) }}">{{ $sidepartner->company }}</a></h4>
                 <time datetime="2020-01-01">Jan 1, 2020</time>
               </div>
