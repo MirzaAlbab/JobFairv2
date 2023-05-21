@@ -21,6 +21,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-15 09:30:00'),
             'careerfair_id' => 1,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
         ]);
@@ -30,6 +31,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-15 10:30:00'),
             'careerfair_id' => 1,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
         ]);
@@ -39,6 +41,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-15 12:00:00'),
             'careerfair_id' => 1,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
         ]);
@@ -48,6 +51,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-15 13:30:00'),
             'careerfair_id' => 2,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
         ]);
@@ -57,6 +61,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-15 14:30:00'),
             'careerfair_id' => 2,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZMtceGprjkoHtaP0XpR-qOjpvxv26xjt2DF',
             'status' => 'active'
         ]);
@@ -66,6 +71,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-16 09:30:00'),
             'careerfair_id' => 2,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
         ]);
@@ -75,6 +81,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-16 10:30:00'),
             'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
         ]);
@@ -84,6 +91,7 @@ class EventSeeder extends Seeder
             'time' => ('2022-03-16 11:30:00'),
             'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
         ]);
@@ -93,6 +101,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-16 13:00:00'),
             'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
         ]);
@@ -102,6 +111,7 @@ class EventSeeder extends Seeder
             'time' => Carbon::parse('2022-03-16 14:00:00'),
             'careerfair_id' => 3,
             'location' => 'Zoom Meeting',
+            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
             'link' => 'https://us06web.zoom.us/meeting/register/tZAtce2urzMpGNL7vGHrjTdPJFRY4zBeVOtj',
             'status' => 'active'
         ]);
