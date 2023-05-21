@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
       
         User::factory(50)->create();
         // Partner::factory(50)->create();
-        // Job::factory(100)->create();
+        Job::factory(100)->create();
         
         $this->call([
             CareerfairSeeder::class,
+            // JobSeeder::class,
             EventSeeder::class,
             FaqSeeder::class,
             PartnerSeeder::class,

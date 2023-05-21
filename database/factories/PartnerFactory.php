@@ -19,10 +19,9 @@ class PartnerFactory extends Factory
     {
         return [
             'company' => fake()->company(),
-            'description' => fake()->text(),
-            'careerfair_id' => mt_rand(1,5),
-            'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649836065/CareerFair/2022-04-13_074745_LOGO-GMP.png',
-            'position' => fake()->randomElement(['1','2']),
+            'description' => '',
+            'careerfair_id' => mt_rand(1,3),
+            'position' => mt_rand(1,5),
             'status' => fake()->randomElement(['active','inactive']),
             // 'status'=> fake()->randomElements(['active','inactive'])
         ];

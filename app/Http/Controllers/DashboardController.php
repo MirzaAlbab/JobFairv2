@@ -86,7 +86,7 @@ class DashboardController extends Controller
     public function getCurrentJobQualification(){
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $education = Careerfair::select('education')->join('partners','partners.careerfair_id', '=', 'careerfairs.id')->join('jobs', 'jobs.partner_id', '=', 'partners.id')->groupBy('jobs.education')->get()->pluck('education');
-        $edu = Careerfair::select(DB::raw('count(jobs.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->join('jobs', 'jobs.partner_id','=','partners.id')->where('careerfairs.id','=',$aocf->id)->groupBy('jobs.education')->get()->pluck('sum');
+        $edu = Job::select(DB::raw('count(jobs.id) as sum'))->join('partners', 'partners.id', '=', 'jobs.partner_id')->join('careerfairs', 'careerfairs.id','=','partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('jobs.education')->get()->pluck('sum');
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
     
@@ -94,8 +94,9 @@ class DashboardController extends Controller
     public function getFullReport(){
         $company = Careerfair::select(DB::raw('count(partners.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->groupBy('careerfairs.id')->get()->pluck('sum');
         $job = Careerfair::select( DB::raw('count(jobs.id) as sum'))->join('partners', 'careerfairs.id', '=', 'partners.careerfair_id')->join('jobs', 'jobs.partner_id','=','partners.id')->groupBy('careerfairs.id')->get()->pluck('sum');
+        $user = Careerfair::select(DB::raw('count(users.id) as sum'))->join('users', 'users.careerfair_id','=','careerfairs.id')->whereIn('users.role',['mhs','alumni','umum'])->groupBy('careerfairs.id')->get()->pluck('sum');
         $careerfair = Careerfair::select('title')->get()->pluck('title');
-        return response()->json(['company' => $company,'job' => $job,'careerfair' => $careerfair], 200);
+        return response()->json(['company' => $company,'job' => $job,'careerfair' => $careerfair, 'user'=>$user], 200);
     }
 
     public function getUserEduReport(){

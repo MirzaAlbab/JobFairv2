@@ -68,11 +68,11 @@ class FrontController extends Controller
     public function partner(Request $request)
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
-        // $partners = Partner::where([
-        //     ['status','active'],
-        //     ['careerfair_id', $aocf->id],
-        // ])->latest()->paginate(6);
-        $partners = Partner::query()->paginate(6);
+        $partners = Partner::where([
+            ['status','active'],
+            ['careerfair_id', $aocf->id],
+        ])->latest()->paginate(6);
+        
         
         if($request->ajax()){
             $partners = Job::query()

@@ -158,8 +158,9 @@
                         series: eduNum||data.edu,
                         chart: {
                           width: 380,
-                          type: 'pie',
+                          type: 'donut',
                         },
+                        
                         labels: data.education,
                         responsive: [{
                           breakpoint: 480,
@@ -171,7 +172,27 @@
                               position: 'bottom'
                             }
                           }
-                        }]                       
+                        }],
+                       
+                        plotOptions: {
+                          pie: {
+                              donut: {
+                                  labels: {
+                                      show: true,
+                                                          
+                                      total: {
+                                          show: true,
+                                          label: `Total`,
+                                          formatter: function (w) {
+                                            return w.globals.seriesTotals.reduce((a, b) => {
+                                              return a + b
+                                            }, 0)
+                                          }
+                                      }
+                                  }                   
+                              }
+                          }
+                        },               
 
                       }).render();
 
@@ -210,7 +231,7 @@
                         series: eduNum||data.edu,
                         chart: {
                           width: 380,
-                          type: 'pie',
+                          type: 'donut',
                         },
                         labels: data.education,
                         responsive: [{
@@ -223,7 +244,26 @@
                               position: 'bottom'
                             }
                           }
-                        }]                       
+                        }],
+                        plotOptions: {
+                          pie: {
+                              donut: {
+                                  labels: {
+                                      show: true,
+                                                          
+                                      total: {
+                                          show: true,
+                                          label: `Total`,
+                                          formatter: function (w) {
+                                            return w.globals.seriesTotals.reduce((a, b) => {
+                                              return a + b
+                                            }, 0)
+                                          }
+                                      }
+                                  }                   
+                              }
+                          }
+                        },                                  
 
                       }).render();
 
@@ -272,7 +312,7 @@
                           data: data.job,
                         }, {
                           name: 'Jobseeker',
-                          data: [15, 11, 20, 8, 12]
+                          data: data.user,
                         }],
                         chart: {
                           height: 350,
@@ -345,7 +385,7 @@
                         series: eduNum||data.edu,
                         chart: {
                           width: 380,
-                          type: 'pie',
+                          type: 'donut',
                         },
                         labels: data.education,
                         responsive: [{
@@ -358,7 +398,26 @@
                               position: 'bottom'
                             }
                           }
-                        }]                       
+                        }],
+                        plotOptions: {
+                          pie: {
+                              donut: {
+                                  labels: {
+                                      show: true,
+                                                          
+                                      total: {
+                                          show: true,
+                                          label: `Total`,
+                                          formatter: function (w) {
+                                            return w.globals.seriesTotals.reduce((a, b) => {
+                                              return a + b
+                                            }, 0)
+                                          }
+                                      }
+                                  }                   
+                              }
+                          }
+                        },                                  
 
                       }).render();
 
@@ -400,10 +459,12 @@
                         series: eduNum||data.edu,
                         chart: {
                           width: 380,
-                          type: 'pie',
+                          type: 'donut',
                         },
                         
+                        
                         labels: data.education,
+                        
                         responsive: [{
                           breakpoint: 480,
                           options: {
@@ -414,7 +475,26 @@
                               position: 'bottom'
                             }
                           }
-                        }]                       
+                        }],
+                        plotOptions: {
+                          pie: {
+                              donut: {
+                                  labels: {
+                                      show: true,
+                                                          
+                                      total: {
+                                          show: true,
+                                          label: `Total`,
+                                          formatter: function (w) {
+                                            return w.globals.seriesTotals.reduce((a, b) => {
+                                              return a + b
+                                            }, 0)
+                                          }
+                                      }
+                                  }                   
+                              }
+                          }
+                        },                                  
 
                       }).render();
 
@@ -453,7 +533,7 @@
       fetch('{{ route('maintenance-status') }}')
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          
           if (data.status == true) {
             maintenanceSwitch.checked = true;
             maintenanceSwitch.removeAttribute("disabled");
