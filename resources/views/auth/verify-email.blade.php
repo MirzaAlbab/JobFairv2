@@ -10,14 +10,14 @@
     @endif
 
     <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
+        <form method="POST" action="{{ route('verification.send') }}" id="resend-form">
             @csrf
-
             <div>
-                <x-primary-button>
+                <x-primary-button id="resend">
                     {{ __('Kirim ulang') }}
                 </x-primary-button>
             </div>
+           
         </form>
 
         <form method="POST" action="{{ route('logout') }}">
@@ -27,5 +27,24 @@
                 {{ __('Log Out') }}
             </button>
         </form>
+        
     </div>
+    
+    
+    <script>
+        // add event listener to resend button on click
+        document.getElementById("resend").addEventListener("click", function() {
+            // disable button
+            document.getElementById("resend").disabled = true;
+            // change button text
+            document.getElementById("resend").innerHTML = "Mengirim...";
+            // submit form
+            document.getElementById("resend-form").submit();
+            // prevent form from submitting twice
+            event.preventDefault();
+        });
+
+        
+       
+    </script>
 </x-guest-layout>
