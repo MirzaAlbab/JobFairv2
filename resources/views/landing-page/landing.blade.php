@@ -13,6 +13,10 @@
 <!-- End Hero -->
 
 
+  
+<!-- ======= Main Section ======= -->
+<main id="main">
+
   <!-- ======= Participant Section ======= -->
   <section id="clients" class="clients">
   
@@ -48,95 +52,92 @@
   </section>
   <!-- End Participant Section -->
 
-<!-- ======= Main Section ======= -->
-<main id="main">
-<!-- ======= What's On Section ======= -->
-  <section id="values" class="values">
-      <div class="container" data-aos="fade-up">
-        <header class="section-header">
-          <p>What's On</p>
-        </header>
-        <div class="row">
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <a href="{{ route('user-partners') }}">
-              <div class="box">
-                <img src="assets/img/values-1.png" class="img-fluid" alt="">
-                <h3>Company Profile</h3>
-                <p>Presentasi perusahaan-perusahaan keren terkait informasi peluang dan prospek karier yang tersedia.</p>
-              </div>
-            </a>
-          </div>
+  
+  <!-- ======= What's On Section ======= -->
+    <section id="values" class="values">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <p>What's On</p>
+          </header>
+          <div class="row">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <a href="{{ route('user-partners') }}">
+                <div class="box">
+                  <img src="assets/img/values-1.png" class="img-fluid" alt="">
+                  <h3>Company Profile</h3>
+                  <p>Presentasi perusahaan-perusahaan keren terkait informasi peluang dan prospek karier yang tersedia.</p>
+                </div>
+              </a>
+            </div>
 
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
-            <a href="{{ route('user-events') }}">
-              <div class="box">
-                <img src="assets/img/values-2.png" class="img-fluid" alt="">
-                <h3>Career Workshop</h3>
-                <p>Sharing session bareng narasumber profesional seputar dunia karir.</p>
-              </div>
-            </a>
-          </div>
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+              <a href="{{ route('user-events') }}">
+                <div class="box">
+                  <img src="assets/img/values-2.png" class="img-fluid" alt="">
+                  <h3>Career Workshop</h3>
+                  <p>Sharing session bareng narasumber profesional seputar dunia karir.</p>
+                </div>
+              </a>
+            </div>
 
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
-            <a href="{{ route('user-partners') }}" >
-              <div class="box">
-                <img src="assets/img/values-3.png" class="img-fluid" alt="">
-                <h3>Job Vacancies</h3>
-                <p>Dapatkan informasi tentang lowongan pekerjaan, magang, pelatihan, dan lain sebagainya</p>
-              </div>
-            </a>
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+              <a href="{{ route('user-partners') }}" >
+                <div class="box">
+                  <img src="assets/img/values-3.png" class="img-fluid" alt="">
+                  <h3>Job Vacancies</h3>
+                  <p>Dapatkan informasi tentang lowongan pekerjaan, magang, pelatihan, dan lain sebagainya</p>
+                </div>
+              </a>
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </section>
+      <!-- End What's On Section -->
+  <!-- ======= Counter Section ======= -->
+  <section id="counts" class="counts">
+    <div class="container" data-aos="fade-up">
 
-    </section>
-    <!-- End What's On Section -->
-<!-- ======= Counter Section ======= -->
-<section id="counts" class="counts">
-  <div class="container" data-aos="fade-up">
+      <div class="row gy-4 justify-content-center">
 
-    <div class="row gy-4 justify-content-center">
-
-      <div class="col-lg-3 col-md-6">
-        <div class="count-box">
-          <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
-          <div>
-            <span data-purecounter-start="0" data-purecounter-end="{{ $countpartner }}" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Perusahaan</p>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="{{ $countpartner }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Perusahaan</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-lg-3 col-md-6">
-        <div class="count-box">
-          <i class="bi bi-headset" style="color: #15be56;"></i>
-          <div>
-            <span data-purecounter-start="0" data-purecounter-end="{{ $countevent }}" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Webinar</p>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-headset" style="color: #15be56;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="{{ $countevent }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Webinar</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-lg-3 col-md-6">
-        <div class="count-box">
-          <i class="bi bi-people" style="color: #bb0852;"></i>
-          <div>
-            <span data-purecounter-start="0" data-purecounter-end="{{ $countuser }}" data-purecounter-duration="1" class="purecounter" id="peserta"></span>
-            <p>Peserta</p>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-people" style="color: #bb0852;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="{{ $countuser }}" data-purecounter-duration="1" class="purecounter" id="peserta"></span>
+              <p>Peserta</p>
+            </div>
           </div>
         </div>
+        
       </div>
       
     </div>
-    
-  </div>
-</section>
-<!-- End Counter Section -->
+  </section>
+  <!-- End Counter Section -->
 
-  
-  
   <!-- ======= Rundown Section ======= -->
   <section id="features" class="features">
 
@@ -244,7 +245,7 @@
   <!-- End Rundonwn Section -->
 
   <!-- ======= Counter Section ======= -->
-  <section id="counts" class="counts">
+  {{-- <section id="counts" class="counts">
     <div class="container" data-aos="fade-up">
 
       <div class="row gy-4 justify-content-center">
@@ -282,7 +283,7 @@
       </div>
       
     </div>
-  </section>
+  </section> --}}
   <!-- End Counter Section -->
   
   <!-- ======= Participant Section ======= -->
