@@ -26,6 +26,7 @@
               </button>
             </form>
           </li>
+          @can('admin')
           <li>
             <div>
               <label class="switch">
@@ -36,6 +37,7 @@
               
             </div>
           </li>
+          @endcan
           
         </ul><!-- End Profile Dropdown Items -->
       </li><!-- End Profile Nav -->
