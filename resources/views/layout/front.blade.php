@@ -48,7 +48,7 @@
           <li><a class="nav-link scrollto {{ (request()->is('about')) ? 'active' : '' }}" href="{{ route('user-about') }}">About</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('partners')) ? 'active' : '' }}" href="{{ route('user-partners') }}">Partners</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('events')) ? 'active' : '' }}" href="{{ route('user-events') }}">Events</a></li>
-          <li><a class="nav-link scrollto {{ (request()->is('galleryy')) ? 'active' : '' }}" href="{{ route('user-gallery') }}">Gallery</a></li>
+          <li><a class="nav-link scrollto {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{ route('user-gallery') }}">Gallery</a></li>
          
              @if (Auth::check())
              <li><a class="nav-link scrollto {{ (request()->is('/user')) ? 'active' : '' }}" href="{{ route('user-area') }}">My Dashboard</a></li>
