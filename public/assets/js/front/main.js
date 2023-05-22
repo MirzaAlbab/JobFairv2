@@ -167,76 +167,11 @@
             }
         }
     });
-    const swiper2 = new Swiper(".swiper-container", {
-        // Optional parameters
-        speed: 400,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        slidesPerView: "auto",
-        // Navigation arrows
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-            clickable: true,
-        },
-        breakpoints: {
-            320: {
-                slidesPerView: 2,
-                spaceBetween: 40,
-            },
-            480: {
-                slidesPerView: 3,
-                spaceBetween: 60,
-            },
-            640: {
-                slidesPerView: 4,
-                spaceBetween: 80,
-            },
-            992: {
-                slidesPerView: 6,
-                spaceBetween: 120,
-            },
-        },
-    });
-    /**
-     * Clients Slider
-     */
-    new Swiper(".clients-slider2", {
-        speed: 400,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        slidesPerView: "auto",
-        centeredSlides: true,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            480: {
-                slidesPerView: 1,
-                spaceBetween: 30,
-            },
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 50,
-            },
-            992: {
-                slidesPerView: 3,
-                spaceBetween: 120,
-            },
-        },
-    });
     new Swiper(".clients-slider", {
         speed: 400,
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 2000,
             disableOnInteraction: false,
         },
         slidesPerView: "auto",
@@ -247,20 +182,20 @@
         },
         breakpoints: {
             320: {
-                slidesPerView: 2,
-                spaceBetween: 40,
+                slidesPerView: 4,
+                spaceBetween: 20,
             },
             480: {
-                slidesPerView: 3,
-                spaceBetween: 60,
+                slidesPerView: 5,
+                spaceBetween: 40,
             },
             640: {
-                slidesPerView: 4,
-                spaceBetween: 80,
+                slidesPerView: 6,
+                spaceBetween: 60,
             },
             992: {
                 slidesPerView: 8,
-                spaceBetween: 60,
+                spaceBetween: 80,
             },
         },
     });

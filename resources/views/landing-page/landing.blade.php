@@ -13,32 +13,40 @@
 <!-- End Hero -->
 
 
-<!-- ======= Sponsor  Section ======= -->
-<section id="clients" class="clients bg-white">
-  <div class="container" data-aos="fade-up">
-    <header class="section-header">
-      <p>Sponsors</p>
-    </header>
-    <div class="clients-slider2 swiper">
-      <div class="swiper-wrapper align-items-center" >
-        @if (count($partners) > 0)
-            
-        @foreach ($partners as $sponsor)
-        <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('storage/'. $sponsor->img) }}" class="img-fluid" alt=""></a></div>
-        {{-- <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="assets/img/dummy.png" class="img-fluid" alt=""></div>
-         --}}
-        @endforeach
-        @else
-        <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></div>
-        <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></div>
+  <!-- ======= Participant Section ======= -->
+  <section id="clients" class="clients">
+  
+    <div class="container" data-aos="fade-up">
+  
+      <header class="section-header">
+        <p>Perusahaan</p>
+      </header>
+      @if(count($platinum) > 0)
+      
+      <div class="text-center">
+        @foreach ($platinum as $plat)
+          <img src="{{ asset('storage/'.$plat->img) }}" class="img-fluid" alt="" style="max-width: 150px">
+          @endforeach
+        </div>
+     
         @endif
+      <div class="clients-slider swiper">
+        <div class="swiper-wrapper align-items-center">
+          @if (count($participant) > 0)
+          @foreach ($participant as $partici)
+          <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
+          @endforeach
+          @else
+          <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>
+          @endif
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
+
     </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-</section>
-<!-- End Sponsor Section -->
+  
+  </section>
+  <!-- End Participant Section -->
 
 <!-- ======= Main Section ======= -->
 <main id="main">
@@ -85,7 +93,47 @@
 
     </section>
     <!-- End What's On Section -->
+<!-- ======= Counter Section ======= -->
+<section id="counts" class="counts">
+  <div class="container" data-aos="fade-up">
 
+    <div class="row gy-4 justify-content-center">
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+          <div>
+            <span data-purecounter-start="0" data-purecounter-end="{{ $countpartner }}" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Perusahaan</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-headset" style="color: #15be56;"></i>
+          <div>
+            <span data-purecounter-start="0" data-purecounter-end="{{ $countevent }}" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Webinar</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-people" style="color: #bb0852;"></i>
+          <div>
+            <span data-purecounter-start="0" data-purecounter-end="{{ $countuser }}" data-purecounter-duration="1" class="purecounter" id="peserta"></span>
+            <p>Peserta</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+<!-- End Counter Section -->
 
   
   
@@ -238,16 +286,16 @@
   <!-- End Counter Section -->
   
   <!-- ======= Participant Section ======= -->
-  <section id="clients" class="clients">
+  {{-- <section id="clients" class="clients">
   
     <div class="container" data-aos="fade-up">
   
       <header class="section-header">
         <p>Perusahaan</p>
       </header>
-  
+
       <div class="clients-slider swiper">
-        <div class="swiper-wrapper align-items-center mb-5">
+        <div class="swiper-wrapper align-items-center">
           @if (count($participant) > 0)
           @foreach ($participant as $partici)
           <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
@@ -255,18 +303,18 @@
           @else
           <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>
           @endif
-          
-          
         </div>
         <div class="swiper-pagination"></div>
       </div>
+
     </div>
   
-  </section>
+  </section> --}}
   <!-- End Participant Section -->
-  @if (count($gallery) > 0)
+
+ 
   <!-- ======= Gallery Section ======= -->
-  <section id="gallery" class="gallery">
+  {{-- <section id="gallery" class="gallery">
 
     <div class="container" data-aos="fade-up">
 
@@ -292,9 +340,8 @@
 
     </div>
 
-  </section><!-- End Gallery Section -->
+  </section><!-- End Gallery Section --> --}}
   
-  @endif
 
   <!-- ======= F.A.Q Section ======= -->
   <section id="faq" class="faq">

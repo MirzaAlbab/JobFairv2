@@ -23,7 +23,7 @@ class FrontController extends Controller
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
        
-        $partners = Partner::where([
+        $platinum = Partner::where([
             ['status', 'active'],
             ['position', '1'],
             ['careerfair_id', $aocf->id],
@@ -48,7 +48,7 @@ class FrontController extends Controller
         $gallery = Gallery::where('status', 'active')->take(3)->get();
         $faq = Faq::where('status', 'active')->get();
         $faqs = $faq->split(2);
-        return view('landing-page.landing', compact('aocf', 'partners', 'rundown', 'countpartner', 'countevent', 'gallery', 'faqs', 'participant','countuser'));
+        return view('landing-page.landing', compact('aocf', 'platinum', 'rundown', 'countpartner', 'countevent', 'gallery', 'faqs', 'participant','countuser'));
         
     }
     public function about()

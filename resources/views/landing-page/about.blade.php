@@ -79,7 +79,7 @@
       </header>
   
       <div class="clients-slider swiper">
-        <div class="swiper-wrapper align-items-center justify-content-center mb-5">
+        <div class="swiper-wrapper align-items-center">
           @if (count($participant) > 0)
           @foreach ($participant as $partici)
           <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
@@ -87,8 +87,6 @@
           @else
           <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>
           @endif
-          
-          
         </div>
         <div class="swiper-pagination"></div>
       </div>
