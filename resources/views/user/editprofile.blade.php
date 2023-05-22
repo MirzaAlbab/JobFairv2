@@ -422,7 +422,7 @@
     // take faculty id
     let faculty = $(this).val()
     // fetch with api request and parameter
-    fetch(`http://career_fair.test/user/major/${faculty}`)
+    fetch(`{{ url('api/major') }}/${faculty}`)
     .then(res => res.json())
     .then(data => {
       // json decode

@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('province')->nullable();
             $table->string('address')->nullable();
-            $table->string('city')->nullable();
+            $table->string('city')->nullable()->default('Lainnya');
             $table->string('about')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('education')->nullable();
-            $table->string('faculty')->nullable();
-            $table->string('major')->nullable();
+            $table->string('education')->nullable()->default('Lainnya');
+            $table->string('faculty')->nullable()->default('Lainnya');
+            $table->string('major')->nullable()->default('Lainnya');
             $table->string('cv')->nullable();
             $table->string('photo')->nullable();
             $table->string('instagram')->nullable();

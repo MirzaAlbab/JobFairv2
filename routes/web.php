@@ -62,7 +62,7 @@ Route::middleware(['auth','verified','user'])->group(function () {
     Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
 
     // api user major
-    Route::get('user/major/{id}', [ProfileController::class, 'getMajor'])->name('getMajor');
+    Route::get('api/major/{id}', [ProfileController::class, 'getMajor'])->name('getMajor');
 });
 
 Route::middleware(['auth','verified'])->group(function () {
