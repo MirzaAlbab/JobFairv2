@@ -44,7 +44,7 @@
               <label for="deskripsi" class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="deskripsi" required>{!! old('deskripsi', $careerfair->description) !!}</textarea>
+                  <textarea class="form-control" id="editor" name="deskripsi">{!! old('deskripsi', $careerfair->description) !!}</textarea>
                   @error('deskripsi')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
