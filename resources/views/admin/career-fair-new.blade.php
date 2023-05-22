@@ -31,7 +31,7 @@
             <div class="row mb-3">
                 <label for="judul" class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
+                  <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" required>
                     @error('judul')
                       <div class="invalid-feedback">
                         {{ $message }}
@@ -44,7 +44,7 @@
               <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                  <textarea class="form-control" id="editor" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
                   @error('deskripsi')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
@@ -55,7 +55,7 @@
             <div class="row mb-3">
               <label for="inputStartDate" class="col-sm-2 col-form-label">Start Date</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('tglmulai') is-invalid @enderror" id="start_date" name="tglmulai" value="{{ old('tglmulai') }}">
+                <input type="text" class="form-control @error('tglmulai') is-invalid @enderror" id="start_date" name="tglmulai" value="{{ old('tglmulai') }}" required>
                 @error('tglmulai')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -67,7 +67,7 @@
             <div class="row mb-3">
               <label for="inputEndDate" class="col-sm-2 col-form-label">End Date</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('tglselesai') is-invalid @enderror" name="tglselesai" id="end_date" value="{{ old('tglselesai') }}">
+                <input type="text" class="form-control @error('tglselesai') is-invalid @enderror" name="tglselesai" id="end_date" value="{{ old('tglselesai') }}" required>
                 @error('tglselesai')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -80,7 +80,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Careerfair Image</label>
               <div class="col-sm-10">
                 <img class="img-preview img-fluid mb-3 col-sm-5">
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()" required>
                 @error('image')
                   <div class="invalid-feedback">
                     {{ $message }}

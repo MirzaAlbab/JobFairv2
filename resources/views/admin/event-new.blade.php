@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Title</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}">
+                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}" required>
                 @error('judul')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -43,7 +43,7 @@
               <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                  <textarea class="form-control" id="editor" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
                   @error('deskripsi')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
@@ -54,7 +54,7 @@
             <div class="row mb-3">
               <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
               <div class="col-sm-10">
-                <input type="datetime-local" class="form-control @error('waktu') is-invalid @enderror" name="waktu" value="{{ old('waktu') }}">
+                <input type="datetime-local" class="form-control @error('waktu') is-invalid @enderror" name="waktu" value="{{ old('waktu') }}" required>
                 @error('waktu')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -66,7 +66,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">AOCF Period</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="periode">
+                <select class="form-select search-select" aria-label="Default select example" name="periode" required>
                   <option value=""></option>
                   @foreach ($careers as $car)
                     <option value="{{ $car->id }}">{{ $car->title }}</option>
@@ -82,7 +82,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Event Image</label>
               <div class="col-sm-10">
                 <img class="img-preview img-fluid mb-3 col-sm-5">
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()" required>
                 @error('image')
                   <div class="invalid-feedback">
                     {{ $message }}

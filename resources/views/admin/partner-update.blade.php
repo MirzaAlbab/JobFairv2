@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Partner Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="nama" value="{{ $partner->company }}">
+                <input type="text" class="form-control" name="nama" value="{{ $partner->company }}" required>
               </div>
             </div>
 
@@ -38,7 +38,7 @@
               <label for="inputDescription" class="col-sm-2 col-form-label">Partner Profile</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="deskripsi">{!! $partner->description !!}</textarea>
+                  <textarea class="form-control" id="editor" name="deskripsi" required>{!! $partner->description !!}</textarea>
                 </div>  
               </div>
             </div>
@@ -46,7 +46,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">AOCF Period</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="periode">
+                <select class="form-select search-select" aria-label="Default select example" name="periode" required>
                   <option value=""></option>
                   @foreach ($careers as $car)
                     <option value="{{ $car->id }}" {{$car->id == $partner->careerfair_id  ? 'selected' : ''}}>{{ $car->title }}</option>
@@ -70,7 +70,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Partner Type</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis">
+                <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis" required>
                   <option value="1" {{ ($partner->position == 1) ? 'selected' : '' }}>Platinum</option>
                   <option value="2" {{ ($partner->position == 2) ? 'selected' : '' }}>Gold</option>
                   <option value="2" {{ ($partner->position == 3) ? 'selected' : '' }}>Silver</option>

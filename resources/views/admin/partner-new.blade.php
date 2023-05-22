@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="nama" class="col-sm-2 col-form-label">Partner Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" required>
                 @error('nama')
                   <div class="invalid-feedback">
                   {{ $message }}
@@ -43,7 +43,7 @@
               <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                  <textarea class="form-control" id="editor" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
                   @error('deskripsi')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
@@ -55,7 +55,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">AOCF Period</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="periode">
+                <select class="form-select search-select" aria-label="Default select example" name="periode" required>
                   <option value=""></option>
                   @foreach ($careers as $car)
                     <option value="{{ $car->id }}">{{ $car->title }}</option>
@@ -71,7 +71,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Partner Image</label>
               <div class="col-sm-10">
                 <img class="img-preview img-fluid mb-3 col-sm-5">
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()" required>
                 @error('image')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -84,7 +84,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Partner Type</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis">
+                <select class="form-select search-select" aria-label="Default select example" aria-placeholder="Open this select menu" name="jenis" required>
                   <option value="" selected>Select an option</option>
                   <option value="1">Platinum</option>
                   <option value="2">Gold</option>

@@ -26,6 +26,17 @@
               </button>
             </form>
           </li>
+          <li>
+            <div>
+              <label class="switch">
+                  <input type="checkbox" id="maintenanceSwitch">
+                  <span class="slider"></span>
+                </label> 
+                <span>Maintenance</span>
+              
+            </div>
+          </li>
+          
         </ul><!-- End Profile Dropdown Items -->
       </li><!-- End Profile Nav -->
     </ul>

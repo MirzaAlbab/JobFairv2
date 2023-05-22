@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="title" class="col-sm-2 col-form-label">Nama Pekerjaan</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" required>
                 @error('title')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -40,7 +40,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Jenis Pekerjaan</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="type" >
+                <select class="form-select search-select" aria-label="Default select example" name="type" required>
                   <option value="">Pilih salah satu</option>
                   @foreach ($jobtype as $typ)
                     <option value="{{ $typ->id }}">{{ $typ->name }}</option>
@@ -54,7 +54,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Pendidikan</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" name="education">
+                <select class="form-select" aria-label="Default select example" name="education" required>
                   <option value="">Pilih salah satu</option>
                   <option value="SMA/SMK">SMA/SMK</option>
                   <option value="D3">D3</option>
@@ -80,7 +80,7 @@
             <div class="row mb-3">
               <label for="start_date" class="col-sm-2 col-form-label">Tanggal Mulai</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" value="{{ old('start_date') }}">
+                <input type="text" class="form-control" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" value="{{ old('start_date') }}" required>
                 @error('start_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -89,7 +89,7 @@
             <div class="row mb-3">
               <label for="end_date" class="col-sm-2 col-form-label">Tanggal Selesai</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" value="{{ old('end_date') }}">
+                <input type="text" class="form-control" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" value="{{ old('end_date') }}" required>
                 @error('end_date')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -100,7 +100,7 @@
               <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="description">{{ old('description') }}</textarea>
+                  <textarea class="form-control" id="editor" name="description" required>{{ old('description') }}</textarea>
                   @error('description')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
@@ -111,7 +111,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Perusahaan</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="partner_id">
+                <select class="form-select search-select" aria-label="Default select example" name="partner_id" required>
                   <option value=""></option>
                   @foreach ($partner as $par)
                     <option value="{{ $par->id }}">{{ $par->company }}</option>
@@ -125,7 +125,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Kategori Pekerjaan</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" name="category">
+                <select class="form-select" aria-label="Default select example" name="category" required>
                   <option value="">Pilih salah satu</option>
                   <option value="full-time">full-time</option>
                   <option value="part-time">part-time</option>

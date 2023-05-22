@@ -17,18 +17,13 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" id="maintenanceSwitch" disabled>
-      <label class="form-check-label" for="maintenanceSwitch">Maintenance mode</label>
-    </div>
 
+ 
 
-    <section class="section dashboard">
+    <section class="section dashboard ">
       <div class="row">
         <!-- Left side columns -->
-        
-          
-           
+
               <div class="card">
                 <div class="card-body pb-0">
                   <h5 class="card-title">Welcome back, {{ Auth::user()->name }}!</h5>

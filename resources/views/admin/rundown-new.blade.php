@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="start_date" class="col-sm-2 col-form-label">Hari, Tanggal</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="hari_tanggal" id="start_date" value="{{ old('hari_tanggal') }}">
+                <input type="text" class="form-control" name="hari_tanggal" id="start_date" value="{{ old('hari_tanggal') }}" required>
                 @error('hari_tanggal')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -41,7 +41,7 @@
               <label for="rincian" class="col-sm-2 col-form-label">Rincian</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="rincian">{{ old('rincian') }}</textarea>
+                  <textarea class="form-control" id="editor" name="rincian" required>{{ old('rincian') }}</textarea>
                   @error('rincian')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
@@ -52,7 +52,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">AOCF Period</label>
               <div class="col-sm-10">
-                <select class="form-select search-select" aria-label="Default select example" name="periode"">
+                <select class="form-select search-select" aria-label="Default select example" name="periode" required>
                   <option value=""></option>
                   @foreach ($careers as $car)
                     <option value="{{ $car->id }}">{{ $car->title }}</option>

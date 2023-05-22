@@ -12,8 +12,6 @@
 </section>
 <!-- End Hero -->
 
-
-  
 <!-- ======= Main Section ======= -->
 <main id="main">
 
@@ -52,7 +50,7 @@
   </section>
   <!-- End Participant Section -->
 
-  
+
   <!-- ======= What's On Section ======= -->
     <section id="values" class="values">
         <div class="container" data-aos="fade-up">

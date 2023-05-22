@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Title</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul', $gallery->title) }}">
+                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul', $gallery->title) }}" required>
                 @error('judul')
                   <div class="invalid-feedback">
                     {{ $message }}

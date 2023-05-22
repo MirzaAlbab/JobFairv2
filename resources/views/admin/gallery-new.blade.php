@@ -30,7 +30,7 @@
             <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Title</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}">
+                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}" required>
                 @error('judul')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -43,7 +43,7 @@
               <label for="image" class="col-sm-2 col-form-label mt-3">Gallery Image</label>
               <div class="col-sm-10">
                 <img class="img-preview img-fluid mb-3 col-sm-5">
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()" required>
                 @error('image')
                   <div class="invalid-feedback">
                     {{ $message }}
