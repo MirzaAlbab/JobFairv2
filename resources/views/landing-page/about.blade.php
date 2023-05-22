@@ -17,7 +17,7 @@
   <!-- End Breadcrumbs -->
 
   <!-- ======= Big Clients Section ======= -->
-  <section id="clients" class="clients bg-white">
+  {{-- <section id="clients" class="clients bg-white">
     <div class="container" data-aos="fade-up">
       <header class="section-header">
         <p>Sponsors</p>
@@ -28,8 +28,7 @@
             
           @foreach ($partners as $sponsor)
           <div class="swiper-slide d-flex align-items-center justify-content-center"><a href="{{ route('user-singlepartner', $sponsor->id) }}" target="_blank"><img src="{{ asset('storage/'.$sponsor->img) }}" class="img-fluid" alt=""></a></div>
-          {{-- <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="assets/img/dummy.png" class="img-fluid" alt=""></div>
-           --}}
+         
           @endforeach
           @else
           <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></div>
@@ -40,7 +39,7 @@
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
-  </section>
+  </section> --}}
   <!-- End Big Clients Section -->
 
     <!-- ======= About Section ======= -->
@@ -70,14 +69,23 @@
   <!-- End About Section -->
 
   <!-- ======= Clients Section ======= -->
-  <section id="clients" class="clients">
+   <!-- ======= Participant Section ======= -->
+   <section id="clients" class="clients">
   
     <div class="container" data-aos="fade-up">
   
       <header class="section-header">
-        <p>Partisipan AOCF</p>
+        <p>Perusahaan</p>
       </header>
-  
+      @if(count($platinum) > 0)
+      
+      <div class="text-center">
+        @foreach ($platinum as $plat)
+          <img src="{{ asset('storage/'.$plat->img) }}" class="img-fluid" alt="" style="max-width: 150px">
+          @endforeach
+        </div>
+     
+        @endif
       <div class="clients-slider swiper">
         <div class="swiper-wrapper align-items-center">
           @if (count($participant) > 0)
@@ -90,8 +98,10 @@
         </div>
         <div class="swiper-pagination"></div>
       </div>
+
     </div>
   
   </section>
+  <!-- End Participant Section -->
   <!-- End Clients Section -->
 @endsection

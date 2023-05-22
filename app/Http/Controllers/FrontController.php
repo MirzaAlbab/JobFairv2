@@ -54,7 +54,7 @@ class FrontController extends Controller
     public function about()
     {
         $aocf = Careerfair::where('status', 'active')->latest()->first();
-        $partners = Partner::where([
+        $platinum = Partner::where([
             ['status', 'active'],
             ['position', '1'],
             ['careerfair_id', $aocf->id],
@@ -63,7 +63,7 @@ class FrontController extends Controller
             ['status', 'active'],
             ['careerfair_id', $aocf->id],
         ])->get();
-        return view('landing-page.about',compact('aocf', 'partners', 'participant'));
+        return view('landing-page.about',compact('aocf', 'platinum', 'participant'));
     }
     public function partner(Request $request)
     {
