@@ -129,7 +129,7 @@
   
     $(document).ready(function() {
         $('.search-select').select2({
-          placeholder: 'Select an option',
+          placeholder: 'Pilih salah satu',
           theme: 'bootstrap-5',
     });
   }); 

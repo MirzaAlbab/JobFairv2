@@ -41,7 +41,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Jenis Pekerjaan</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" name="type" required>
+                <select class="form-select search-select" aria-label="Default select example" name="type" required>
                   <option value="">Pilih salah satu</option>
                   @foreach ($jobtype as $typ)
                   <option value="{{ $typ->id }}" {{ $typ->id == $job->type ? 'selected':'' }}>{{ $typ->name }}</option>

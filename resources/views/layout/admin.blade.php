@@ -120,6 +120,14 @@
     
     } );
   </script>
+  <script>
+    $(document).ready(function() {
+      $('.search-select').select2({
+        placeholder: 'Pilih salah satu',
+        theme: 'bootstrap-5',
+      });
+    });
+  </script>
   
   <script>
     today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
@@ -318,14 +326,7 @@
     }
   }
   </script>
-  <script>
-    $(document).ready(function() {
-      $('.search-select').select2({
-        placeholder: 'Pilih salah satu',
-        theme: 'bootstrap-5',
-      });
-    });
-  </script>
+  
   
  
  
