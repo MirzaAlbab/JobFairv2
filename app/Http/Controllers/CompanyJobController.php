@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobType;
 use App\Models\Partner;
 use Illuminate\Http\Request;
 use App\Models\JobApplication;
@@ -28,7 +29,8 @@ class CompanyJobController extends Controller
      */
     public function create()
     {
-        return view ('company.job-new');
+        $jobtype = JobType::all();
+        return view ('company.job-new', compact('jobtype'));
     }
 
     /**
@@ -87,7 +89,8 @@ class CompanyJobController extends Controller
     public function edit(Job $job)
     {
         $job = Job::find($job->id);
-        return view('company.job-update', compact('job'));
+        $jobtype = JobType::all();
+        return view('company.job-update', compact('job', 'jobtype'));
     }
 
     /**

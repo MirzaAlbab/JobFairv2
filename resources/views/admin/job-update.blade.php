@@ -47,6 +47,9 @@
                   <option value="{{ $typ->id }}" {{ $typ->id == $job->type ? 'selected':'' }}>{{ $typ->name }}</option>
                 @endforeach
                 </select>
+                <small class="form-text text-muted">
+                  Jika tidak ada jenis pekerjaan yang sesuai, silahkan pilih lainnya.
+                </small>
                 @error('type')
                   <p class="text-danger">{{ $message }}</p>
                 @enderror
