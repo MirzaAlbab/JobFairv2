@@ -162,7 +162,7 @@ class CareerfairController extends Controller
        
         $qr = Careerfair::find($request->id);
         if($qr->qr == null){
-            $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('/presence'));
+            $qr = QrCode::format('png')->merge("/public/assets/img/dpkka-mini.png")->errorCorrection('H')->size(300)->generate(URL::to('user/presence'));
             // $qr = QrCode::format('png')->size(300)->generate($request->judul);
             $output_file = 'public/uploads/img/img-' . time() . '.png';
             Storage::disk('public')->put($output_file, $qr);

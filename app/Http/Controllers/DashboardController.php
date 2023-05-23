@@ -57,7 +57,7 @@ class DashboardController extends Controller
        
         $user = auth()->user();
         $careerfair = Careerfair::where('status', 'active')->latest()->first();
-        if($request->id == 'http://career_fair.test/presence'){
+        if($request->id == URL::to('user/presence')){
             try {
                 
                 Presence::create([
