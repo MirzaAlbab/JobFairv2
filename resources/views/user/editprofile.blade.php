@@ -122,7 +122,7 @@
                 </div>
                 @endif
 
-                @if(Auth::user()->education != 'Lainnya')
+                @if(Auth::user()->education != 'Lainnya' && Auth::user()->faculty != 'Lainnya' && Auth::user()->major != 'Lainnya')
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Pendidikan</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->education }}</div>
@@ -218,7 +218,8 @@
                     <label for="city" class="col-md-4 col-lg-3 col-form-label">Kota/Kab</label>
                     <div class="col-md-8 col-lg-9">
                       <select class="form-select" aria-label="Default select example" id="city" name="city" disabled required>
-                        <option id="city" value="" selected>Pilih salah satu</option>
+                       
+                        <option id="city"></option>
                       </select>
                       @error('city')
                       <p class="text-danger">{{ $message }}</p>
@@ -240,7 +241,7 @@
                     <label for="pendidikan" class="col-md-4 col-lg-3 col-form-label">Tingkat Pendidikan</label>
                     <div class="col-md-8 col-lg-9">
                       <select class="form-select" aria-label="Default select example" id="pendidikan" name="education" required>
-                        <option selected>Pilih salah satu</option>
+                        <option value="" selected>Pilih salah satu</option>
                         <option value="SMA/SMK" {{ Auth::user()->education == "SMA/SMK" ? 'selected' :'' }}>SMA/SMK</option>
                         <option value="D3"{{ Auth::user()->education == "D3" ? 'selected' :'' }}>D3</option>
                         <option value="D4"{{ Auth::user()->education == "D4" ? 'selected' :'' }}>D4</option>
@@ -264,7 +265,7 @@
                         <option value="{{ $faculty->id }}" {{ Auth::user()->faculty == $faculty->id ? 'selected' :'' }}>{{ $faculty->name }}</option>
                         @endforeach
                       </select>
-                      @error('major')
+                      @error('faculty')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
@@ -274,7 +275,8 @@
                     <div class="col-md-8 col-lg-9">
                       
                       <select class="form-select" aria-label="Default select example" id="major" name="major" disabled required>
-                        <option id="major" selected value="">Pilih salah satu</option>
+                      
+                        <option id="major"></option>
                        
                       </select>
                       @error('major')
@@ -415,7 +417,7 @@
       })
       
       $('#city').removeAttr('disabled')
-      $('#city').html('<option selected>Pilih salah satu</option>')
+      $('#city').html('<option value="" selected>Pilih salah satu</option>')
       $('#city').append(cities)
     })
   });
@@ -440,7 +442,7 @@
       
       
       $('#major').removeAttr('disabled')
-      $('#major').html('<option selected>Pilih salah satu</option>')
+      $('#major').html('<option value="" selected>Pilih salah satu</option>')
       $('#major').append(majors)
     })
   });
