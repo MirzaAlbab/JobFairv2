@@ -89,7 +89,7 @@
                           enabled: false
                         },
                         xaxis: {
-                          categories: ['Company', 'Job', 'Webinar', 'Participant', ],
+                          categories: ['Company', 'Job', 'Webinar', 'Jobseeker', ],
                         },
                         yaxis: {
                           title: {

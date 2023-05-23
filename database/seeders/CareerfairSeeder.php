@@ -28,14 +28,14 @@ class CareerfairSeeder extends Seeder
         'start_date' => '2022-01-01',
         'end_date' => '2022-01-01',
         'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
-        'status' => 'active',
+        'status' => 'inactive',
     ]);
     Careerfair::create([
         'title' => "AOCF 37th Unair",
         'start_date' => '2022-01-01',
         'end_date' => '2022-01-01',
         'img' => 'https://res.cloudinary.com/dxd813fbq/image/upload/v1649835947/CareerFair/2022-04-13_074547_bri.png',
-        'status' => 'active',
+        'status' => 'inactive',
     ]);
     
    

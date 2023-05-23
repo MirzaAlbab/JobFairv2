@@ -58,7 +58,7 @@
               </a>
             
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+               
                 <li><form action="{{ route('logout') }}" method="post">
                   @csrf
                   <button class="dropdown-item d-flex align-items-center" type="submit">
