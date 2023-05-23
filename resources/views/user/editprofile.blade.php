@@ -125,7 +125,7 @@
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->education }}</div>
                 </div>
 
-                @if(Auth::user()->faculty)
+                @if(Auth::user()->faculty == 'Lainnya')
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Fakultas</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->Faculty->name }}</div>
