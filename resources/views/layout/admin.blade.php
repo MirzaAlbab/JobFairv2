@@ -61,9 +61,9 @@
   <!-- ======= Footer ======= -->
   @include('admin.footer')
   <!-- End Footer -->
-
+  
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+  
   <!-- Vendor JS Files -->
   
   
@@ -76,6 +76,13 @@
   <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+
   <script>
     $(document).ready(function (e) {
       $(document).on("click", "#delete-modal", function (e) {
@@ -85,6 +92,35 @@
       });
     });
   </script>
+   <script>
+    $(".export ul li").click(function() {
+    let i = $(this).index() + 1
+    let table = $('#tabel').DataTable();
+    console.log(table);
+    if (i == 1) {
+        table.button('.buttons-csv').trigger();
+        console.log(i);
+    } else if (i == 2) {
+        table.button('.buttons-excel').trigger();
+    } else if (i == 3) {
+        table.button('.buttons-pdf').trigger();
+    }
+  });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#tabel').DataTable( {
+          
+          dom: 'Bfrtip',
+          buttons: [
+            'csv', 'excel', 'pdf'
+          ],
+          "searching": false
+      } );
+    
+    } );
+  </script>
+  
   <script>
     today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
      $('#start_date').datepicker({
@@ -111,7 +147,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/admin/main.js') }}"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/super-build/ckeditor.js"></script>
   <script>
