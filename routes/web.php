@@ -46,8 +46,7 @@ Route::middleware(['auth','verified','user'])->group(function () {
     // route user show job proposal
     Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
     
-    // route: user job details and apply
-    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
+    // route: user apply job
     Route::post('/user/applyjob', [JobApplicationController::class, 'store'])->name('applyjob');
     
     // route: user/presence
@@ -88,6 +87,9 @@ Route::middleware(['auth','verified'])->group(function () {
     
     // api company views
     Route::get('/api/getviews',[DashboardController::class, 'getViews'])->name('company.views');
+    
+    // route/job-details
+    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
 });
 
 Route::middleware(['auth', 'verified','admin'])->group(function () {
@@ -157,7 +159,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     Route::get('/dashboard/job-update/{job}/edit', [JobController::class, 'edit'])->name('job-edit');
     Route::post('/dashboard/job-update/{job}', [JobController::class, 'update'])->name('job-update');
     Route::delete('/dashboard/job/delete', [JobController::class, 'destroy'])->name('job-delete');
-    Route::get('/singlepartner/{partner}/job/{id}', [FrontController::class, 'jobdetails'])->name('jobdetails');
+   
 
     // route: admin/partner
     Route::get('/dashboard/partner', [PartnerController::class, 'index'])->name('partner');
