@@ -100,16 +100,7 @@
                   <div class="col-lg-3 col-md-4 label ">Nama Lengkap</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                 </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Kota</div>
-                  <div class="col-lg-9 col-md-8">{{ Auth::user()->city }}</div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Alamat</div>
-                  <div class="col-lg-9 col-md-8">{{ Auth::user()->address }}</div>
-                </div>
-
+                
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">No. Telepon</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
@@ -120,12 +111,23 @@
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
                 </div>
 
+                @if(Auth::user()->city != 'Lainnya')
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Kota</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->city }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Alamat</div>
+                  <div class="col-lg-9 col-md-8">{{ Auth::user()->address }}</div>
+                </div>
+                @endif
+
+                @if(Auth::user()->education != 'Lainnya')
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Pendidikan</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->education }}</div>
                 </div>
 
-                @if(Auth::user()->faculty != 'Lainnya')
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Fakultas</div>
                   <div class="col-lg-9 col-md-8">{{ Auth::user()->Faculty->name }}</div>
