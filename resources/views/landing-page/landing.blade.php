@@ -31,19 +31,46 @@
           @endforeach
         </div>
      
-        @endif
+      @endif
+      @if(count($gold) > 0)
+      
+      <div class="text-center">
+        @foreach ($gold as $gol)
+          <img src="{{ asset('storage/'.$gol->img) }}" class="img-fluid" alt="" style="max-width: 125px">
+          @endforeach
+        </div>
+     
+      @endif
+      @if(count($silver) > 0)
+      
+      <div class="text-center">
+        @foreach ($silver as $silv)
+          <img src="{{ asset('storage/'.$silv->img) }}" class="img-fluid" alt="" style="max-width: 100px">
+          @endforeach
+        </div>
+     
+      @endif
+      @if(count($bronze) > 0)
+      
+      <div class="text-center">
+        @foreach ($bronze as $bronz)
+          <img src="{{ asset('storage/'.$bronz->img) }}" class="img-fluid" alt="" style="max-width: 75px">
+          @endforeach
+        </div>
+     
+      @endif
+      @if (count($participant) > 0)
       <div class="clients-slider swiper">
         <div class="swiper-wrapper align-items-center">
-          @if (count($participant) > 0)
           @foreach ($participant as $partici)
           <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
           @endforeach
           @else
           <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>
-          @endif
         </div>
         <div class="swiper-pagination"></div>
       </div>
+      @endif
 
     </div>
   

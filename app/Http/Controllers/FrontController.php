@@ -28,6 +28,26 @@ class FrontController extends Controller
             ['position', '1'],
             ['careerfair_id', $aocf->id],
         ])->get();
+        $gold = Partner::where([
+            ['status', 'active'],
+            ['position', '2'],
+            ['careerfair_id', $aocf->id],
+        ])->get();
+        $silver = Partner::where([
+            ['status', 'active'],
+            ['position', '3'],
+            ['careerfair_id', $aocf->id],
+        ])->get();
+        $bronze = Partner::where([
+            ['status', 'active'],
+            ['position', '4'],
+            ['careerfair_id', $aocf->id],
+        ])->get();
+        // $participant = Partner::where([
+        //     ['status', 'active'],
+        //     ['position', '5'],
+        //     ['careerfair_id', $aocf->id],
+        // ])->get();
         
         $participant = Partner::where([
             ['status', 'active'],
@@ -48,7 +68,7 @@ class FrontController extends Controller
         $gallery = Gallery::where('status', 'active')->take(3)->get();
         $faq = Faq::where('status', 'active')->get();
         $faqs = $faq->split(2);
-        return view('landing-page.landing', compact('aocf', 'platinum', 'rundown', 'countpartner', 'countevent', 'gallery', 'faqs', 'participant','countuser'));
+        return view('landing-page.landing', compact('aocf', 'rundown', 'gallery', 'faqs', 'countpartner', 'countevent','countuser','platinum','gold','silver','bronze','participant'));
         
     }
     public function about()
@@ -89,6 +109,7 @@ class FrontController extends Controller
     }
     public function search(Request $request)
     {
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
         $query = $request->input('query');
         $category = $request->input('category');
         // how to separate when user only filter by categories without using any query
@@ -116,7 +137,7 @@ class FrontController extends Controller
         //     $partner_ids = $partner_ids->unique();
             
             // get partners with the ids
-            $partners = Partner::whereIn('id', $partner_ids)->paginate(6);
+            $partners = Partner::whereIn('id', $partner_ids)->where('careerfair_id', $aocf->id)->paginate(6);
             
         
         return view('landing-page.partners-filter', compact('partners'));

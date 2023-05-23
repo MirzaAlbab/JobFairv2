@@ -182,20 +182,20 @@
         },
         breakpoints: {
             320: {
-                slidesPerView: 4,
-                spaceBetween: 20,
+                slidesPerView: 6,
+                spaceBetween: 10,
             },
             480: {
-                slidesPerView: 5,
-                spaceBetween: 40,
+                slidesPerView: 8,
+                spaceBetween: 20,
             },
             640: {
-                slidesPerView: 6,
-                spaceBetween: 60,
+                slidesPerView: 9,
+                spaceBetween: 30,
             },
             992: {
-                slidesPerView: 8,
-                spaceBetween: 80,
+                slidesPerView: 12,
+                spaceBetween: 40,
             },
         },
     });
