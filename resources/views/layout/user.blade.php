@@ -30,7 +30,11 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/admin/style.css') }}" rel="stylesheet">
-
+  <style>
+    .dataTable-search{
+      display: none;
+    }
+  </style>
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -99,7 +103,7 @@
           const imgprev = document.querySelector('.img-preview');
           
           imgprev.style.display = 'block';
-          imgprev.src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          imgprev.src = "{{ asset('assets/img/profile-img.jpg') }}";
           
       });
     });
@@ -125,17 +129,7 @@
       
     }
   </script>
-  <script>
-    $(document).ready(function() {
-     $('#tabel').DataTable( {
-         
-        "paging": false,
-         "searching": false
-     });
-     
-    });
-
-   </script>
+  
 
 
 </body>
