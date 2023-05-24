@@ -33,7 +33,6 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  
                   <a class="btn btn-primary" href="/assets/vendor/pdfjs/web/viewer.html?file={{ $cv }}">Lihat CV</a>
                 </div>
 
