@@ -30,16 +30,20 @@
                 <p class="card-text">You haven't uploaded your CV yet.</p>
                 <a href="{{ route('profile.edit') }}" class="btn btn-primary">Upload CV</a>
               @else
+                @if($device == 'mobile')
+                 
+                <div class="row">
+                  <div class="col-md-12">
+                    <a class="btn btn-primary" href="/assets/vendor/pdfjs/web/viewer.html?file={{ $cv }}" target="blank">Lihat CV</a>
+                  </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <a class="btn btn-primary" href="/assets/vendor/pdfjs/web/viewer.html?file={{ $cv }}">Lihat CV</a>
                 </div>
+                @else
+                  <iframe id="pdf-js-viewer"
+                  src="{{ $cv }}" frameborder="0" width="600" height="500"></iframe>
+                @endif
 
-              </div>
              
-              <iframe id="pdf-js-viewer"
-               src="{{ $cvcoba }}" frameborder="0" width="600" height="500"></iframe>
               @endif
   
             </div>

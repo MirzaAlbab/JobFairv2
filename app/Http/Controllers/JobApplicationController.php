@@ -34,12 +34,24 @@ class JobApplicationController extends Controller
     public function viewcv(){
         $id = Auth()->user()->id;
         $cv = User::where('id','=',$id)->first();
-        $cvcoba = '/storage/'.$cv->cv;
-
-        $cv = '../../../../storage/'.$cv->cv;
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+       
+    //    make if for mobile
+        if(strpos($user_agent, 'Mobile') !== false){
+            $device = 'mobile';
+            $cv = '../../../../storage/'.$cv->cv;
+            return view('user.cv', compact('cv','device'));
+            
+        }
+        else{
+            $cv = '/storage/'.$cv->cv;
+            $device = 'desktop';
+            return view('user.cv', compact('cv','device'));
+        }
+       
 
         
-       return view('user.cv', compact('cv','cvcoba'));
+       
         
     }
     public function indexCompany()
