@@ -30,12 +30,8 @@
                 <p class="card-text">You haven't uploaded your CV yet.</p>
                 <a href="{{ route('profile.edit') }}" class="btn btn-primary">Upload CV</a>
               @else
-              
-            
-            {{-- update cv --}}
-           
-            
-              <iframe id="pdf-js-viewer"
+
+              <iframe
               src="{{ asset('storage/'.$cv->cv) }}"
               width="800px"
               height="600px"
@@ -47,17 +43,12 @@
              
             </div>
             @endif
-             
-           
-              
+  
             </div>
           </div>
         </div>
       </div>
     </section>
-      
-    
-      
   </main>
   
 @endsection

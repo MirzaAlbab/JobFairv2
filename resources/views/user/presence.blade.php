@@ -79,4 +79,73 @@
     </div>    
   </main>
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script>
+    // $('#result').val('test');
+    function onScanSuccess(decodedText, decodedResult) {
+        // alert(decodedText);
+       
+        let id = decodedText;  
+                  
+        html5QrcodeScanner.clear().then(_ => {
+         
+          
+          let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+           
+          $.ajax({
+            url: "{{ route('presensi-store') }}",
+            type: 'POST',            
+            data: {
+                _method : "POST",
+                _token: CSRF_TOKEN,
+                id: id
+                
+            },
+            success: function (response) { 
+                console.log(response);
+                if(response.status == 200){
+                  $('#mysuccessModal').modal('show');
+                  setTimeout(() => {
+                    
+                    location.reload();
+                  }, 1000);
+
+                }else{
+                  $('#myfailModal').modal('show');
+                  setTimeout(() => {
+                    
+                    location.reload();
+                  }, 3000);
+                  
+                }
+                
+            }
+            }).catch(error => {
+            $('#myfailModal').modal('show');
+            setTimeout(() => {
+                    
+                    location.reload();
+                  }, 3000);
+            
+            
+            });   
+        
+        
+        });
+      }
+
+    function onScanFailure(error) {
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
+        // console.warn(`Code scan error = ${error}`);
+        // alert('QR Code tidak valid, silahkan scan ulang ')
+    }
+    
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: {width: 250, height: 250} },
+   
+    /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  </script>
 @endsection

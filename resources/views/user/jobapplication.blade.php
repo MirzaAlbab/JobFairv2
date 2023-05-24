@@ -27,7 +27,7 @@
               <h5 class="card-title">Datatables</h5>
 
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table datatable" id="tabel">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

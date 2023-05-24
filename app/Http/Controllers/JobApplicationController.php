@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\JobApplication;
-use Illuminate\Support\Facades\Response;
 
 use function Pest\Laravel\get;
+use function Ramsey\Uuid\v1;
+
+use Illuminate\Support\Facades\Response;
 
 class JobApplicationController extends Controller
 {
@@ -31,9 +34,9 @@ class JobApplicationController extends Controller
     public function viewcv(){
         $id = Auth()->user()->id;
         $cv = User::where('id','=',$id)->first();
-      
+
         
-        return view('user.cv', compact('cv'));
+       return view('user.cv', compact('cv'));
         
     }
     public function indexCompany()
