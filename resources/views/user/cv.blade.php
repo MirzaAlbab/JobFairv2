@@ -26,23 +26,22 @@
             <div class="card-body">
               <h5 class="card-title">CV</h5>
 
-              @if($cv->cv == null || $cv->cv == '')
+              @if($cv == null || $cv == '')
                 <p class="card-text">You haven't uploaded your CV yet.</p>
                 <a href="{{ route('profile.edit') }}" class="btn btn-primary">Upload CV</a>
               @else
 
-              <iframe
-              src="{{ asset('storage/'.$cv->cv) }}"
-              width="800px"
-              height="600px"
-              style="border: none;"
-            />
-            </iframe>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <a href="{{ route('profile.edit') }}" class="btn btn-primary me-md-2" type="button">Update CV</a>
+              <div class="row">
+                <div class="col-md-12">
+                  
+                  <a class="btn btn-primary" href="/assets/vendor/pdfjs/web/viewer.html?file={{ $cv }}">Lihat CV</a>
+                </div>
+
+              </div>
              
-            </div>
-            @endif
+              <iframe id="pdf-js-viewer"
+               src="{{ $cvcoba }}" frameborder="0" width="600" height="500"></iframe>
+              @endif
   
             </div>
           </div>
@@ -50,5 +49,6 @@
       </div>
     </section>
   </main>
+  
   
 @endsection

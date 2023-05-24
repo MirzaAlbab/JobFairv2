@@ -34,9 +34,12 @@ class JobApplicationController extends Controller
     public function viewcv(){
         $id = Auth()->user()->id;
         $cv = User::where('id','=',$id)->first();
+        $cvcoba = '/storage/'.$cv->cv;
+
+        $cv = '../../../../storage/'.$cv->cv;
 
         
-       return view('user.cv', compact('cv'));
+       return view('user.cv', compact('cv','cvcoba'));
         
     }
     public function indexCompany()
