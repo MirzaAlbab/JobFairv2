@@ -1,1 +1,1 @@
-<img src="{{ asset('assets/img/dpkka-mini.png') }}" alt="">
+<img src="{{ asset('assets/img/dpkka-mini.webp') }}" alt="">

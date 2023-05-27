@@ -66,7 +66,7 @@
           <div class="swiper-slide"><a href="{{ route('user-singlepartner', $partici->id) }}" target="_blank"><img src="{{ asset('storage/'.$partici->img) }}" class="img-fluid" alt=""></a></div>
           @endforeach
           @else
-          <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.png') }}" class="img-fluid" alt=""></a></div>
+          <div class="swiper-slide"><a href="#"><img src="{{ asset('assets/img/dummy.webp') }}" class="img-fluid" alt=""></a></div>
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -197,7 +197,7 @@
             
             @endforeach
             @else
-            <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/comingsoonnnn.png') }}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide d-flex align-items-center justify-content-center"><img src="{{ asset('assets/img/dummy.webp') }}" class="img-fluid" alt=""></div>
             @endif
               </div>
               <!-- End Accordion without outline borders -->

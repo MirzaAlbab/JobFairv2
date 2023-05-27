@@ -95,7 +95,7 @@
         <div class="row gy-4 justify-content-center">
 
           <div class="col-lg-3">
-            <img class="img-fluid logo d-flex align-items-center" src="{{ asset('assets/img/DPKKA_T.png') }}" alt="">
+            <img class="img-fluid logo d-flex align-items-center" src="{{ asset('assets/img/DPKKA_T.webp') }}" alt="">
           </div>
           
           <div class="col-lg-5 col-md-12 footer-info text-center">

@@ -64,7 +64,7 @@
       <div class="col-12 col-md-8 col-lg-6">
         <div class="maintenance-container">
           <div class="maintenance-logo">
-            <img src="{{ asset('assets/img/dpkka-mini.png') }}" alt="Logo" class="img-fluid">
+            <img src="{{ asset('assets/img/dpkka-mini.webp') }}" alt="Logo" class="img-fluid">
           </div>
           <h1 class="maintenance-heading">We'll be right back!</h1>
           <p class="maintenance-text">Sorry for the inconvenience, but we're performing some maintenance at the moment.</p>

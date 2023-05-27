@@ -30,7 +30,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/prof-ellly.jpg" class="img-fluid" alt="">
+                <img src="assets/img/prof-ellly.webp" class="img-fluid" alt="">
                 <div class="social">
                   <a href="https://www.linkedin.com/in/elly-munadziroh-179285135/"><i class="bi bi-linkedin"></i></a>
                 </div>
@@ -46,7 +46,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/pak-endi.jpg" class="img-fluid" alt="">
+                <img src="assets/img/pak-endi.webp" class="img-fluid" alt="">
                 <div class="social">
                   
                   <a href="https://www.linkedin.com/in/lastiko-endi-r/"><i class="bi bi-linkedin"></i></a>
