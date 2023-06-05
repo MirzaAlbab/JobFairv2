@@ -12,6 +12,7 @@
   <nav class="header-nav ms-auto">
     
     <ul class="d-flex align-items-center">
+      @can('admin')
        <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="left" title="Maintenance">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-tools"></i>
@@ -22,7 +23,6 @@
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="notification-item">
-               @can('admin')
     
                   <label class="switch">
                       <input type="checkbox" id="maintenanceSwitch" class="align-self-start">
@@ -30,13 +30,13 @@
                     </label> 
                     <span class="align-self-end pt-3">Maintenance</span>
                             
-                @endcan
+                  </li>
+                  
+                </ul>
+                <!-- End Maintenance Dropdown Items -->
               </li>
-              
-            </ul>
-            <!-- End Notification Dropdown Items -->
-          </li>
-          <!-- End Notification Nav -->
+              <!-- End Maintenance Nav -->
+              @endcan
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <span class="dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
