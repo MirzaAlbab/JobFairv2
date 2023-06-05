@@ -466,8 +466,8 @@ h6 {
 }
 .header-nav .notifications .notification-item {
     display: flex;
-    align-items: center;
-    padding: 15px 10px;
+    align-items: start;
+    padding: 5px 5px;
     transition: 0.3s;
 }
 .header-nav .notifications .notification-item i {

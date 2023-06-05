@@ -6,14 +6,42 @@
       <span class="d-none d-lg-block">ACF</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
+    
   </div><!-- End Logo -->
 
   <nav class="header-nav ms-auto">
+    
     <ul class="d-flex align-items-center">
+       <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="left" title="Maintenance">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-tools"></i>
+            </a
+            ><!-- End Maintenance Icon -->
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="notification-item">
+               @can('admin')
+    
+                  <label class="switch">
+                      <input type="checkbox" id="maintenanceSwitch" class="align-self-start">
+                      <span class="slider"></span>
+                    </label> 
+                    <span class="align-self-end pt-3">Maintenance</span>
+                            
+                @endcan
+              </li>
+              
+            </ul>
+            <!-- End Notification Dropdown Items -->
+          </li>
+          <!-- End Notification Nav -->
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <span class="dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
         </a><!-- End Profile Name Icon -->
+       
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
          
@@ -26,18 +54,7 @@
               </button>
             </form>
           </li>
-          @can('admin')
-          <li>
-            <div>
-              <label class="switch">
-                  <input type="checkbox" id="maintenanceSwitch">
-                  <span class="slider"></span>
-                </label> 
-                <span>Maintenance</span>
-              
-            </div>
-          </li>
-          @endcan
+         
           
         </ul><!-- End Profile Dropdown Items -->
       </li><!-- End Profile Nav -->
