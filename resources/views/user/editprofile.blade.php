@@ -35,8 +35,8 @@
           
            
             <div class="social-links mt-2">
-              <a href="{{ Auth::user()->instagram }}" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="{{ Auth::user()->linkedin }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="{{ Auth::user()->instagram }}" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+              <a href="{{ Auth::user()->linkedin }}" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
              
               @if (session('status'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -401,7 +401,7 @@
       let provinces = data.map(province => {
         return `<option value="${province.id}">${province.name}</option>`
       })
-      console.log(provinces)
+      
       $('#province').append(provinces)
     })
   });
@@ -433,12 +433,12 @@
       data = Object.entries(data.major);
       // map data to html
 
-      console.log(data)
+      
       let majors = data.map(major => {
         return `<option value="${major[0]}">${major[1]}</option>`
       })
       
-      console.log(majors)
+
       
       
       $('#major').removeAttr('disabled')
