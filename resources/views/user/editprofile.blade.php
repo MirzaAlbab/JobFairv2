@@ -262,7 +262,7 @@
                       <select class="form-select" aria-label="Default select example" id="faculty" name="faculty" required>
                         <option selected value="">Pilih salah satu</option>
                        @foreach ($faculties as $faculty)
-                        <option value="{{ $faculty->id }}" {{ Auth::user()->faculty == $faculty->id ? 'selected' :'' }}>{{ $faculty->name }}</option>
+                        <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
                         @endforeach
                       </select>
                       @error('faculty')
