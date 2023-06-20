@@ -84,6 +84,7 @@ Route::middleware(['auth','verified'])->group(function () {
     
     // route: company show job proposal
     Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
+    Route::get('/company/downloadCV/{id}', [JobApplicationController::class, 'downloadCV'])->name('company-downloadcv');
     
     // api company views
     Route::get('/api/getviews',[DashboardController::class, 'getViews'])->name('company.views');

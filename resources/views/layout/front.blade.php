@@ -46,7 +46,7 @@
         <ul>
           <li><a class="nav-link scrollto {{ (request()->is('landingpage')) ? 'active' : '' }}"  href="{{ route('user-landing') }}">Home</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('about')) ? 'active' : '' }}" href="{{ route('user-about') }}">About</a></li>
-          <li><a class="nav-link scrollto {{ (request()->is('partners')) ? 'active' : '' }}" href="{{ route('user-partners') }}">Partners</a></li>
+          <li><a class="nav-link scrollto {{ (request()->is('partners')) ? 'active' : '' }}" href="{{ route('user-partners') }}">Jobs</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('events')) ? 'active' : '' }}" href="{{ route('user-events') }}">Events</a></li>
           <li><a class="nav-link scrollto {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{ route('user-gallery') }}">Gallery</a></li>
          

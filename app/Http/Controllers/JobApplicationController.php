@@ -48,10 +48,6 @@ class JobApplicationController extends Controller
             $device = 'desktop';
             return view('user.cv', compact('cv','device'));
         }
-       
-
-        
-       
         
     }
     public function indexCompany()
@@ -66,6 +62,17 @@ class JobApplicationController extends Controller
         $user = auth()->user();
         $jobapps = JobApplication::all();
         return view('admin.jobapplication', compact('jobapps'));
+    }
+
+    public function CompanyViewCV($id){
+        $cv = User::where('id','=',$id)->first();
+        $cv = '/storage/'.$cv->cv;
+        return view('company.cv', compact('cv'));
+    }
+    public function downloadCV($id){
+        $cv = User::where('id','=',$id)->first();
+        $cv = '/storage/'.$cv->cv;
+        return Response::download(public_path($cv));
     }
     
 

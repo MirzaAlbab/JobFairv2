@@ -69,7 +69,21 @@
       $('#id').val(delete_id);
       });
     });
+
+    $(document).ready(function (e) {
+      $(document).on("click", "#view-modal", function (e) {
+      let user_data = $(this).attr('data-value');
+        let user = JSON.parse(user_data);
+        let src = "{{ asset('storage') }}/" + user.cv;
+        $('#pdf-js-viewer').attr('src', src);
+        
+        
+      });
+    });
   </script>
+  
+   
+ 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

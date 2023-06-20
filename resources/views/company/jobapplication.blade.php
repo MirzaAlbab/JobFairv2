@@ -43,8 +43,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Edu</th>
                     <th scope="col">Job</th>
+                    <th scope="col">Action</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
@@ -54,9 +54,11 @@
                   <tr>
                     <th scope="row">{{ $loop->iteration }} </th>
                     <td class="align-middle">{{ $job->user->name }}</td>  
-                    <td class="align-middle">{{ $job->user->education }}</td>  
-                    
                     <td class="align-middle">{{ $job->job->title }}</td>
+                    <td class="align-middle">                       
+                      <a type="button" class="btn btn-primary btn-sm" id="view-modal" data-value="{{$job->user}}" data-bs-toggle="modal"  data-bs-target="#viewuserModal" title="View CV"><i class="bi bi-eye"></i></a>
+                      <a href="{{ route('company-downloadcv',$job->user->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Download CV"><i class="bi bi-download"></i></a>
+                    </td>
                     <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>  
                      
                     </td>
@@ -66,6 +68,29 @@
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
+               <!-- Delete Modal -->
+               <div class="modal fade" id="viewuserModal" tabindex="-1" >
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">View CV</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                      <div class="row">
+                        <iframe id="pdf-js-viewer"
+                        src="" frameborder="0" width="800" height="500"></iframe>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             <!-- End Delete Modal-->
               
             </div>
           </div>
