@@ -31,6 +31,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
+            @if (session('failed'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ session('failed') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
               <a href="{{ route('career-fair-new') }}" class="btn btn-primary mb-3" role="button" aria-pressed="true"><i class="bi bi-plus-lg"></i> New Career Fair</a>
 
               <!-- Table with stripped rows -->

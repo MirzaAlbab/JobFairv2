@@ -130,6 +130,27 @@ class CareerfairController extends Controller
         }else{
             $img = $careerfair->img;
         }
+        // check wheether any career fair is active
+        if($request->status == "inactive"){
+            $active = Careerfair::where('status', 'active')->count();
+           
+            if($active != 1){
+                Careerfair::where('id', $request->id)
+                ->update([
+                    'title' => $request->judul,
+                    'description' => $request->deskripsi,
+                    'start_date' => $request->tglmulai,
+                    'end_date' => $request->tglselesai,
+                    'img' => $img,
+                    'status' => $request->status,
+                ]);
+                return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil diperbarui');
+               
+            }
+            else{
+                return redirect('/dashboard/career-fair')->with('failed', 'Update gagal. Minimal 1 Career Fair harus aktif');
+            }
+        }
         Careerfair::where('id', $request->id)
                 ->update([
                     'title' => $request->judul,
@@ -140,6 +161,8 @@ class CareerfairController extends Controller
                     'status' => $request->status,
                 ]);
         return redirect('/dashboard/career-fair')->with('status', 'Career Fair berhasil diperbarui');
+
+       
     }
 
     /**

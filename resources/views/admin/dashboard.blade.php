@@ -197,6 +197,77 @@
 
               </div>
             </div><!-- End User Category -->
+             <!-- User Apply Chart -->
+             <div class="col-md-6">
+              <div class="card">
+
+                <div class="card-body">
+                  <h5 class="card-title">User Apply Reports <span>/Today</span></h5>
+
+                  <!-- Bar Chart -->
+                  <div id="currentUserApplyChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('{{ route('current-applied-user') }}')
+                        .then((response) => response.json())
+                        .then((data) => {
+                         
+                          // parse json data to array of number
+                          let sum = Object.values(data.sum);
+                        //  parse into number
+                          let sumNum = sum.map(Number);
+                         
+                          new ApexCharts(document.querySelector("#currentUserApplyChart"), {
+                      
+                        series: [{
+                          data: sumNum||data.sum,
+                        }],
+                        chart: {
+                          width: 380,
+                          type: 'bar',
+                        },
+                        
+                        labels:[ 'Not Applied' , 'Applied'],
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            chart: {
+                              width: 200
+                            },
+                            legend: {
+                              position: 'bottom'
+                            }
+                          }
+                        }],
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 4,
+                            horizontal: true,
+                            endingShape: 'rounded',
+                            distributed: true,
+                          
+                          },
+                         
+                        },
+                       
+                        
+
+
+                      }).render();
+
+                        });
+                     
+                    });
+                    
+                   
+                  </script>
+                  <!-- End Bar Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End User Apply -->
              <!-- User Presence Chart -->
              <div class="col-md-6">
               <div class="card">
@@ -283,6 +354,7 @@
                       fetch('{{ route('current-applied-company') }}')
                         .then((response) => response.json())
                         .then((data) => {
+                          console.log(data);
                           
                           // parse json data to array of number
                           let sum = Object.values(data.sum);

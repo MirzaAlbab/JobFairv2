@@ -108,7 +108,7 @@ class DashboardController extends Controller
     public function getCurrentAppliedCompany(){
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $company = Partner::select('company',DB::raw('count(job_applications.user_id) as sum'))->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->join("job_applications", "job_applications.partner_id",'=','partners.id')->where('partners.careerfair_id','=',$aocf->id)->groupBy('partners.id')->having('sum', '>', 0)->get()->pluck('company');
-        $sum = JobApplication::select(DB::raw('count(user_id) as sum'))->join('partners', 'job_applications.partner_id','=','partners.id')->join('careerfairs', 'careerfairs.id','=', 'partners.careerfair_id')->groupBy('partners.id')->get()->pluck('sum');
+        $sum = JobApplication::select(DB::raw('count(user_id) as sum'))->join('partners', 'job_applications.partner_id','=','partners.id')->join('careerfairs', 'careerfairs.id','=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('partners.id')->get()->pluck('sum');
         return response()->json(['company' => $company, 'sum'=>$sum], 200);
         // $user = User::select(DB::raw('count(job_applications.user_id) as sum'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id')->get()->pluck('sum');
     }
@@ -136,8 +136,14 @@ class DashboardController extends Controller
 
         $finalnotapplied = collect($notapplied)->sum('sum');
         $finalapplied = collect($applieduser)->sum('sum');
+
+        // make it into one array
+        $array = array();
+        array_push($array, $finalnotapplied);
+        array_push($array, $finalapplied);
+        
     
-        return response()->json(['notapplied' => $finalnotapplied, 'applieduser' => $finalapplied], 200);
+        return response()->json(['sum' => $array], 200);
     }
     
     // all time career fair
