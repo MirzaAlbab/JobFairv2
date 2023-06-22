@@ -76,7 +76,7 @@
         let user = JSON.parse(user_data);
         let src = "{{ asset('storage') }}/" + user.cv;
         $('#pdf-js-viewer').attr('src', src);
-        
+
         
       });
     });
@@ -115,6 +115,11 @@
           'csv', 'excel', 'pdf'
         ],
         "searching": false,
+        "columnDefs": [
+            { "visible": false, "targets": [3,4,5] },
+            { "searchable": false,"targets": [3,4,5]},
+        ]
+        
         
       });
     

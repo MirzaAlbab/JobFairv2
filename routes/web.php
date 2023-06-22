@@ -186,7 +186,11 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     
     // route: api admin dashboard current career fair
     Route::get('/api/getcurrentuseredu',[DashboardController::class, 'getCurrentUserEducation'])->name('current-user-edu');
+    Route::get('/api/getcurrentusercategory',[DashboardController::class, 'getCurrentUserCategory'])->name('current-user-category');
+    Route::get('/api/getcurrentcfpresence',[DashboardController::class, 'getCurrentCFPresence'])->name('current-cf-presence');
     Route::get('/api/getcurrentjobedu',[DashboardController::class, 'getCurrentJobQualification'])->name('current-job-edu');
+    Route::get('/api/getcurrentappliedcompany',[DashboardController::class, 'getCurrentAppliedCompany'])->name('current-applied-company');
+    Route::get('/api/getcurrentapplieduser',[DashboardController::class, 'getCurrentAppliedUser'])->name('current-applied-user');
 
     // route: api admin dashboard all time career fair
     Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport'])->name('alltime-report');

@@ -126,6 +126,219 @@
 
               </div>
             </div><!-- End Reports -->
+
+             <!-- User Category Chart -->
+             <div class="col-md-6">
+              <div class="card">
+
+                <div class="card-body">
+                  <h5 class="card-title">User Category Reports <span>/Today</span></h5>
+
+                  <!-- Bar Chart -->
+                  <div id="currentUserCategoryChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('{{ route('current-user-category') }}')
+                        .then((response) => response.json())
+                        .then((data) => {
+                          // parse json data to array of number
+                          let sum = Object.values(data.sum);
+                        //  parse into number
+                          let sumNum = sum.map(Number);
+                         
+                          new ApexCharts(document.querySelector("#currentUserCategoryChart"), {
+                      
+                        series: [{
+                          data: sumNum||data.sum,
+                        }],
+                        chart: {
+                          width: 380,
+                          type: 'bar',
+                        },
+                        
+                        labels: data.category,
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            chart: {
+                              width: 200
+                            },
+                            legend: {
+                              position: 'bottom'
+                            }
+                          }
+                        }],
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 4,
+                            horizontal: true,
+                            endingShape: 'rounded',
+                            distributed: true,
+                          
+                          },
+                         
+                        },
+                       
+                        
+
+
+                      }).render();
+
+                        });
+                     
+                    });
+                    
+                   
+                  </script>
+                  <!-- End Bar Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End User Category -->
+             <!-- User Presence Chart -->
+             <div class="col-md-6">
+              <div class="card">
+
+                <div class="card-body">
+                  <h5 class="card-title">User Presence Reports <span>/Today</span></h5>
+
+                  <!-- Bar Chart -->
+                  <div id="currentUserPresenceChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('{{ route('current-cf-presence') }}')
+                        .then((response) => response.json())
+                        .then((data) => {
+                          
+                          // parse json data to array of number
+                          let sum = Object.values(data.presence);
+                        //  parse into number
+                          let presenceNum = sum.map(Number);
+                         
+                          new ApexCharts(document.querySelector("#currentUserPresenceChart"), {
+                      
+                        series: [{
+                          data: presenceNum||data.presence,
+                        }],
+                        chart: {
+                          width: 380,
+                          type: 'bar',
+                        },
+                        
+                        labels: data.time,
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            chart: {
+                              width: 200
+                            },
+                            legend: {
+                              position: 'bottom'
+                            }
+                          }
+                        }],
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 4,
+                            horizontal: true,
+                            endingShape: 'rounded',
+                            distributed: true,
+                          
+                          },
+                         
+                        },
+                       
+                        
+
+
+                      }).render();
+
+                        });
+                     
+                    });
+                    
+                   
+                  </script>
+                  <!-- End Bar Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End User Presence -->
+             <!-- Company Application Chart -->
+             <div class="col-md-6">
+              <div class="card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Company Application Reports <span>/Today</span></h5>
+
+                  <!-- Bar Chart -->
+                  <div id="currentCompanyApplicationChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      fetch('{{ route('current-applied-company') }}')
+                        .then((response) => response.json())
+                        .then((data) => {
+                          
+                          // parse json data to array of number
+                          let sum = Object.values(data.sum);
+                        //  parse into number
+                          let sumNum = sum.map(Number);
+                         
+                          new ApexCharts(document.querySelector("#currentCompanyApplicationChart"), {
+                      
+                        series: [{
+                          data: sumNum||data.sum,
+                        }],
+                        chart: {
+                          width: 380,
+                          type: 'bar',
+                        },
+                        
+                        labels: data.company,
+                        responsive: [{
+                          breakpoint: 480,
+                          options: {
+                            chart: {
+                              width: 200
+                            },
+                            legend: {
+                              position: 'bottom'
+                            }
+                          }
+                        }],
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 4,
+                            horizontal: true,
+                            endingShape: 'rounded',
+                            distributed: true,
+                          
+                          },
+                         
+                        },
+                       
+                        
+
+
+                      }).render();
+
+                        });
+                     
+                    });
+                    
+                   
+                  </script>
+                  <!-- End Bar Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End User Presence -->
             
             <!-- User Education Chart -->
             <div class="col-md-6">
@@ -201,6 +414,8 @@
 
               </div>
             </div><!-- End User Education -->
+            
+           
 
             <!-- Job Qualification Chart -->
             <div class="col-md-6">

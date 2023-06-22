@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\TextUI\XmlConfiguration\Variable;
 
 class DashboardController extends Controller
 {   
@@ -83,11 +84,60 @@ class DashboardController extends Controller
         return response()->json(['edu' => $edu,'education' => $education], 200);
     }
 
+    public function getCurrentUserCategory(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $sum = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.role')->get()->pluck('sum');
+        $category = User::select('role')->whereIn('role',['mhs','alumni','umum'])->where('careerfair_id','=',$aocf->id)->groupBy('users.role')->get()->pluck('role');
+        return response()->json(['sum' => $sum,'category' => $category], 200);
+    }
+
+    public function getCurrentCFPresence(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $presence = Presence::select(DB::raw('count(presences.id) as sum'))->where('careerfair_id','=',$aocf->id)->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('sum');
+        $time = Presence::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as time"))->where('careerfair_id','=',$aocf->id)->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('time');
+        return response()->json(['presence' => $presence, 'time' => $time], 200);
+    }
+
     public function getCurrentJobQualification(){
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         $education = Careerfair::select('education')->join('partners','partners.careerfair_id', '=', 'careerfairs.id')->join('jobs', 'jobs.partner_id', '=', 'partners.id')->groupBy('jobs.education')->get()->pluck('education');
         $edu = Job::select(DB::raw('count(jobs.id) as sum'))->join('partners', 'partners.id', '=', 'jobs.partner_id')->join('careerfairs', 'careerfairs.id','=','partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('jobs.education')->get()->pluck('sum');
         return response()->json(['edu' => $edu,'education' => $education], 200);
+    }
+
+    public function getCurrentAppliedCompany(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        $company = Partner::select('company',DB::raw('count(job_applications.user_id) as sum'))->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->join("job_applications", "job_applications.partner_id",'=','partners.id')->where('partners.careerfair_id','=',$aocf->id)->groupBy('partners.id')->having('sum', '>', 0)->get()->pluck('company');
+        $sum = JobApplication::select(DB::raw('count(user_id) as sum'))->join('partners', 'job_applications.partner_id','=','partners.id')->join('careerfairs', 'careerfairs.id','=', 'partners.careerfair_id')->groupBy('partners.id')->get()->pluck('sum');
+        return response()->json(['company' => $company, 'sum'=>$sum], 200);
+        // $user = User::select(DB::raw('count(job_applications.user_id) as sum'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id')->get()->pluck('sum');
+    }
+    public function getCurrentAppliedUser(){
+        $aocf = Careerfair::where('status', 'active')->latest()->first();
+        // query to check how many user applied to a company
+        // $user = User::select(DB::raw('count(distinct(job_applications.user_id)) as total'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id')->get();
+        // $user = User::select(DB::raw('sum(total)'))->joinSub($sub, 'sub', function ($join) {
+        // laravel subquery
+        // $sub = User::select(DB::raw('count(job_applications.user_id) as total'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id');
+        // $user = User::select(DB::raw('sum(total)'))->from(DB::raw('count(job_applications.user_id) as total'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id');
+        // $user = User::select(DB::raw('sum(total)'))->(DB::raw('count(job_applications.user_id) as total'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->groupBy('users.id');
+        // $user = DB::select("SELECT SUM(total) FROM (SELECT COUNT(distinct(job_applications.user_id)) as total FROM job_applications JOIN users on job_applications.user_id = users.id JOIN partners on partners.id = job_applications.partner_id JOIN careerfairs on careerfairs.id = partners.careerfair_id where careerfairs.id = 1 group By users.id) AS grand");
+        // $sum = $user[0]->{'SUM(total)'};
+
+        // SELECT SUM(total) FROM (SELECT COUNT(distinct(job_applications.user_id)) as total FROM job_applications JOIN users on job_applications.user_id = users.id JOIN partners on partners.id = job_applications.partner_id JOIN careerfairs on careerfairs.id = partners.careerfair_id where careerfairs.id = 1 group By users.id) AS grand
+
+        $notapplied = User::select(DB::raw('count(distinct(users.id)) as sum'))->join('partners', 'partners.careerfair_id', '=', 'users.careerfair_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->whereIn('role',['mhs','alumni','umum'])->whereNotIn('users.id', function($query){
+            $query->select('job_applications.user_id')->from('job_applications');
+        })->groupBy('users.id')->get();
+
+        $applieduser = User::select(DB::raw('count(distinct(users.id)) as sum'))->join('partners', 'partners.careerfair_id', '=', 'users.careerfair_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->where('careerfairs.id','=',$aocf->id)->whereIn('role',['mhs','alumni','umum'])->whereIn('users.id', function($query){
+            $query->select('job_applications.user_id')->from('job_applications');
+        })->groupBy('users.id')->get();
+
+        $finalnotapplied = collect($notapplied)->sum('sum');
+        $finalapplied = collect($applieduser)->sum('sum');
+    
+        return response()->json(['notapplied' => $finalnotapplied, 'applieduser' => $finalapplied], 200);
     }
     
     // all time career fair
