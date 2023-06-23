@@ -195,6 +195,10 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
     // route: api admin dashboard all time career fair
     Route::get('/api/getfullreport',[DashboardController::class, 'getFullReport'])->name('alltime-report');
     Route::get('/api/useredureport',[DashboardController::class, 'getUserEduReport'])->name('user-edu-report');
+    Route::get('/api/usercategoryreport',[DashboardController::class, 'getUserCategoryReport'])->name('user-category-report');
+    Route::get('/api/userpresencereport',[DashboardController::class, 'getUserPresenceReport'])->name('user-presence-report');
+    Route::get('/api/appliedcompany',[DashboardController::class, 'getCompanyApplyReport'])->name('company-apply-report');
+    Route::get('/api/applieduser',[DashboardController::class, 'getUserApplyReport'])->name('user-apply-report');
     Route::get('/api/jobedureport',[DashboardController::class, 'getJobEduReport'])->name('job-edu-report');
 
     // route: api admin maintenance and live

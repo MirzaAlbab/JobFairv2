@@ -125,7 +125,7 @@
                 </div>
 
               </div>
-            </div><!-- End Reports -->
+            </div><!-- End Current Reports -->
 
              <!-- User Category Chart -->
              <div class="col-md-6">
@@ -197,6 +197,7 @@
 
               </div>
             </div><!-- End User Category -->
+
              <!-- User Apply Chart -->
              <div class="col-md-6">
               <div class="card">
@@ -268,6 +269,7 @@
 
               </div>
             </div><!-- End User Apply -->
+
              <!-- User Presence Chart -->
              <div class="col-md-6">
               <div class="card">
@@ -339,6 +341,7 @@
 
               </div>
             </div><!-- End User Presence -->
+
              <!-- Company Application Chart -->
              <div class="col-md-6">
               <div class="card">
@@ -354,7 +357,7 @@
                       fetch('{{ route('current-applied-company') }}')
                         .then((response) => response.json())
                         .then((data) => {
-                          console.log(data);
+                          
                           
                           // parse json data to array of number
                           let sum = Object.values(data.sum);
@@ -487,8 +490,6 @@
               </div>
             </div><!-- End User Education -->
             
-           
-
             <!-- Job Qualification Chart -->
             <div class="col-md-6">
               <div class="card">
@@ -559,6 +560,8 @@
 
               </div>
             </div><!-- End Job Qualification -->
+           
+
   
           </div>
   
@@ -568,7 +571,7 @@
                   <div class="row">
 
                  
-                  <!-- Full Reports -->
+            <!-- Full Reports -->
              <div class="col-12">
               <div class="card">
 
@@ -641,7 +644,292 @@
 
               </div>
             </div>
-            <!-- End Reports -->
+            <!-- End Full Reports -->
+
+               <!-- User Category Chart -->
+               <div class="col-md-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">All User Category Reports <span>/Today</span></h5>
+  
+                    <!-- Bar Chart -->
+                    <div id="FullUserCategoryChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('{{ route('user-category-report') }}')
+                          .then((response) => response.json())
+                          .then((data) => {
+                            // parse json data to array of number
+                            let sum = Object.values(data.sum);
+                          //  parse into number
+                            let sumNum = sum.map(Number);
+                           
+                            new ApexCharts(document.querySelector("#FullUserCategoryChart"), {
+                        
+                          series: [{
+                            data: sumNum||data.sum,
+                          }],
+                          chart: {
+                            width: 380,
+                            type: 'bar',
+                          },
+                          
+                          labels: data.category,
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          }],
+                          plotOptions: {
+                            bar: {
+                              borderRadius: 4,
+                              horizontal: true,
+                              endingShape: 'rounded',
+                              distributed: true,
+                            
+                            },
+                           
+                          },
+                         
+                          
+  
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
+                     
+                    </script>
+                    <!-- End Bar Chart -->
+  
+                  </div>
+  
+                </div>
+              </div><!-- End User Category -->
+               <!-- User Apply Chart -->
+               <div class="col-md-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">All User Apply Reports <span>/Today</span></h5>
+  
+                    <!-- Bar Chart -->
+                    <div id="FullUserApplyChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('{{ route('user-apply-report') }}')
+                          .then((response) => response.json())
+                          .then((data) => {
+                           
+                            // parse json data to array of number
+                            let sum = Object.values(data.sum);
+                          //  parse into number
+                            let sumNum = sum.map(Number);
+                           
+                            new ApexCharts(document.querySelector("#FullUserApplyChart"), {
+                        
+                          series: [{
+                            data: sumNum||data.sum,
+                          }],
+                          chart: {
+                            width: 380,
+                            type: 'bar',
+                          },
+                          
+                          labels:[ 'Not Applied' , 'Applied'],
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          }],
+                          plotOptions: {
+                            bar: {
+                              borderRadius: 4,
+                              horizontal: true,
+                              endingShape: 'rounded',
+                              distributed: true,
+                            
+                            },
+                           
+                          },
+                         
+                          
+  
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
+                     
+                    </script>
+                    <!-- End Bar Chart -->
+  
+                  </div>
+  
+                </div>
+              </div><!-- End User Apply -->
+               <!-- User Presence Chart -->
+               <div class="col-md-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">All User Presence Reports <span>/Today</span></h5>
+  
+                    <!-- Bar Chart -->
+                    <div id="FullUserPresenceChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('{{ route('user-presence-report') }}')
+                          .then((response) => response.json())
+                          .then((data) => {
+                            
+                            // parse json data to array of number
+                            let sum = Object.values(data.presence);
+                          //  parse into number
+                            let presenceNum = sum.map(Number);
+                           
+                            new ApexCharts(document.querySelector("#FullUserPresenceChart"), {
+                        
+                          series: [{
+                            data: presenceNum||data.presence,
+                          }],
+                          chart: {
+                            width: 380,
+                            type: 'bar',
+                          },
+                          
+                          labels: data.time,
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          }],
+                          plotOptions: {
+                            bar: {
+                              borderRadius: 4,
+                              horizontal: true,
+                              endingShape: 'rounded',
+                              distributed: true,
+                            
+                            },
+                           
+                          },
+                         
+                          
+  
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
+                     
+                    </script>
+                    <!-- End Bar Chart -->
+  
+                  </div>
+  
+                </div>
+              </div><!-- End User Presence -->
+               <!-- Company Application Chart -->
+               <div class="col-md-6">
+                <div class="card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">All Company Application Reports <span>/Today</span></h5>
+  
+                    <!-- Bar Chart -->
+                    <div id="FullCompanyApplicationChart"></div>
+  
+                    <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                        fetch('{{ route('company-apply-report') }}')
+                          .then((response) => response.json())
+                          .then((data) => {
+                            
+                            
+                            // parse json data to array of number
+                            let sum = Object.values(data.sum);
+                          //  parse into number
+                            let sumNum = sum.map(Number);
+                           
+                            new ApexCharts(document.querySelector("#FullCompanyApplicationChart"), {
+                        
+                          series: [{
+                            data: sumNum||data.sum,
+                          }],
+                          chart: {
+                            width: 380,
+                            type: 'bar',
+                          },
+                          
+                          labels: data.company,
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200
+                              },
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          }],
+                          plotOptions: {
+                            bar: {
+                              borderRadius: 4,
+                              horizontal: true,
+                              endingShape: 'rounded',
+                              distributed: true,
+                            
+                            },
+                           
+                          },
+                         
+                          
+  
+  
+                        }).render();
+  
+                          });
+                       
+                      });
+                      
+                     
+                    </script>
+                    <!-- End Bar Chart -->
+  
+                  </div>
+  
+                </div>
+              </div><!-- End User Presence -->
              <!-- User Education Chart -->
              <div class="col-6">
               <div class="card">

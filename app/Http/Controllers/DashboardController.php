@@ -155,6 +155,39 @@ class DashboardController extends Controller
         return response()->json(['company' => $company,'job' => $job,'careerfair' => $careerfair, 'user'=>$user], 200);
     }
 
+    public function getUserCategoryReport(){
+        $category = User::select('role')->whereIn('role',['mhs','alumni','umum'])->groupBy('users.role')->get()->pluck('role');
+        $sum = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.role')->get()->pluck('sum');
+        return response()->json(['sum' => $sum,'category' => $category], 200);
+    }
+
+    public function getUserPresenceReport(){
+        $presence = Presence::select(DB::raw('count(presences.id) as sum'))->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('sum');
+        $time = Presence::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as time"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->pluck('time');
+        return response()->json(['presence' => $presence, 'time' => $time], 200);
+    }
+
+    public function getUserApplyReport(){
+        $applied = User::select(DB::raw('count(distinct(job_applications.user_id)) as sum'))->join('job_applications', 'job_applications.user_id', '=', 'users.id')->join('partners', 'partners.id', '=', 'job_applications.partner_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->whereIn('users.role',['mhs','alumni','umum'])->groupBy('users.id')->get();
+        $notapplied = User::select(DB::raw('count(distinct(users.id)) as sum'))->join('partners', 'partners.careerfair_id', '=', 'users.careerfair_id')->join('careerfairs', 'careerfairs.id', '=', 'partners.careerfair_id')->whereIn('role',['mhs','alumni','umum'])->whereNotIn('users.id', function($query){
+            $query->select('job_applications.user_id')->from('job_applications');
+        })->groupBy('users.id')->get();
+        $notapplied = collect($notapplied)->sum('sum');
+        $applied = collect($applied)->sum('sum');
+        
+        $finaldata = array();
+        array_push($finaldata, $notapplied);
+        array_push($finaldata, $applied);
+    
+        return response()->json([ 'sum' => $finaldata], 200);
+    }
+
+    public function getCompanyApplyReport(){
+        $company = Partner::select('company',DB::raw('count(job_applications.user_id) as sum'))->join('job_applications', 'job_applications.partner_id','=','partners.id')->join('careerfairs', 'careerfairs.id','=', 'partners.careerfair_id')->groupBy('partners.id')->having('sum', '>', 0)->get()->pluck('company');
+        $sum = JobApplication::select(DB::raw('count(user_id) as sum'))->join('partners', 'job_applications.partner_id','=','partners.id')->join('careerfairs', 'careerfairs.id','=', 'partners.careerfair_id')->groupBy('partners.id')->get()->pluck('sum');
+        return response()->json(['company' => $company, 'sum'=>$sum], 200);
+    }
+
     public function getUserEduReport(){
         $education = User::select('education')->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('education');
         $edu = User::select(DB::raw('count(users.id) as sum'))->whereIn('role',['mhs','alumni','umum'])->groupBy('users.education')->get()->pluck('sum');
