@@ -74,6 +74,13 @@ class JobApplicationController extends Controller
         $cv = '/storage/'.$cv->cv;
         return Response::download(public_path($cv));
     }
+
+    public function proceedJobseeker($id){
+        $jobapp = JobApplication::where('id','=',$id)->first();
+        $jobapp->status = 'process';
+        $jobapp->save();
+        return redirect()->back()->with('status', 'Berhasil memproses lamaran jobseeker');
+    }
     
 
     /**

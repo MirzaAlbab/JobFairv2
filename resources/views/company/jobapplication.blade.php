@@ -66,9 +66,27 @@
                       <a type="button" class="btn btn-primary btn-sm" id="view-modal" data-value="{{$job->user}}" data-bs-toggle="modal"  data-bs-target="#viewuserModal" title="View CV"><i class="bi bi-eye"></i></a>
                       <a href="{{ route('company-downloadcv',$job->user->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Download CV"><i class="bi bi-download"></i></a>
                     </td>
-                    <td class="align-middle"><span class="badge rounded-pill bg-primary">{{ $job->status }}</span></td>  
-                     
+                   
+                    @if ($job->status == 'sent')
+                    <td class="align-middle">
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ $job->status }}
+                        </button>
+                        <ul class="dropdown-menu">
+                          <form action="{{ route('company-proceed',$job->id) }}" method="POST">
+                            @csrf
+                            <li><button class="dropdown-item" type="submit">Proceed</button></li>
+                          </form>
+                          
+                        </ul>
+                      </div>
                     </td>
+                    @else
+                      <td class="align-middle"><span class="badge rounded-pill bg-warning">{{ $job->status }}</span></td>  
+                    
+                    @endif
+                   
                   </tr>
                   @endforeach
                   
