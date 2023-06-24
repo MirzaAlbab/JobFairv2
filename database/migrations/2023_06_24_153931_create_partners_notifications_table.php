@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('job_applications', function (Blueprint $table) {
+        Schema::create('partners_notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('job_id');
-            $table->foreignId('partner_id');
-            $table->enum('status', ['sent', 'process'])->default('sent');
+            $table->integer('partner_id');
+            $table->string('title')->default('Career Fair Job');
+            $table->mediumText('message')->nullable();
+            $table->string('user')->nullable();
+            $table->enum('status', ['delivered','scheduled'])->default('scheduled');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_applications');
+        Schema::dropIfExists('partners_notifications');
     }
 };

@@ -34,6 +34,11 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('countpartner', 'counterevent', 'countuser','countjob','aocf'));
     }
 
+    public function markAsRead(){
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    }
+
     public function user(){
         $user = auth()->user();
         $countlamaran = JobApplication::where('user_id','=',$user->id)->count();

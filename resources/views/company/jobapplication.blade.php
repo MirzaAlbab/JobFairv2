@@ -78,7 +78,6 @@
                             @csrf
                             <li><button class="dropdown-item" type="submit">Proceed</button></li>
                           </form>
-                          
                         </ul>
                       </div>
                     </td>

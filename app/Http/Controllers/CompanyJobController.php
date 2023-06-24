@@ -162,4 +162,6 @@ class CompanyJobController extends Controller
          );
         return response()->download($file, $filename, $headers);
     }
+
+    
 }

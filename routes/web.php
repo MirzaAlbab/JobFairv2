@@ -11,6 +11,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\CareerfairController;
 use App\Http\Controllers\CompanyJobController;
+use App\Http\Controllers\CompanyNotifController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
@@ -42,6 +43,7 @@ Route::get('/teams',[FrontController::class, 'team'])->name('teams');
 Route::middleware(['auth','verified','user'])->group(function () {
     // route: user/dashboard
     Route::get('/user', [DashboardController::class, 'user'])->name('user-area');
+    Route::get('/mark-as-read', [DashboardController::class, 'markAsRead'])->name('read-notif');
     
     // route user show job proposal
     Route::get('/user/applyjob', [JobApplicationController::class, 'index'])->name('jobApplication');
@@ -78,6 +80,14 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/company/job-update/{job}', [CompanyJobController::class, 'update'])->name('company-job-update');
     Route::delete('/company/job/delete', [CompanyJobController::class, 'destroy'])->name('company-job-delete');
     
+    Route::get('/company/notification', [CompanyNotifController::class, 'index'])->name('company-job-notification');
+    Route::post('/company/notification', [CompanyNotifController::class, 'store'])->name('company-notification-store');
+    Route::get('/company/notification-new', [CompanyNotifController::class, 'create'])->name('company-notification-new');
+    Route::get('/company/notification-view/{notif}', [CompanyNotifController::class, 'show'])->name('company-notification-view');
+    Route::get('/company/notification-update/{notif}/edit', [CompanyNotifController::class, 'edit'])->name('company-notification-edit');
+    Route::post('/company/notification-update/{notif}', [CompanyNotifController::class, 'update'])->name('company-notification-update');
+    Route::post('/company/notification-send', [CompanyNotifController::class, 'sendNotif'])->name('company-notification-send');
+
     // route: company show qr code
     Route::get('/companyqrcode/{id}', [CompanyJobController::class, 'viewQRCode'])->name('companyqrcode');
     Route::get('/downloadcompanyqrcode/{id}', [CompanyJobController::class, 'downloadQRCode'])->name('download-companyqr');
@@ -86,7 +96,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
     Route::get('/company/downloadCV/{id}', [JobApplicationController::class, 'downloadCV'])->name('company-downloadcv');
     Route::post('/company/proceed/{id}', [JobApplicationController::class, 'proceedJobseeker'])->name('company-proceed');
-    Route::post('/company/reject/{id}', [JobApplicationController::class, 'rejectJobseeker'])->name('company-reject');
+    // Route::post('/company/reject/{id}', [JobApplicationController::class, 'rejectJobseeker'])->name('company-reject');
     
     // api company views
     Route::get('/api/getviews',[DashboardController::class, 'getViews'])->name('company.views');

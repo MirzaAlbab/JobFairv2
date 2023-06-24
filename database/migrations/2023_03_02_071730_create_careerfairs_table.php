@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('img')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('inactive');
-            // $table->integer('user')->default(0);
+            $table->integer('user')->default(0);
             $table->string('qr')->nullable();
             $table->timestamps();
         });
