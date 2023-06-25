@@ -43,7 +43,7 @@
             <i class="bi bi-info-circle text-primary"></i>
             <div>
               <h4>{{$notification->data['title']}}</h4>
-              <p>{{$notification->data['data']}}</p>
+              <p>{!!$notification->data['data']!!}</p>
               <p>{{$notification->created_at->diffForHumans()}}</p>
             </div>
           </li>
@@ -137,7 +137,7 @@
           <i class="bi bi-info-circle text-primary"></i>
           <div>
             <h4>{{$notification->data['title']}}</h4>
-            <p>{{$notification->data['data']}}</p>
+            <p>{!!$notification->data['data']!!}</p>
             <p>{{$notification->created_at->diffForHumans()}}</p>
           </div>
         </li>
@@ -151,7 +151,7 @@
           <i class="bi bi-info-circle text-secondary"></i>
           <div>
             <h4>{{$notification->data['title']}}</h4>
-            <p>{{$notification->data['data']}}</p>
+            <p>{!!$notification->data['data']!!}</p>
             <p>{{$notification->created_at->diffForHumans()}}</p>
           </div>
         </li>

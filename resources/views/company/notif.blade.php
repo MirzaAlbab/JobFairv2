@@ -56,8 +56,10 @@
                     <td class="align-middle">                       
                       <a href="{{ route('company-notification-view',$not->id) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true" title="View"><i class="bi bi-eye"></i></a>
                       <a href="{{ route('company-notification-edit',$not->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                      <!-- Delete Modal -->
-                      <a type="button" class="btn btn-danger btn-sm" id="delete-modal" data-value="{{$not->id}}" data-bs-toggle="modal"  data-bs-target="#deleteFormModal"><i class="bi bi-trash"></i></a>
+                      <!-- Send Modal -->
+                      @if ($not->status == 'scheduled')
+                      <a type="button" class="btn btn-info btn-sm" id="delete-modal" data-value="{{$not->id}}" data-bs-toggle="modal"  data-bs-target="#deleteFormModal"><i class="bi bi-send"></i></a>
+                      @endif
                     </td>
                   </tr>
                   @endforeach
@@ -70,12 +72,12 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Delete Job</h5>
+                      <h5 class="modal-title">Send Notification</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <div class="modal-body">
-                      Are you sure you want to delete this Job?
+                      Are you sure you want to sent this Notification?
                     </div>
 
                     <div class="modal-footer">
@@ -83,7 +85,7 @@
                       <form action="{{ route('company-notification-send') }}" method="POST">
                         <input type="text" id="id" name="id" hidden>
                         @csrf
-                        <button type="submit" class="btn btn-danger" role="button" aria-pressed="true">Delete</button>
+                        <button type="submit" class="btn btn-info" role="button" aria-pressed="true">Send</button>
                       </form>
                     </div>
                   </div>
