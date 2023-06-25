@@ -10,15 +10,17 @@ use Illuminate\Notifications\Notification;
 class CompanyNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    protected $message;
+    protected $message, $title;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message,$title)
     {
-         $this->message = $message;
+        $this->message = $message;
+        $this->title = $title;
+       
          
     }
 
@@ -56,7 +58,10 @@ class CompanyNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
+            // sent message title time
             'data' => $this->message,
+            'title' => $this->title,
+            
             
         ];
     }

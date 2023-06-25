@@ -464,22 +464,29 @@ h6 {
     font-size: 11px;
     padding: 3px 6px;
 }
-.header-nav .notifications .notification-item {
+.header-nav .notifications .notification-item, .modal-body  .notification-item {
     display: flex;
     align-items: start;
     padding: 5px 5px;
     transition: 0.3s;
 }
-.header-nav .notifications .notification-item i {
+.header-nav .notifications .notification-item,.modal-body  .notification-item {
+    display: flex;
+    align-items: start;
+    padding: 5px 5px;
+    transition: 0.3s;
+}
+
+.header-nav .notifications .notification-item i, .modal-body  .notification-item i {
     margin: 0 20px 0 10px;
     font-size: 24px;
 }
-.header-nav .notifications .notification-item h4 {
+.header-nav .notifications .notification-item h4, .modal-body  .notification-item h4 {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
 }
-.header-nav .notifications .notification-item p {
+.header-nav .notifications .notification-item p, .modal-body  .notification-item p {
     font-size: 13px;
     margin-bottom: 3px;
     color: #919191;

@@ -61,6 +61,8 @@
   <!-- ======= Footer ======= -->
   @include('admin.footer')
   <!-- End Footer -->
+
+  
   
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
@@ -87,7 +89,7 @@
     $(document).ready(function (e) {
       $(document).on("click", "#delete-modal", function (e) {
       var delete_id = $(this).attr('data-value');
-      console.log(delete_id);
+      
       $('#id').val(delete_id);
       });
     });

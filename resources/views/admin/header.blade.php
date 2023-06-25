@@ -12,6 +12,59 @@
   <nav class="header-nav ms-auto">
     
     <ul class="d-flex align-items-center">
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          @if (Auth::user()->unreadNotifications->count() > 0)
+          <span class="badge bg-primary badge-number">{{ Auth::user()->unreadNotifications->count() }}</span> </a
+        ><!-- End Notification Icon -->
+        @endif
+
+        <ul
+          class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+        >
+          <li class="dropdown-header">
+            {{ Auth::user()->unreadNotifications->count() }} new notifications
+            @if (Auth::user()->unreadNotifications->count() > 0)
+            <a href="{{route('read-notif')}}"
+              ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                >Mark as read</span
+              ></a
+            >
+            @endif
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          
+          @foreach (auth()->user()->unreadNotifications as $notification)
+          
+          <li class="notification-item">
+            <i class="bi bi-info-circle text-primary"></i>
+            <div>
+              <h4>{{$notification->data['title']}}</h4>
+              <p>{{$notification->data['data']}}</p>
+              <p>{{$notification->created_at->diffForHumans()}}</p>
+            </div>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          @endforeach
+
+          <li class="dropdown-footer">
+            <a type="button" id="notif-modal" data-value="{{auth()->user()->readNotifications}}" data-bs-toggle="modal"  data-bs-target="#notificationModal">Show all notifications</a>
+            
+          </li>
+        </ul>
+        <!-- End Notification Dropdown Items -->
+      </li>
+      <!-- End Notification Nav -->
+       
+         
+      
+
+     
       @can('admin')
        <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="left" title="Maintenance">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -60,5 +113,60 @@
       </li><!-- End Profile Nav -->
     </ul>
   </nav><!-- End Icons Navigation -->
+   
 
 </header>
+<!-- Notif Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">All Notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <ul
+        class="dropdown-menu-end dropdown-menu-arrow notifications"
+      >
+        
+        @foreach (auth()->user()->unreadNotifications as $notification)
+        
+        <li class="notification-item">
+          <i class="bi bi-info-circle text-primary"></i>
+          <div>
+            <h4>{{$notification->data['title']}}</h4>
+            <p>{{$notification->data['data']}}</p>
+            <p>{{$notification->created_at->diffForHumans()}}</p>
+          </div>
+        </li>
+        
+          <hr class="dropdown-divider" />
+        
+        @endforeach
+        @foreach (auth()->user()->readNotifications as $notification)
+        
+        <li class="notification-item">
+          <i class="bi bi-info-circle text-secondary"></i>
+          <div>
+            <h4>{{$notification->data['title']}}</h4>
+            <p>{{$notification->data['data']}}</p>
+            <p>{{$notification->created_at->diffForHumans()}}</p>
+          </div>
+        </li>
+        
+          <hr class="dropdown-divider" />
+        
+        @endforeach
+      </ul>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Delete Modal-->

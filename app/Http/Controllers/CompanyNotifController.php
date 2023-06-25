@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Notifications\CompanyNotification;
 use App\Models\PartnersNotification;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification as Notification;
 use Illuminate\Support\Facades\Redis;
+use SebastianBergmann\Diff\Diff;
 
 class CompanyNotifController extends Controller
 {
@@ -87,14 +89,10 @@ class CompanyNotifController extends Controller
         $userlist = JobApplication::where('partner_id', auth()->user()->address)->where('status','=','process')->pluck('user_id');
         $message = $notif[0]->message;
 
-       
-
         $users = User::whereIn('id', $userlist)->get();
-        
-       
 
-        // looping through the array of users to send notification
-        Notification::send($users, new CompanyNotification($message));
+        // through the array of users to send notification
+        Notification::send($users, new CompanyNotification($message, $notif[0]->title));
 
         // updating the status of the notification to delivered
         PartnersNotification::where('id', $request->id)
