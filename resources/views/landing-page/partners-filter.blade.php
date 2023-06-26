@@ -31,7 +31,7 @@
             <div class="col-lg-6">
               <form action="{{ route('search') }}" method="get" class="mb-5">
         
-                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+                <input type="text" name="query" value="{{ request('query') }}">
                 
                 <select class="form-select" name="category" >
                     <option value="">Education</option>
@@ -52,9 +52,6 @@
       
       
        @if (count($partners) > 0)
-
-      
-
 
       <div class="row mt-5">
         @foreach ($partners as $partner)
@@ -79,9 +76,21 @@
               <p>
                 {!! $partner->description !!}
               </p>
+              {{-- send current query into read more  --}}
+
+
+              @if (request()->has('category')||request()->has('query'))
+              <div class="read-more">
+                <a href="{{ route('user-singlepartner', ['id' => $partner->id, 'query' => request('query'), 'category' => request('category')]) }}">Read More</a>
+              @else
+              
+              
               <div class="read-more">
                 <a href="{{ route('user-singlepartner', $partner->id) }}">Read More</a>
               </div>
+              @endif
+              
+              
             </div>
 
           </article>

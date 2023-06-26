@@ -94,10 +94,19 @@
     
               
               @endforeach
+              
            
+              <div class="partner-pagination">
+                <ul class="d-flex justify-content-center">
+                 
+                   {{ $jobs->links()  }}
+                </ul>
+              </div>
           </div>
 
+
         </div><!-- End blog entries list -->
+        
 
         <div class="col-lg-4">
 

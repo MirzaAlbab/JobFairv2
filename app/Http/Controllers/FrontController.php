@@ -152,7 +152,25 @@ class FrontController extends Controller
             'user_agent' => $request->header('User-Agent'),
             'partner_id' => $partner->id,
         ]);
-        $jobs = Job::where('partner_id', $partner->id)->get();  
+        // catch query and category on url
+
+
+        $query = $request->input('query');
+        $category = $request->input('category');
+        
+        // how to separate when user only filter by categories without using any query
+        if($query == null && $category == null){
+            $jobs = Job::where('partner_id', $partner->id)->paginate(8);
+        }else{
+            
+        $jobs = Job::query()
+            ->when($query, function ($query, $search) {
+                return $query->where('title', 'like', "%{$search}%");
+            })
+            ->when($category, function ($query, $category) {
+                return $query->where('education', $category);
+            })->where('partner_id', $partner->id)->paginate(8);
+        }
         return view('landing-page.single-partner', compact('partner', 'sidebar','aocf','jobs'));
     }
     public function jobdetails($partner,$id)
