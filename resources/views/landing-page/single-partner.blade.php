@@ -99,7 +99,7 @@
               <div class="partner-pagination">
                 <ul class="d-flex justify-content-center">
                  
-                   {{ $jobs->links()  }}
+                   {{ $jobs->withQueryString()->links()  }}
                 </ul>
               </div>
           </div>

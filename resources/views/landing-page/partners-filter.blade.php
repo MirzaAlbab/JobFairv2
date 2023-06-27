@@ -39,6 +39,8 @@
                     <option value="D3" {{ request('category') == "D3" ? 'selected': '' }}>D3</option>
                     <option value="D4" {{ request('category') == "D4" ? 'selected': '' }}>D4</option>
                     <option value="S1" {{ request('category') == "S1" ? 'selected': '' }}>S1</option>
+                    <option value="S2" {{ request('category') == "S2" ? 'selected': '' }}>S2</option>
+                    <option value="S3" {{ request('category') == "S3" ? 'selected': '' }}>S3</option>
                 </select>
                 
                 <input type="submit" value="Search">

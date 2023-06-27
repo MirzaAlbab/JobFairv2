@@ -94,16 +94,17 @@ class FrontController extends Controller
         ])->latest()->paginate(6);
         
         
-        if($request->ajax()){
-            $partners = Job::query()
-                        ->when($request->seach_term, function($q)use($request){
-                            $q->where('title', 'like', '%'.$request->seach_term.'%');})
-                        ->when($request->status, function($q)use($request){
-                            $q->where('status',$request->status);
-                        })
-                        ->paginate(6);
-            return response()->json($partners);
-        }
+        // if($request->ajax()){
+        //     $partners = Job::query()
+        //                 ->when($request->seach_term, function($q)use($request){
+        //                     $q->where('title', 'like', '%'.$request->seach_term.'%');})
+        //                 ->when($request->status, function($q)use($request){
+        //                     $q->where('status',$request->status);
+        //                 })
+        //                 ->paginate(6);
+        //     return response()->json($partners);
+        // }
+        // $education = Job::select('education')->join('partners', 'partners.id', '=', 'jobs.partner_id')->where('partners.careerfair_id', $aocf->id)->distinct()->get()->pluck('education');
         
         return view('landing-page.partners', compact('partners', 'aocf'));
     }
@@ -169,7 +170,7 @@ class FrontController extends Controller
             })
             ->when($category, function ($query, $category) {
                 return $query->where('education', $category);
-            })->where('partner_id', $partner->id)->paginate(8);
+            })->where('partner_id', $partner->id)->paginate(4);
         }
         return view('landing-page.single-partner', compact('partner', 'sidebar','aocf','jobs'));
     }
