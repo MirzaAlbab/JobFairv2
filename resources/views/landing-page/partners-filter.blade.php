@@ -9,9 +9,9 @@
 
       <ol>
         <li><a href="{{ route('user-landing') }}">Home</a></li>
-        <li>Partners</li>
+        <li>Jobs</li>
       </ol>
-      <h2>Partners</h2>
+      <h2>Jobs</h2>
 
     </div>
   </section>

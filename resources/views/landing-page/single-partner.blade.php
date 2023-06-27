@@ -10,10 +10,10 @@
 
       <ol>
         <li><a href="{{ route('user-landing') }}">Home</a></li>
-        <li><a href="{{ route('user-partners') }}">Partners</a></li>
-        <li>Single Partner</li>
+        <li><a href="{{ route('user-partners') }}">Jobs</a></li>
+        <li>{{ $partner->company }}</li>
       </ol>
-      <h2>Single Partner</h2>
+      <h2>{{ $partner->company }}</h2>
 
     </div>
   </section>
