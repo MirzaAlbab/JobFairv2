@@ -200,7 +200,7 @@ section {
     position: relative;
 }
 .navbar a,
-.navbar a:focus {
+.navbar a:focus, .navbar span {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -242,8 +242,8 @@ section {
     position: absolute;
     left: 14px;
     top: calc(100% + 30px);
-    margin: 0;
-    padding: 10px 0;
+    margin-left: 10px;
+   
     z-index: 99;
     opacity: 0;
     visibility: hidden;

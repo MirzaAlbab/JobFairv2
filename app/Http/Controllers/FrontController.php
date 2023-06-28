@@ -161,7 +161,7 @@ class FrontController extends Controller
         
         // how to separate when user only filter by categories without using any query
         if($query == null && $category == null){
-            $jobs = Job::where('partner_id', $partner->id)->paginate(8);
+            $jobs = Job::where('partner_id', $partner->id)->paginate(4);
         }else{
             
         $jobs = Job::query()
