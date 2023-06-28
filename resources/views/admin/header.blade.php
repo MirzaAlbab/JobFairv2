@@ -97,7 +97,41 @@
        
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-         
+          <li>
+            <a href="{{ route('user-landing') }}" class="dropdown-item d-flex align-items-center">
+              <i class="bi bi-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <hr class="dropdown-divider" />
+          <li>
+            <a href="{{ route('user-about') }}" class="dropdown-item d-flex align-items-center">
+              <i class="bi bi-info-square"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <hr class="dropdown-divider" />
+          <li>
+            <a href="{{ route('user-partners') }}" class="dropdown-item d-flex align-items-center">
+              <i class="bi bi-building"></i>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <hr class="dropdown-divider" />
+          <li>
+            <a href="{{ route('user-events') }}" class="dropdown-item d-flex align-items-center">
+              <i class="bi bi-calendar3"></i>
+              <span>Events</span>
+            </a>
+          </li>
+          <hr class="dropdown-divider" />
+          <li>
+            <a href="{{ route('user-gallery') }}" class="dropdown-item d-flex align-items-center">
+              <i class="bi bi-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <hr class="dropdown-divider" />
           <li>
             <form action="{{ route('logout') }}" method="post">
               @csrf
@@ -107,6 +141,7 @@
               </button>
             </form>
           </li>
+          
          
           
         </ul><!-- End Profile Dropdown Items -->

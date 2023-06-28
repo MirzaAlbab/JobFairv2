@@ -15,15 +15,15 @@
           <span>Lamaran</span>
         </a>
       </li><!-- End Rundown Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link @yield('cv', 'collapsed')" href="{{ route('user-cv') }}">
-          <i class="bi bi-question-circle"></i>
-          <span>CV</span>
-        </a>
-      </li>
     </li>
-   
+    
     <li class="nav-heading">Profile</li>
+    <li class="nav-item">
+      <a class="nav-link @yield('cv', 'collapsed')" href="{{ route('user-cv') }}">
+        <i class="bi bi-question-circle"></i>
+        <span>CV</span>
+      </a>
+    </li>
       <li class="nav-item">
         <a class="nav-link @yield('profile', 'collapsed')" href="{{ route('profile.edit') }}">
           <i class="bi bi-ui-checks-grid"></i>
