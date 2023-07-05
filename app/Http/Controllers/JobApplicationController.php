@@ -34,6 +34,10 @@ class JobApplicationController extends Controller
         $cv = User::where('id','=',$id)->first();
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
        
+        if($cv->cv == null || $cv->cv == ''){
+            $cv = null;
+            return view('user.cv', compact('cv'));
+        }
     //    make if for mobile
         if(strpos($user_agent, 'Mobile') !== false){
             $device = 'mobile';

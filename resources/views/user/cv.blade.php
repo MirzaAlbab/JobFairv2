@@ -26,25 +26,23 @@
             <div class="card-body">
               <h5 class="card-title">CV</h5>
 
-              @if($cv == null || $cv == '')
+              @if(empty($cv))
                 <p class="card-text">You haven't uploaded your CV yet.</p>
                 <a href="{{ route('profile.edit') }}" class="btn btn-primary">Upload CV</a>
-              @else
-                @if($device == 'mobile')
-                 
+              @elseif($cv != '' && $device == 'mobile')
                 <div class="row">
                   <div class="col-md-12">
                     <a class="btn btn-primary" href="/assets/vendor/pdfjs/web/viewer.html?file={{ $cv }}" target="blank">Lihat CV</a>
                   </div>
 
                 </div>
-                @else
+              @else
                   <iframe id="pdf-js-viewer"
                   src="{{ $cv }}" frameborder="0" width="600" height="500"></iframe>
-                @endif
+              @endif
 
              
-              @endif
+              
   
             </div>
           </div>
