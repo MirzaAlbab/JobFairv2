@@ -37,7 +37,7 @@
             </div>
 
               <!-- Table with stripped rows -->
-              <table class="table display nowrap" id="tabel">
+              <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

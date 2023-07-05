@@ -5,12 +5,13 @@ namespace App\Exports;
 use App\Models\JobApplication;
 use App\Models\Major;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class JobApplicationExport implements  FromCollection, WithHeadings, WithTitle, WithMapping
+class JobApplicationExport implements  FromCollection, WithHeadings, WithTitle, WithMapping, ShouldAutoSize
 {
     
     public function collection()
