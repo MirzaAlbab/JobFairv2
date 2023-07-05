@@ -44,14 +44,14 @@ class JobApplicationExport implements  FromCollection, WithHeadings, WithTitle, 
     public function headings(): array
     {
         return [
-            'Name',
+            'Nama',
             'Email',
-            'Phone',
-            'About',
-            'Education',
-            'Major',
-            'City',
-            'Address',
+            'No.Telepon',
+            'Deskripsi',
+            'Pendidikan',
+            'Jurusan',
+            'Kabupaten/Kota',
+            'Alamat',
             'Instagram',
             'Linkedin',
         ];
