@@ -38,7 +38,7 @@
                 </div>
               @else
                   <iframe id="pdf-js-viewer"
-                  src="{{ $cv }}" frameborder="0" width="600" height="500"></iframe>
+                  src="{{ $cv }}" frameborder="0" width="800" height="500"></iframe>
               @endif
 
              
