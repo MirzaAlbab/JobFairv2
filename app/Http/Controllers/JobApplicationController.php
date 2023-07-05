@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
-use Auth;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF as PDF;
 use Illuminate\Http\Request;
 use App\Models\JobApplication;
-
-use function Pest\Laravel\get;
-use function Ramsey\Uuid\v1;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\JobApplicationExport;
 use Illuminate\Support\Facades\Response;
 
 class JobApplicationController extends Controller
@@ -55,6 +52,18 @@ class JobApplicationController extends Controller
         $user = auth()->user();
         $jobapps = JobApplication::where('partner_id','=',$user->address )->get();
         return view('company.jobapplication', compact('jobapps'));
+    }
+
+    public function exportExcel(){
+        return Excel::download(new JobApplicationExport, 'JobApplication.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.ms-excel',
+        ]);
+    }
+        
+    public function exportCsv(){
+        return Excel::download(new JobApplicationExport, 'JobApplication.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
     }
 
     public function indexAdmin()

@@ -94,6 +94,8 @@ Route::middleware(['auth','verified'])->group(function () {
     
     // route: company show job proposal
     Route::get('/company/jobapplication', [JobApplicationController::class, 'indexCompany'])->name('company-job-application');
+    Route::get('/company/jobapplicationexcel', [JobApplicationController::class, 'exportExcel'])->name('company-job-application-excel');
+    Route::get('/company/jobapplicationcsv', [JobApplicationController::class, 'exportCsv'])->name('company-job-application-csv');
     Route::get('/company/downloadCV/{id}', [JobApplicationController::class, 'downloadCV'])->name('company-downloadcv');
     Route::post('/company/proceed/{id}', [JobApplicationController::class, 'proceedJobseeker'])->name('company-proceed');
     // Route::post('/company/reject/{id}', [JobApplicationController::class, 'rejectJobseeker'])->name('company-reject');

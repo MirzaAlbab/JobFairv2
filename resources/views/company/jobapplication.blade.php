@@ -31,9 +31,9 @@
                 Export
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#">Export CSV</a></li>
-                <li><a href="#">Export Excel</a></li>
-                <li><a href="#">Export PDF</a></li>
+                <li><a href="{{ route('company-job-application-csv') }}">Export CSV</a></li>
+                <li><a href="{{ route('company-job-application-excel') }}">Export Excel</a></li>
+                <li><a href="{{ route('company-job-application-pdf') }}">Export PDF</a></li>
               </ul>
             </div>
 
@@ -44,7 +44,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Job</th>
-                   
                     <th scope="col">Action</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -56,8 +55,7 @@
                     <th scope="row">{{ $loop->iteration }} </th>
                     <td class="align-middle">{{ $job->user->name }}</td>  
                     <td class="align-middle">{{ $job->job->title }}</td>
-                   
-                   
+                    
                     <td class="align-middle">                       
                       <a type="button" class="btn btn-primary btn-sm" id="view-modal" data-value="{{$job->user}}" data-bs-toggle="modal"  data-bs-target="#viewuserModal" title="View CV"><i class="bi bi-eye"></i></a>
                       <a href="{{ route('company-downloadcv',$job->user->id) }}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" title="Download CV"><i class="bi bi-download"></i></a>
