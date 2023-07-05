@@ -27,9 +27,7 @@
   <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
-  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css"> --}}
-  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+  
  
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/admin/style.css') }}" rel="stylesheet">
@@ -60,6 +58,8 @@
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
   <script>
     $(document).ready(function (e) {
@@ -93,57 +93,15 @@
   <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
-  {{-- Export button --}}
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-
+  
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/admin/main.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <script>
-    $(document).ready(function() {
-      $('#tabel').DataTable( {
-        
-        dom: 'Bfrtip',
-        buttons: [
-          'csv', 'excel', 'pdf'
-        ],
-        "searching": false,
-        "columnDefs": [
-            { "visible": false, "targets": [3,4,5] },
-            { "searchable": false,"targets": [3,4,5]},
-        ]
-        
-        
-      });
-    
-   });
-
     $('.search-select').select2({
       placeholder: 'Pilih salah satu',
       theme: 'bootstrap-5',
-    });
-  </script>
-
-  <script>
-    $(".export ul li").click(function() {
-      let i = $(this).index() + 1
-      let table = $('#tabel').DataTable();
-      console.log(table);
-      if (i == 1) {
-          table.button('.buttons-csv').trigger();
-          console.log(i);
-      } else if (i == 2) {
-          table.button('.buttons-excel').trigger();
-      } else if (i == 3) {
-          table.button('.buttons-pdf').trigger();
-      }
     });
   </script>
 

@@ -38,15 +38,13 @@
             </div>
 
               <!-- Table with stripped rows -->
-              <table class="table datatable" id="tabel">
+              <table class="table display nowrap" id="tabel">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Job</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Education</th>
-                    <th scope="col">Major</th>
+                   
                     <th scope="col">Action</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -58,9 +56,7 @@
                     <th scope="row">{{ $loop->iteration }} </th>
                     <td class="align-middle">{{ $job->user->name }}</td>  
                     <td class="align-middle">{{ $job->job->title }}</td>
-                    <td class="align-middle">{{ $job->user->email }}</td>  
-                    <td class="align-middle">{{ $job->user->education }}</td> 
-                    <td class="align-middle">{{ $job->user->major }}</td> 
+                   
                    
                     <td class="align-middle">                       
                       <a type="button" class="btn btn-primary btn-sm" id="view-modal" data-value="{{$job->user}}" data-bs-toggle="modal"  data-bs-target="#viewuserModal" title="View CV"><i class="bi bi-eye"></i></a>

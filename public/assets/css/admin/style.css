@@ -1113,13 +1113,6 @@ h6 {
 /*--------------------------------------------------------------
 # Hide Button
 --------------------------------------------------------------*/
-#tabel_paginate,
-#tabel_info {
-    display: none;
-}
-.dt-buttons {
-    display: none;
-}
 .export a {
     text-decoration: none;
     color: #000;

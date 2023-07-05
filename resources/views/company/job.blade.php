@@ -34,7 +34,7 @@
               <a href="{{ route('company-job-new') }}" class="btn btn-primary mb-3" role="button" aria-pressed="true"><i class="bi bi-plus-lg"></i> New Job</a>
 
               <!-- Table with stripped rows -->
-              <table class="table datatable display nowrap" id="tabel">
+              <table class="table datatable display nowrap">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

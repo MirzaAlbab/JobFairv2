@@ -18,11 +18,11 @@
     </li>
     @endcan
     
-    <li class="nav-heading">Lamaran</li>
+    <li class="nav-heading">Job Application</li>
       <li class="nav-item">
         <a class="nav-link @yield('jobApplication', 'collapsed')" href="{{ route('company-job-application') }}">
           <i class="bi bi-card-list"></i>
-          <span>Lamaran</span>
+          <span>Job Application</span>
         </a>
       </li><!-- End Rundown Page Nav -->
     
