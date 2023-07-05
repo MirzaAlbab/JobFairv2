@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\JobApplication;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JobApplicationExport;
+use App\Models\Careerfair;
 use Illuminate\Support\Facades\Response;
 
 class JobApplicationController extends Controller
@@ -69,7 +70,13 @@ class JobApplicationController extends Controller
     public function indexAdmin()
     {
         $user = auth()->user();
-        $jobapps = JobApplication::all();
+        $aocf = Careerfair::where('status','=','active')->first();
+        // get all job application of current career fair
+        // job application where job_id is in job where careerfair_id is current career fair
+
+        $jobapps = JobApplication::whereHas('company', function($q) use ($aocf){
+            $q->where('careerfair_id','=',$aocf->id);
+        })->get();
         return view('admin.jobapplication', compact('jobapps'));
     }
 
