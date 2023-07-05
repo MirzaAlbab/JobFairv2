@@ -33,7 +33,6 @@
               <ul class="dropdown-menu">
                 <li><a href="{{ route('company-job-application-csv') }}">Export CSV</a></li>
                 <li><a href="{{ route('company-job-application-excel') }}">Export Excel</a></li>
-                <li><a href="{{ route('company-job-application-pdf') }}">Export PDF</a></li>
               </ul>
             </div>
 
