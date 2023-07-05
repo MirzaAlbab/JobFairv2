@@ -72,19 +72,39 @@
             <ul class="nav nav-tabs nav-tabs-bordered">
 
               <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Profil</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Data Diri</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit CV</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-work">Pengalaman Kerja</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-organization">Pengalaman Organisasi</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-certification">Sertifikasi</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-training">Pelatihan</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-achievement">Prestasi</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-cv">Edit CV</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Ubah Kata Sandi</button>
               </li>
 
             </ul>
@@ -236,9 +256,10 @@
                       @enderror
                     </div>
                   </div>
+                 
 
                   <div class="row mb-3">
-                    <label for="pendidikan" class="col-md-4 col-lg-3 col-form-label">Tingkat Pendidikan</label>
+                    <label for="pendidikan" class="col-md-4 col-lg-3 col-form-label">Jenjang</label>
                     <div class="col-md-8 col-lg-9">
                       <select class="form-select" aria-label="Default select example" id="pendidikan" name="education" required>
                         <option value="" selected>Pilih salah satu</option>
@@ -254,6 +275,17 @@
                       @enderror
                     </div>
                   </div>
+
+                  <div class="row mb-3">
+                    <label for="university" class="col-md-4 col-lg-3 col-form-label">Sekolah / Universitas</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="university" type="text" class="form-control" id="university" value="{{ Auth::user()->address }}" required>
+                      @error('university')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+                  
 
                   <div class="row mb-3">
                     <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Fakultas</label>
@@ -280,6 +312,25 @@
                        
                       </select>
                       @error('major')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="ipk" class="col-md-4 col-lg-3 col-form-label">IPK/Nilai Rata-rata Ujian Sekolah</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="ipk" type="text" class="form-control" id="ipk" value="{{ Auth::user()->address }}" required>
+                      @error('ipk')
+                      <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="yeargraduation" class="col-md-4 col-lg-3 col-form-label">Tahun Lulus</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="yeargraduation" type="text" class="form-control" id="yeargraduation" value="{{ Auth::user()->address }}" required>
+                      @error('yeargraduation')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
@@ -316,7 +367,357 @@
 
               </div>
 
-              <div class="tab-pane fade pt-3" id="profile-settings">
+              <div class="tab-pane fade pt-3" id="profile-work">
+
+  
+                <div class="row mb-3">
+                  
+                  <div class="col-md-8 col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addWorkModal">
+                      Tambah Data
+                    </button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="addWorkModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalTitleId">Tambah Pengalaman Kerja</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="mb-3">
+                              <label for="perusahaan" class="form-label">Nama Perusahaan</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="perusahaan" id="perusahaan" placeholder="Nama Perusahaan" required>
+                            </div>
+                            <div class="mb-3">
+                             <label for="jabatan" class="form-label">Jabatan</label>
+                             <select class="form-select form-select-sm" name="jabatan" id="jabatan">
+                               <option selected>Pilih salah satu</option>
+                               <option value="lokal">Lokal</option>
+                               <option value="nasional">Nasional</option>
+                               <option value="internasional">Internasional</option>
+                             </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="tglmulai" class="form-label">Tgl Mulai Bekerja</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tglmulai" id="tglmulai" placeholder="">
+                             
+                            </div>
+                            <div class="mb-3">
+                              <label for="tglberakhir" class="form-label">Tahun</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
+                                <label class="form-check-label" for="masihkerja">
+                                  masih bekerja sampai saat ini
+                                </label>
+                              </div>
+                             
+                            </div>
+                            <div class="mb-3">
+                             <label for="status" class="form-label">Status</label>
+                             <select class="form-select form-select-sm" name="status" id="status">
+                               <option selected>Pilih salah satu</option>
+                               <option value="intern">Intern</option>
+                               <option value="kontrak">Kontrak</option>
+                               <option value="tetap">Tetap</option>
+                               <option value="project">Project</option>
+                             </select>
+                            </div>
+ 
+                            <div class="mb-3">
+                              <label for="peran" class="form-label">Peran dan Tanggung jawab</label>
+                              <textarea class="form-control form-control-sm" name="peran" id="peran" rows="3"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+
+                </div>
+               
+
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-organization">
+
+                <div class="row mb-3">
+                  
+                  <div class="col-md-8 col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOrganizationModal">
+                      Tambah Data
+                    </button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="addOrganizationModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalTitleId">Tambah Pengalaman Organisasi</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="mb-3">
+                              <label for="organisasi" class="form-label">Nama Organisasi</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="organisasi" id="organisasi" placeholder="Nama Organisasi" required>
+                            </div>
+                            <div class="mb-3">
+                             <label for="jabatan" class="form-label">Jabatan</label>
+                             <select class="form-select form-select-sm" name="jabatan" id="jabatan">
+                               <option selected>Pilih salah satu</option>
+                               <option value="ketua">Ketua</option>
+                               <option value="wakil">Wakil Ketua</option>
+                               <option value="kepaladivisi">Kepala Departemen/Divisi</option>
+                               <option value="staff">Staff</option>
+                             </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="tglmulai" class="form-label">Tgl Mulai Menjabat</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tglmulai" id="tglmulai" placeholder="">
+                             
+                            </div>
+                            <div class="mb-3">
+                              <label for="tglberakhir" class="form-label">Tgl Berakhir Menjabat</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
+                                <label class="form-check-label" for="masihkerja">
+                                  masih menjabat sampai saat ini
+                                </label>
+                              </div>
+                             
+                            </div>
+                      
+ 
+                            <div class="mb-3">
+                              <label for="peran" class="form-label">Peran dan Tanggung jawab</label>
+                              <textarea class="form-control form-control-sm" name="peran" id="peran" rows="3"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-certification">
+
+                <div class="row mb-3">
+                  
+                  <div class="col-md-8 col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCertModal">
+                      Tambah Data
+                    </button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="addCertModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalTitleId">Tambah Sertifikasi</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="mb-3">
+                              <label for="sertifikat" class="form-label">Nama Sertifikat</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="sertifikat" id="sertifikat" placeholder="Nama Sertifikat" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="lembagasertif" class="form-label">Lembaga Sertifikat</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="lembagasertif" id="lembagasertif" placeholder="Lembaga" required>
+                            </div>
+                            <div class="mb-3">
+                             <label for="sertifikat" class="form-label">Tahun Sertifikat</label>
+                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
+                               <option selected>Pilih salah satu</option>
+                               <option value="staff">Staff</option>
+                               <option value="manager">Manager</option>
+                               <option value="supervisor">Supervisor</option>
+                             </select>
+                            </div>
+                           
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-training">
+
+                <div class="row mb-3">
+                  
+                  <div class="col-md-8 col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTrainingModal">
+                      Tambah Data
+                    </button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="addTrainingModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalTitleId">Tambah Pelatihan</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="mb-3">
+                              <label for="pelatihan" class="form-label">Nama Pelatihan</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="pelatihan" id="pelatihan" placeholder="Nama Pelatihan" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="lembagalatih" class="form-label">Lembaga Pelatihan</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="lembagalatih" id="lembagalatih" placeholder="Lembaga Pelatihan" required>
+                            </div>
+                            <div class="mb-3">
+                             <label for="sertifikat" class="form-label">Tahun Sertifikat</label>
+                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
+                               <option selected>Pilih salah satu</option>
+                               <option value="staff">Staff</option>
+                               <option value="manager">Manager</option>
+                               <option value="supervisor">Supervisor</option>
+                             </select>
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="tglberakhir" class="form-label">Tgl Berakhir</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
+                                <label class="form-check-label" for="masihkerja">
+                                  Seumur Hidup
+                                </label>
+                              </div>
+                             
+                            </div>
+
+                            
+                            
+                           
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-achievement">
+
+                <div class="row mb-3">
+                  
+                  <div class="col-md-8 col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAchievementModal">
+                      Tambah Data
+                    </button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="addAchievementModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalTitleId">Tambah Prestasi</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="mb-3">
+                              <label for="prestasi" class="form-label">Nama Prestasi</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="prestasi" id="prestasi" placeholder="Nama Prestasi" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                             <label for="sertifikat" class="form-label">Tingkat Prestasi</label>
+                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
+                               <option selected>Pilih salah satu</option>
+                               <option value="lokal">Lokal</option>
+                               <option value="nasional">Nasional</option>
+                               <option value="internasional">Internasional</option>
+                             </select>
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="pencapaian" class="form-label">Pencapaian</label>
+                              <input type="text"
+                                class="form-control form-control-sm" name="pencapaian" id="pencapaian" placeholder="Pencapaian" required>
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="tahun" class="form-label">Tahun</label>
+                              <input type="date"
+                                class="form-control form-control-sm" name="tahun" id="tahun" placeholder="">
+                            </div>
+
+                            
+                            
+                           
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-cv">
 
                 <!-- Settings Form -->
                 <form enctype="multipart/form-data" method="post" action="{{ route('profile.cv') }}">
