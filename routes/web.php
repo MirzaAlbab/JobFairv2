@@ -61,7 +61,34 @@ Route::middleware(['auth','verified','user'])->group(function () {
     Route::put('/user/profile', [ProfileController::class, 'cv'])->name('profile.cv');
     Route::delete('/user/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/user/viewcv', [JobApplicationController::class, 'viewcv'])->name('user-cv');
+    
+    Route::get('/user/experience', [ProfileController::class, 'getExperience'])->name('experience.get');
+    Route::post('/user/experience', [ProfileController::class, 'addExperience'])->name('experience.store');
+    Route::put('/user/experience/update/{exp}', [ProfileController::class, 'updateExperience'])->name('experience.update');
+    Route::delete('/user/experience', [ProfileController::class, 'deleteExperience'])->name('experience.delete');
+    
+    
+    Route::get('/user/organization', [ProfileController::class, 'getOrganization'])->name('organization.get');
+    Route::post('/user/organization', [ProfileController::class, 'addOrganization'])->name('organization.store');
+    Route::put('/user/organization/update/{org}', [ProfileController::class, 'updateOrganization'])->name('organization.update');
+    Route::delete('/user/organization', [ProfileController::class, 'deleteOrganization'])->name('organization.delete');
+    
+    Route::get('/user/certificate', [ProfileController::class, 'getCertificate'])->name('certificate.get');
+    Route::post('/user/certificate', [ProfileController::class, 'addCertificate'])->name('certificate.store');
+    Route::put('/user/certificate/update/{org}', [ProfileController::class, 'updateCertificate'])->name('certificate.update');
+    Route::delete('/user/certificate', [ProfileController::class, 'deleteCertificate'])->name('certificate.delete');
+    
+    Route::get('/user/training', [ProfileController::class, 'getTraining'])->name('training.get');
+    Route::post('/user/training', [ProfileController::class, 'addTraining'])->name('training.store');
+    Route::put('/user/training/update/{org}', [ProfileController::class, 'updateTraining'])->name('training.update');
+    Route::delete('/user/training', [ProfileController::class, 'deleteTraining'])->name('training.delete');
 
+    Route::get('/user/achievement', [ProfileController::class, 'getAchievement'])->name('achievement.get');
+    Route::post('/user/achievement', [ProfileController::class, 'addAchievement'])->name('achievement.store');
+    Route::put('/user/achievement/update/{org}', [ProfileController::class, 'updateAchievement'])->name('achievement.update');
+    Route::delete('/user/achievement', [ProfileController::class, 'deleteAchievement'])->name('achievement.delete');
+    
+    
     // api user major
     Route::get('api/major/{id}', [ProfileController::class, 'getMajor'])->name('getMajor');
 });

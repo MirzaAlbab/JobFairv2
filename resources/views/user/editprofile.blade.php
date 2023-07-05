@@ -330,6 +330,7 @@
                     <label for="yeargraduation" class="col-md-4 col-lg-3 col-form-label">Tahun Lulus</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="yeargraduation" type="text" class="form-control" id="yeargraduation" value="{{ Auth::user()->address }}" required>
+                     
                       @error('yeargraduation')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -373,6 +374,15 @@
                 <div class="row mb-3">
                   
                   <div class="col-md-8 col-lg-12 text-center">
+                   
+                    <ul>
+                      @foreach($experiences as $exp)
+                      <li>
+                        <p>{{ $exp->company_name }}</p>
+                      </li>
+                      @endforeach
+
+                    </ul>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addWorkModal">
                       Tambah Data
                     </button>
@@ -388,14 +398,18 @@
                             </div>
                         <div class="modal-body">
                           <div class="container-fluid">
+                            <form action="{{ route('experience.store') }}" method="POST">
+                              @csrf
+
                             <div class="mb-3">
-                              <label for="perusahaan" class="form-label">Nama Perusahaan</label>
+                              <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="companyname" class="form-label">Nama Perusahaan</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="perusahaan" id="perusahaan" placeholder="Nama Perusahaan" required>
+                                class="form-control form-control-sm" name="company_name" id="companyname" placeholder="Nama Perusahaan" required>
                             </div>
                             <div class="mb-3">
-                             <label for="jabatan" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="jabatan" id="jabatan">
+                             <label for="companypos" class="form-label">Jabatan</label>
+                             <select class="form-select form-select-sm" name="job_title" id="companypos">
                                <option selected>Pilih salah satu</option>
                                <option value="lokal">Lokal</option>
                                <option value="nasional">Nasional</option>
@@ -403,43 +417,45 @@
                              </select>
                             </div>
                             <div class="mb-3">
-                              <label for="tglmulai" class="form-label">Tgl Mulai Bekerja</label>
+                              <label for="companystart" class="form-label">Tgl Mulai Bekerja</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="tglmulai" id="tglmulai" placeholder="">
+                                class="form-control form-control-sm" name="start_date" id="companystart" placeholder="">
                              
                             </div>
                             <div class="mb-3">
-                              <label for="tglberakhir" class="form-label">Tahun</label>
+                              <label for="companyend" class="form-label">Tahun</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                                class="form-control form-control-sm" name="end_date" id="companyend" placeholder="">
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
-                                <label class="form-check-label" for="masihkerja">
+                                <input class="form-check-input" type="checkbox" value="1" id="currentjob" name="current_job">
+                                <label class="form-check-label" for="currentjob">
                                   masih bekerja sampai saat ini
                                 </label>
                               </div>
                              
                             </div>
                             <div class="mb-3">
-                             <label for="status" class="form-label">Status</label>
-                             <select class="form-select form-select-sm" name="status" id="status">
+                             <label for="companystatus" class="form-label">Status</label>
+                             <select class="form-select form-select-sm" name="status" id="companystatus">
                                <option selected>Pilih salah satu</option>
                                <option value="intern">Intern</option>
-                               <option value="kontrak">Kontrak</option>
-                               <option value="tetap">Tetap</option>
+                               <option value="contract">Kontrak</option>
+                               <option value="permanent">Tetap</option>
                                <option value="project">Project</option>
+                               
                              </select>
                             </div>
  
                             <div class="mb-3">
-                              <label for="peran" class="form-label">Peran dan Tanggung jawab</label>
-                              <textarea class="form-control form-control-sm" name="peran" id="peran" rows="3"></textarea>
+                              <label for="companydesc" class="form-label">Peran dan Tanggung jawab</label>
+                              <textarea class="form-control form-control-sm" name="job_description" id="companydesc" rows="3"></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -471,14 +487,17 @@
                             </div>
                         <div class="modal-body">
                           <div class="container-fluid">
+                            <form action="{{ route('organization.store') }}" method="POST">
+                              @csrf
                             <div class="mb-3">
-                              <label for="organisasi" class="form-label">Nama Organisasi</label>
+                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="organization_name" class="form-label">Nama Organisasi</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="organisasi" id="organisasi" placeholder="Nama Organisasi" required>
+                                class="form-control form-control-sm" name="organization_name" id="organization_name" placeholder="Nama Organisasi" required>
                             </div>
                             <div class="mb-3">
-                             <label for="jabatan" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="jabatan" id="jabatan">
+                             <label for="organizationpos" class="form-label">Jabatan</label>
+                             <select class="form-select form-select-sm" name="organizationpos" id="organizationpos">
                                <option selected>Pilih salah satu</option>
                                <option value="ketua">Ketua</option>
                                <option value="wakil">Wakil Ketua</option>
@@ -487,18 +506,18 @@
                              </select>
                             </div>
                             <div class="mb-3">
-                              <label for="tglmulai" class="form-label">Tgl Mulai Menjabat</label>
+                              <label for="organizationstart" class="form-label">Tgl Mulai Menjabat</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="tglmulai" id="tglmulai" placeholder="">
+                                class="form-control form-control-sm" name="organizationstart" id="organizationstart">
                              
                             </div>
                             <div class="mb-3">
-                              <label for="tglberakhir" class="form-label">Tgl Berakhir Menjabat</label>
+                              <label for="organizationend" class="form-label">Tgl Berakhir Menjabat</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                                class="form-control form-control-sm" name="organizationend" id="organizationend">
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
-                                <label class="form-check-label" for="masihkerja">
+                                <input class="form-check-input" type="checkbox" value="true" id="ongoing">
+                                <label class="form-check-label" for="ongoing">
                                   masih menjabat sampai saat ini
                                 </label>
                               </div>
@@ -507,14 +526,15 @@
                       
  
                             <div class="mb-3">
-                              <label for="peran" class="form-label">Peran dan Tanggung jawab</label>
-                              <textarea class="form-control form-control-sm" name="peran" id="peran" rows="3"></textarea>
+                              <label for="organizationdesc" class="form-label">Peran dan Tanggung jawab</label>
+                              <textarea class="form-control form-control-sm" name="organizationdesc" id="organizationdesc" rows="3"></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">Save</button>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -545,31 +565,35 @@
                             </div>
                         <div class="modal-body">
                           <div class="container-fluid">
+                            <form action="{{ route('certificate.store') }}" method="POST">
+                              @csrf
                             <div class="mb-3">
-                              <label for="sertifikat" class="form-label">Nama Sertifikat</label>
+                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="certificate" class="form-label">Nama Sertifikat</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="sertifikat" id="sertifikat" placeholder="Nama Sertifikat" required>
+                                class="form-control form-control-sm" name="certificate" id="certificate" placeholder="Nama Sertifikat" required>
                             </div>
                             <div class="mb-3">
-                              <label for="lembagasertif" class="form-label">Lembaga Sertifikat</label>
+                              <label for="institutioncert" class="form-label">Lembaga Sertifikat</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="lembagasertif" id="lembagasertif" placeholder="Lembaga" required>
+                                class="form-control form-control-sm" name="institutioncert" id="institutioncert" placeholder="Lembaga" required>
                             </div>
                             <div class="mb-3">
-                             <label for="sertifikat" class="form-label">Tahun Sertifikat</label>
-                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
-                               <option selected>Pilih salah satu</option>
-                               <option value="staff">Staff</option>
-                               <option value="manager">Manager</option>
-                               <option value="supervisor">Supervisor</option>
-                             </select>
-                            </div>
-                           
+                              <label for="certificationyear" class="form-label">Tahun Sertifikat</label>
+                              <select class="form-select form-select-sm" name="certificationyear" id="certificationyear">
+                                <option selected>Pilih salah satu</option>
+                                @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
+                                  <option value="{{ $i }}">{{ $i }}</option>
+                                  @endfor
+                              
+                              </select>
+                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">Save</button>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -600,47 +624,55 @@
                             </div>
                         <div class="modal-body">
                           <div class="container-fluid">
+                            <form action="{{ route('training.store') }}" method="POST">
+                              @csrf
                             <div class="mb-3">
-                              <label for="pelatihan" class="form-label">Nama Pelatihan</label>
+                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="training" class="form-label">Nama Pelatihan</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="pelatihan" id="pelatihan" placeholder="Nama Pelatihan" required>
+                                class="form-control form-control-sm" name="training" id="training" placeholder="Nama Pelatihan" required>
                             </div>
                             <div class="mb-3">
-                              <label for="lembagalatih" class="form-label">Lembaga Pelatihan</label>
+                              <label for="institutiontrain" class="form-label">Lembaga Pelatihan</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="lembagalatih" id="lembagalatih" placeholder="Lembaga Pelatihan" required>
+                                class="form-control form-control-sm" name="institutiontrain" id="institutiontrain" placeholder="Lembaga Pelatihan" required>
                             </div>
                             <div class="mb-3">
-                             <label for="sertifikat" class="form-label">Tahun Sertifikat</label>
-                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
+                             <label for="certtraining" class="form-label">Tahun Sertifikat</label>
+                             <select class="form-select form-select-sm" name="certtraining" id="certtraining">
                                <option selected>Pilih salah satu</option>
-                               <option value="staff">Staff</option>
-                               <option value="manager">Manager</option>
-                               <option value="supervisor">Supervisor</option>
+                               @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
+                                 <option value="{{ $i }}">{{ $i }}</option>
+                                 @endfor
+                             
                              </select>
                             </div>
 
                             <div class="mb-3">
-                              <label for="tglberakhir" class="form-label">Tgl Berakhir</label>
-                              <input type="date"
-                                class="form-control form-control-sm" name="tglberakhir" id="tglberakhir" placeholder="">
+                              <label for="exptraining" class="form-label">Tahun Berakhir</label>
+                              <select class="form-select form-select-sm" name="exptraining" id="exptraining">
+                                <option selected>Pilih salah satu</option>
+                                @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
+                                 <option value="{{ $i }}">{{ $i }}</option>
+                                 @endfor
+                                
+                              </select>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="masihkerja" id="masihkerja">
-                                <label class="form-check-label" for="masihkerja">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="">
                                   Seumur Hidup
                                 </label>
                               </div>
                              
-                            </div>
+                             </div>
 
-                            
-                            
                            
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">Save</button>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -671,15 +703,18 @@
                             </div>
                         <div class="modal-body">
                           <div class="container-fluid">
+                            <form action="{{ route('achievement.store') }}" method="POST">
+                              @csrf
                             <div class="mb-3">
-                              <label for="prestasi" class="form-label">Nama Prestasi</label>
+                              <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="achievement" class="form-label">Nama Prestasi</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="prestasi" id="prestasi" placeholder="Nama Prestasi" required>
+                                class="form-control form-control-sm" name="achievement" id="achievement" placeholder="Nama Prestasi" required>
                             </div>
                            
                             <div class="mb-3">
-                             <label for="sertifikat" class="form-label">Tingkat Prestasi</label>
-                             <select class="form-select form-select-sm" name="sertifikat" id="jabatan">
+                             <label for="achievementlevel" class="form-label">Tingkat Prestasi</label>
+                             <select class="form-select form-select-sm" name="achievementlevel" id="achievementlevel">
                                <option selected>Pilih salah satu</option>
                                <option value="lokal">Lokal</option>
                                <option value="nasional">Nasional</option>
@@ -688,16 +723,21 @@
                             </div>
 
                             <div class="mb-3">
-                              <label for="pencapaian" class="form-label">Pencapaian</label>
+                              <label for="achievementdesc" class="form-label">Pencapaian</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="pencapaian" id="pencapaian" placeholder="Pencapaian" required>
+                                class="form-control form-control-sm" name="achievementdesc" id="achievementdesc" placeholder="Pencapaian" required>
                             </div>
 
                             <div class="mb-3">
-                              <label for="tahun" class="form-label">Tahun</label>
-                              <input type="date"
-                                class="form-control form-control-sm" name="tahun" id="tahun" placeholder="">
-                            </div>
+                              <label for="achievementyear" class="form-label">Tahun Sertifikat</label>
+                              <select class="form-select form-select-sm" name="achievementyear" id="achievementyear">
+                                <option selected>Pilih salah satu</option>
+                                 @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
+                                 <option value="{{ $i }}">{{ $i }}</option>
+                                 @endfor
+                              
+                              </select>
+                             </div>
 
                             
                             
@@ -707,6 +747,7 @@
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">Save</button>
+                          </form>
                         </div>
                       </div>
                     </div>

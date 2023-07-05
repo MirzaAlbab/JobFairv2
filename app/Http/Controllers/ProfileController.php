@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Faculty;
 use App\Models\Major;
 use App\Models\User;
+use App\Models\UserExperience;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +22,14 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $faculties = Faculty::all();
+        $experiences = UserExperience::where('user_id', $request->user()->id)->get();
+
+        
         
         return view('user.editprofile', [
             'user' => $request->user(),
             'faculties' => $faculties,
+            'experiences' => $experiences,
               
         ]);
     }
@@ -57,8 +62,6 @@ class ProfileController extends Controller
         }else{
             $img = null;
         }
-       
-       
        
         $request->user()->fill($request->validated());
 
@@ -137,5 +140,40 @@ class ProfileController extends Controller
     public function getMajor ($id){
         $majors = Major::where("faculty_id",$id)->pluck("name","id");
         return response()->json(['major'=>$majors]);
+    }
+
+    public function addExperience (Request $request){
+        
+        $request->validate([
+            'company_name' => 'required',
+            'job_title' => 'required',
+            'job_description' => 'required',
+            'start_date' => 'required',
+            'status' => 'required',
+        ]);
+        if($request->current_job){
+            UserExperience::create([
+                'company_name' => $request->company_name,
+                'job_title' => $request->job_title,
+                'job_description' => $request->job_description,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'is_current_job' => $request->current_job,
+                'status' => $request->status,
+                'user_id' => $request->user_id,
+            ]);
+        }else{
+            UserExperience::create([
+                'company_name' => $request->company_name,
+                'job_title' => $request->job_title,
+                'job_description' => $request->job_description,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'status' => $request->status,
+                'user_id' => $request->user_id,
+            ]);
+        
+        }
+    return Redirect::route('profile.edit')->with('status', 'Experience added successfully');
     }
 }
