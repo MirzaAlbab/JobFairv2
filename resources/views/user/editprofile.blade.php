@@ -369,23 +369,80 @@
               </div>
 
               <div class="tab-pane fade pt-3" id="profile-work">
-
-  
                 <div class="row mb-3">
-                  
-                  <div class="col-md-8 col-lg-12 text-center">
-                   
-                    <ul>
-                      @foreach($experiences as $exp)
-                      <li>
-                        <p>{{ $exp->company_name }}</p>
-                      </li>
-                      @endforeach
+                  <div class="col-md-8 col-lg-12">
 
-                    </ul>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addWorkModal">
-                      Tambah Data
-                    </button>
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Pengalaman Kerja</h5>
+                            @if($experiences->isEmpty())
+                            <p class="card-text">Anda belum menambahkan pengalaman kerja</p>
+                            @endif
+              
+                            <!-- Default Accordion -->
+                            <div class="accordion" id="accordionExample">
+                              @foreach ($experiences as $exp)
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $exp->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ $exp->company_name }}
+                                  </button>
+                                </h2>
+                                <div id="collapse{{ $exp->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <p><strong>Jabatan</strong></p>
+                                        <p>{{ $exp->job_title }}</p>
+                                      </div>
+                                      @if ($exp->is_current_job == 1)
+                                      <div class="col-md-6">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $exp->start_date }} - Sekarang</p>
+                                      </div>
+                                      @else
+                                      <div class="col-md-6">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $exp->start_date}} - {{ $exp->end_date }}</p>
+                                      </div>
+                                      @endif
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Peran dan Tanggung Jawab</strong></p>
+                                        <p>{{ $exp->job_description }}</p>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Status</strong></p>
+                                        <p>{{ $exp->status }}</p>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <form action="{{ route('experience.destroy') }}" method="POST">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="text" name="expid" hidden value="{{ $exp->id }}">
+                                          <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              @endforeach
+                            </div><!-- End Default Accordion Example -->
+                            <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addWorkModal">
+                              Tambah Pengalaman Kerja
+                            </button>
+                          </div>
+                          
+                        </div>
+                  
+                    
                   </div>
                   
                   <!-- Modal -->
@@ -409,8 +466,8 @@
                             </div>
                             <div class="mb-3">
                              <label for="companypos" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="job_title" id="companypos">
-                               <option selected>Pilih salah satu</option>
+                             <select class="form-select form-select-sm" name="job_title" id="companypos" required>
+                               <option value="" selected>Pilih salah satu</option>
                                <option value="lokal">Lokal</option>
                                <option value="nasional">Nasional</option>
                                <option value="internasional">Internasional</option>
@@ -419,13 +476,13 @@
                             <div class="mb-3">
                               <label for="companystart" class="form-label">Tgl Mulai Bekerja</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="start_date" id="companystart" placeholder="">
+                                class="form-control form-control-sm" name="start_date" id="companystart" required>
                              
                             </div>
                             <div class="mb-3">
                               <label for="companyend" class="form-label">Tahun</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="end_date" id="companyend" placeholder="">
+                                class="form-control form-control-sm" name="end_date" id="companyend" >
                               <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" id="currentjob" name="current_job">
                                 <label class="form-check-label" for="currentjob">
@@ -436,8 +493,8 @@
                             </div>
                             <div class="mb-3">
                              <label for="companystatus" class="form-label">Status</label>
-                             <select class="form-select form-select-sm" name="status" id="companystatus">
-                               <option selected>Pilih salah satu</option>
+                             <select class="form-select form-select-sm" name="status" id="companystatus" required>
+                               <option value="" selected>Pilih salah satu</option>
                                <option value="intern">Intern</option>
                                <option value="contract">Kontrak</option>
                                <option value="permanent">Tetap</option>
@@ -448,7 +505,7 @@
  
                             <div class="mb-3">
                               <label for="companydesc" class="form-label">Peran dan Tanggung jawab</label>
-                              <textarea class="form-control form-control-sm" name="job_description" id="companydesc" rows="3"></textarea>
+                              <textarea class="form-control form-control-sm" name="job_description" id="companydesc" rows="3" required></textarea>
                             </div>
                           </div>
                         </div>
@@ -468,17 +525,79 @@
 
               </div>
               <div class="tab-pane fade pt-3" id="profile-organization">
-
                 <div class="row mb-3">
+                  <div class="col-md-8 col-lg-12">
+
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Pengalaman Organisasi</h5>
+                            @if($organizations->isEmpty())
+                            <p class="card-text">Anda belum menambahkan pengalaman organisasi</p>
+                            @endif
+              
+                            <!-- Default Accordion -->
+                            <div class="accordion" id="accordionExample">
+                              @foreach ($organizations as $org)
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $org->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ $org->organization_name }}
+                                  </button>
+                                </h2>
+                                <div id="collapse{{ $org->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <p><strong>Jabatan</strong></p>
+                                        <p>{{ $org->job_title }}</p>
+                                      </div>
+                                      @if ($org->is_current_organization == 1)
+                                      <div class="col-md-6">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $org->start_date }} - Sekarang</p>
+                                      </div>
+                                      @else
+                                      <div class="col-md-6">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $org->start_date}} - {{ $org->end_date }}</p>
+                                      </div>
+                                      @endif
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Peran dan Tanggung Jawab</strong></p>
+                                        <p>{{ $org->job_description }}</p>
+                                      </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <form action="{{ route('organization.destroy') }}" method="POST">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="text" name="orgid" hidden value="{{ $org->id }}">
+                                          <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              @endforeach
+                            </div><!-- End Default Accordion Example -->
+                            <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addOrgModal">
+                              Tambah Pengalaman Organisasi
+                            </button>
+                          </div>
+                          
+                        </div>
                   
-                  <div class="col-md-8 col-lg-12 text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOrganizationModal">
-                      Tambah Data
-                    </button>
+                    
                   </div>
                   
                   <!-- Modal -->
-                  <div class="modal fade" id="addOrganizationModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div class="modal fade" id="addOrgModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -489,16 +608,17 @@
                           <div class="container-fluid">
                             <form action="{{ route('organization.store') }}" method="POST">
                               @csrf
+
                             <div class="mb-3">
-                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
-                              <label for="organization_name" class="form-label">Nama Organisasi</label>
+                              <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="orgname" class="form-label">Nama Organisasi</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="organization_name" id="organization_name" placeholder="Nama Organisasi" required>
+                                class="form-control form-control-sm" name="organization_name" id="orgname" placeholder="Nama Organisasi" required>
                             </div>
                             <div class="mb-3">
-                             <label for="organizationpos" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="organizationpos" id="organizationpos">
-                               <option selected>Pilih salah satu</option>
+                             <label for="orgjob" class="form-label">Jabatan</label>
+                             <select class="form-select form-select-sm" name="job_title" id="orgjob" required>
+                               <option value="" selected>Pilih salah satu</option>
                                <option value="ketua">Ketua</option>
                                <option value="wakil">Wakil Ketua</option>
                                <option value="kepaladivisi">Kepala Departemen/Divisi</option>
@@ -506,34 +626,34 @@
                              </select>
                             </div>
                             <div class="mb-3">
-                              <label for="organizationstart" class="form-label">Tgl Mulai Menjabat</label>
+                              <label for="orgstart" class="form-label">Tgl Mulai Menjabat</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="organizationstart" id="organizationstart">
+                                class="form-control form-control-sm" name="start_date" id="orgstart" required>
                              
                             </div>
                             <div class="mb-3">
-                              <label for="organizationend" class="form-label">Tgl Berakhir Menjabat</label>
+                              <label for="orgend" class="form-label">Tgl Akhir Menjabat</label>
                               <input type="date"
-                                class="form-control form-control-sm" name="organizationend" id="organizationend">
+                                class="form-control form-control-sm" name="end_date" id="orgend">
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="ongoing">
-                                <label class="form-check-label" for="ongoing">
+                                <input class="form-check-input" type="checkbox" value="1" id="currentorg" name="is_current_organization">
+                                <label class="form-check-label" for="currentorg">
                                   masih menjabat sampai saat ini
                                 </label>
                               </div>
                              
                             </div>
-                      
+                            
  
                             <div class="mb-3">
-                              <label for="organizationdesc" class="form-label">Peran dan Tanggung jawab</label>
-                              <textarea class="form-control form-control-sm" name="organizationdesc" id="organizationdesc" rows="3"></textarea>
+                              <label for="orgdesc" class="form-label">Peran dan Tanggung jawab</label>
+                              <textarea class="form-control form-control-sm" name="job_description" id="orgdesc" rows="3" required></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
                           </form>
                         </div>
                       </div>
@@ -543,16 +663,69 @@
                   
 
                 </div>
+               
 
               </div>
               <div class="tab-pane fade pt-3" id="profile-certification">
-
                 <div class="row mb-3">
+                  <div class="col-md-8 col-lg-12">
+
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Sertifikasi</h5>
+                            @if($certificates->isEmpty())
+                            <p class="card-text">Anda belum menambahkan sertifikat</p>
+                            @endif
+              
+                            <!-- Default Accordion -->
+                            <div class="accordion" id="accordionExample">
+                              @foreach ($certificates as $cert)
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $cert->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ $cert->certification_name }}
+                                  </button>
+                                </h2>
+                                <div id="collapse{{ $cert->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Institusi</strong></p>
+                                        <p>{{ $cert->certification_institution }}</p>
+                                      </div>
+                                     
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $cert->certification_date }}</p>
+                                      </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <form action="{{ route('certificate.destroy') }}" method="POST">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="text" name="certid" hidden value="{{ $cert->id }}">
+                                          <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              @endforeach
+                            </div><!-- End Default Accordion Example -->
+                            <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addCertModal">
+                              Tambah Sertifikat
+                            </button>
+                          </div>
+                          
+                        </div>
                   
-                  <div class="col-md-8 col-lg-12 text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCertModal">
-                      Tambah Data
-                    </button>
+                    
                   </div>
                   
                   <!-- Modal -->
@@ -560,7 +733,7 @@
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="modalTitleId">Tambah Sertifikasi</h5>
+                              <h5 class="modal-title" id="modalTitleId">Tambah Sertifikat</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         <div class="modal-body">
@@ -568,20 +741,20 @@
                             <form action="{{ route('certificate.store') }}" method="POST">
                               @csrf
                             <div class="mb-3">
-                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
-                              <label for="certificate" class="form-label">Nama Sertifikat</label>
+                              <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="certname" class="form-label">Nama Sertifikat</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="certificate" id="certificate" placeholder="Nama Sertifikat" required>
+                                class="form-control form-control-sm" name="certificate_name" id="certname" placeholder="Nama Sertifikat" required>
                             </div>
                             <div class="mb-3">
-                              <label for="institutioncert" class="form-label">Lembaga Sertifikat</label>
+                              <label for="certins" class="form-label">Lembaga Sertifikat</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="institutioncert" id="institutioncert" placeholder="Lembaga" required>
+                                class="form-control form-control-sm" name="certificate_ins" id="certins" placeholder="Lembaga" required>
                             </div>
                             <div class="mb-3">
-                              <label for="certificationyear" class="form-label">Tahun Sertifikat</label>
-                              <select class="form-select form-select-sm" name="certificationyear" id="certificationyear">
-                                <option selected>Pilih salah satu</option>
+                              <label for="certyear" class="form-label">Tahun Sertifikat</label>
+                              <select class="form-select form-select-sm" name="certificate_year" id="certyear" required>
+                                <option value="" selected>Pilih salah satu</option>
                                 @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
                                   <option value="{{ $i }}">{{ $i }}</option>
                                   @endfor
@@ -592,7 +765,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
                           </form>
                         </div>
                       </div>
@@ -602,20 +775,88 @@
                   
 
                 </div>
+               
 
               </div>
               <div class="tab-pane fade pt-3" id="profile-training">
-
                 <div class="row mb-3">
+                  <div class="col-md-8 col-lg-12">
+
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Pelatihan</h5>
+                            @if($training->isEmpty())
+                            <p class="card-text">Anda belum menambahkan pelatihan</p>
+                            @endif
+              
+                            <!-- Default Accordion -->
+                            <div class="accordion" id="accordionExample">
+                              @foreach ($training as $train)
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $train->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ $train->training_name }}
+                                  </button>
+                                </h2>
+                                <div id="collapse{{ $train->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Institusi</strong></p>
+                                        <p>{{ $train->training_institution }}</p>
+                                      </div>
+                                     
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tahun Sertifikat</strong></p>
+                                        <p>{{ $train->training_date }}</p>
+                                      </div>
+                                    </div>
+                                    @if ($train->is_training_expired == 1)
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tahun Berakhir</strong></p>
+                                        <p>Seumur Hidup</p>
+                                      </div>
+                                    </div>
+                                    @else
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tahun Berakhir</strong></p>
+                                        <p>{{ $train->training_expiration_date }}</p>
+                                      </div>
+                                    </div>
+                                    @endif
+                                   
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <form action="{{ route('training.destroy') }}" method="POST">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="text" name="trainid" hidden value="{{ $train->id }}">
+                                          <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              @endforeach
+                            </div><!-- End Default Accordion Example -->
+                            <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addtrainModal">
+                              Tambah Sertifikat
+                            </button>
+                          </div>
+                          
+                        </div>
                   
-                  <div class="col-md-8 col-lg-12 text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTrainingModal">
-                      Tambah Data
-                    </button>
+                    
                   </div>
                   
                   <!-- Modal -->
-                  <div class="modal fade" id="addTrainingModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div class="modal fade" id="addtrainModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -627,20 +868,20 @@
                             <form action="{{ route('training.store') }}" method="POST">
                               @csrf
                             <div class="mb-3">
-                              <input type="text" name="id" hidden value=" {{ Auth::user()->id }} ">
-                              <label for="training" class="form-label">Nama Pelatihan</label>
+                              <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
+                              <label for="trainname" class="form-label">Nama Pelatihan</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="training" id="training" placeholder="Nama Pelatihan" required>
+                                class="form-control form-control-sm" name="training_name" id="trainname" placeholder="Nama Pelatihan" required>
                             </div>
                             <div class="mb-3">
-                              <label for="institutiontrain" class="form-label">Lembaga Pelatihan</label>
+                              <label for="trainins" class="form-label">Lembaga Pelatihan</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="institutiontrain" id="institutiontrain" placeholder="Lembaga Pelatihan" required>
+                                class="form-control form-control-sm" name="training_ins" id="trainins" placeholder="Lembaga Pelatihan" required>
                             </div>
                             <div class="mb-3">
-                             <label for="certtraining" class="form-label">Tahun Sertifikat</label>
-                             <select class="form-select form-select-sm" name="certtraining" id="certtraining">
-                               <option selected>Pilih salah satu</option>
+                             <label for="trainyear" class="form-label">Tahun Sertifikat</label>
+                             <select class="form-select form-select-sm" name="training_year" id="trainyear" required>
+                               <option value="" selected>Pilih salah satu</option>
                                @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
                                  <option value="{{ $i }}">{{ $i }}</option>
                                  @endfor
@@ -649,17 +890,17 @@
                             </div>
 
                             <div class="mb-3">
-                              <label for="exptraining" class="form-label">Tahun Berakhir</label>
-                              <select class="form-select form-select-sm" name="exptraining" id="exptraining">
-                                <option selected>Pilih salah satu</option>
+                              <label for="trainexp" class="form-label">Tahun Berakhir</label>
+                              <select class="form-select form-select-sm" name="training_exp" id="trainexp">
+                                <option value="" selected>Pilih salah satu</option>
                                 @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
                                  <option value="{{ $i }}">{{ $i }}</option>
                                  @endfor
                                 
                               </select>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" value="1" name="is_training_expired" id="trainexpcheck">
+                                <label class="form-check-label" for="trainexpcheck">
                                   Seumur Hidup
                                 </label>
                               </div>
@@ -671,7 +912,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
                           </form>
                         </div>
                       </div>
@@ -681,20 +922,80 @@
                   
 
                 </div>
+               
 
               </div>
               <div class="tab-pane fade pt-3" id="profile-achievement">
-
                 <div class="row mb-3">
+                  <div class="col-md-8 col-lg-12">
+
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Prestasi</h5>
+                            @if($achievements->isEmpty())
+                            <p class="card-text">Anda belum menambahkan prestasi</p>
+                            @endif
+              
+                            <!-- Default Accordion -->
+                            <div class="accordion" id="accordionExample">
+                              @foreach ($achievements as $achieve)
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $achieve->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ $achieve->achievement_name }}
+                                  </button>
+                                </h2>
+                                <div id="collapse{{ $achieve->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Pencapaian</strong></p>
+                                        <p>{{ $achieve->achievement_description }}</p>
+                                      </div>
+                                     
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tahun</strong></p>
+                                        <p>{{ $achieve->achievement_date }}</p>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <p><strong>Tingkat</strong></p>
+                                        <p>{{ $achieve->achievement_level }}</p>
+                                      </div>
+                                    </div>
+                                   
+                                   
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <form action="{{ route('achievement.destroy') }}" method="POST">
+                                          @csrf
+                                          @method('delete')
+                                          <input type="text" name="achieveid" hidden value="{{ $achieve->id }}">
+                                          <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              @endforeach
+                            </div><!-- End Default Accordion Example -->
+                            <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addachieveModal">
+                              Tambah Prestasi
+                            </button>
+                          </div>
+                          
+                        </div>
                   
-                  <div class="col-md-8 col-lg-12 text-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAchievementModal">
-                      Tambah Data
-                    </button>
+                    
                   </div>
                   
                   <!-- Modal -->
-                  <div class="modal fade" id="addAchievementModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                  <div class="modal fade" id="addachieveModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -707,15 +1008,15 @@
                               @csrf
                             <div class="mb-3">
                               <input type="text" name="user_id" hidden value=" {{ Auth::user()->id }} ">
-                              <label for="achievement" class="form-label">Nama Prestasi</label>
+                              <label for="achievename" class="form-label">Nama Prestasi</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="achievement" id="achievement" placeholder="Nama Prestasi" required>
+                                class="form-control form-control-sm" name="achievement_name" id="achievename" placeholder="Nama Prestasi" required>
                             </div>
                            
                             <div class="mb-3">
-                             <label for="achievementlevel" class="form-label">Tingkat Prestasi</label>
-                             <select class="form-select form-select-sm" name="achievementlevel" id="achievementlevel">
-                               <option selected>Pilih salah satu</option>
+                             <label for="achievelevel" class="form-label">Tingkat Prestasi</label>
+                             <select class="form-select form-select-sm" name="achievement_level" id="achievelevel" required>
+                               <option value="" selected>Pilih salah satu</option>
                                <option value="lokal">Lokal</option>
                                <option value="nasional">Nasional</option>
                                <option value="internasional">Internasional</option>
@@ -723,15 +1024,15 @@
                             </div>
 
                             <div class="mb-3">
-                              <label for="achievementdesc" class="form-label">Pencapaian</label>
+                              <label for="achievedesc" class="form-label">Pencapaian</label>
                               <input type="text"
-                                class="form-control form-control-sm" name="achievementdesc" id="achievementdesc" placeholder="Pencapaian" required>
+                                class="form-control form-control-sm" name="achievement_desc" id="achievedesc" placeholder="Pencapaian" required>
                             </div>
 
                             <div class="mb-3">
-                              <label for="achievementyear" class="form-label">Tahun Sertifikat</label>
-                              <select class="form-select form-select-sm" name="achievementyear" id="achievementyear">
-                                <option selected>Pilih salah satu</option>
+                              <label for="achieveyear" class="form-label">Tahun</label>
+                              <select class="form-select form-select-sm" name="achievement_year" id="achieveyear" required>
+                                <option value="" selected>Pilih salah satu</option>
                                  @for ($i = date('Y'); $i >= (date('Y')-10); $i--)
                                  <option value="{{ $i }}">{{ $i }}</option>
                                  @endfor
@@ -746,7 +1047,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
                           </form>
                         </div>
                       </div>
@@ -756,8 +1057,12 @@
                   
 
                 </div>
+               
 
               </div>
+             
+             
+            
               <div class="tab-pane fade pt-3" id="profile-cv">
 
                 <!-- Settings Form -->
