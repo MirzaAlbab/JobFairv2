@@ -22,9 +22,12 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('university')->nullable()->default('Lainnya');
             $table->string('education')->nullable()->default('Lainnya');
             $table->string('faculty')->nullable()->default('Lainnya');
             $table->string('major')->nullable()->default('Lainnya');
+            $table->decimal('gpa')->nullable();
+            $table->year('graduation_year')->nullable();
             $table->string('cv')->nullable();
             $table->string('photo')->nullable();
             $table->string('instagram')->nullable();

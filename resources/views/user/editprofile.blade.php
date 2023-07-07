@@ -46,11 +46,11 @@
               @endif
               @if ($errors->any())
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Update failed</strong>
+                <strong>{{ $errors }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               @endif
-              {{-- detect errps with message bag --}}
+              {{-- detect errors with message bag --}}
 
               @if ($errors->hasBag('updatePassword'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -100,7 +100,7 @@
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-cv">Edit CV</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-cv">Unggah CV</button>
               </li>
 
               <li class="nav-item">
@@ -320,7 +320,8 @@
                   <div class="row mb-3">
                     <label for="ipk" class="col-md-4 col-lg-3 col-form-label">IPK/Nilai Rata-rata Ujian Sekolah</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="ipk" type="text" class="form-control" id="ipk" value="{{ Auth::user()->address }}" required>
+                      <input name="ipk" type="number" step="0.01" min="0" max="4"class="form-control" id="ipk" value="{{ Auth::user()->address }}" required aria-describedby="ipk">
+                      <small id="helpId" class="form-text text-muted">Gunakan koma contoh: 3,5</small>
                       @error('ipk')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -329,8 +330,14 @@
                   <div class="row mb-3">
                     <label for="yeargraduation" class="col-md-4 col-lg-3 col-form-label">Tahun Lulus</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="yeargraduation" type="text" class="form-control" id="yeargraduation" value="{{ Auth::user()->address }}" required>
-                     
+                        <select class="form-select" name="yeargraduation" id="yeargraduation" required>
+                          <option value="" selected>Pilih salah satu</option>
+                          @for ($i = date('Y'); $i >= (date('Y')-15); $i--)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        
+                        </select>
+                      
                       @error('yeargraduation')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -760,7 +767,7 @@
                                   @endfor
                               
                               </select>
-                             </div>
+                            </div>
                           </div>
                         </div>
                         <div class="modal-footer">
