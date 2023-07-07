@@ -38,7 +38,9 @@
               <a href="{{ Auth::user()->instagram }}" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
               <a href="{{ Auth::user()->linkedin }}" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
              
-              @if (session('status'))
+              
+            </div>
+            @if (session('status'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>{{ session('status') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -58,7 +60,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               @endif
-            </div>
           </div>
         </div>
 
@@ -857,7 +858,7 @@
                               @endforeach
                             </div><!-- End Default Accordion Example -->
                             <button type="button" class="btn btn-sm btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addtrainModal">
-                              Tambah Sertifikat
+                              Tambah Pelatihan
                             </button>
                           </div>
                           
