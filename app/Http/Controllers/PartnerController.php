@@ -57,12 +57,21 @@ class PartnerController extends Controller
         }else{
             $img = null;
         }
+
+        $path = "/public/storage/".$img;
+        $qr = QrCode::format('png')->merge($path)->errorCorrection('H')->size(300)->generate(URL::to('/singlepartner/'.$request->id));
+        // $qr = QrCode::format('png')->size(300)->generate($request->judul);
+        $output_file = 'public/uploads/img/img-' . time() . '.png';
+        Storage::disk('public')->put($output_file, $qr);
+
+
         Partner::create([
             'company' => $request->nama,
             'description'=> $request->deskripsi,
             'careerfair_id' => $request->periode,
             'position' => $request->jenis,
             'img' => $img,
+            'qr' => $output_file,
             'status' => $request->status,
         ]);
         return redirect('/dashboard/partner')->with('status', 'Partner berhasil ditambah');
