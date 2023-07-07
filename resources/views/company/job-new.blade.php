@@ -60,7 +60,8 @@
                 <select class="form-select" aria-label="Default select example" name="education">
                   <option value="">Pilih salah satu</option>
                   <option value="SMA/SMK">SMA/SMK</option>
-                  <option value="D3/D4">D3/D4</option>
+                  <option value="D3">D3</option>
+                  <option value="D4">D4</option>
                   <option value="S1">S1</option>
                   <option value="S2">S2</option>
                   <option value="S3">S3</option>
@@ -102,7 +103,7 @@
               <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="description">{{ old('description') }}</textarea>
+                  <textarea class="form-control" id="editor" name="description" >{{ old('description') }}</textarea>
                   @error('description')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror

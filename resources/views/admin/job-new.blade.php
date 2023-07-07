@@ -103,7 +103,7 @@
               <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="description" required>{{ old('description') }}</textarea>
+                  <textarea class="form-control" id="editor" name="description">{{ old('description') }}</textarea>
                   @error('description')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror

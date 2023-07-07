@@ -43,7 +43,7 @@
               <label for="answer" class="col-sm-2 col-form-label">Answer</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control"  name="answer" id="editor" required>{{ old('answer') }}</textarea>
+                  <textarea class="form-control"  name="answer" id="editor">{{ old('answer') }}</textarea>
                   @error('answer')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror

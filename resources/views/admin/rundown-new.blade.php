@@ -41,7 +41,7 @@
               <label for="rincian" class="col-sm-2 col-form-label">Rincian</label>
               <div class="col-sm-10">
                 <div>
-                  <textarea class="form-control" id="editor" name="rincian" required>{{ old('rincian') }}</textarea>
+                  <textarea class="form-control" id="editor" name="rincian" >{{ old('rincian') }}</textarea>
                   @error('rincian')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
