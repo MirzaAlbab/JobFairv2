@@ -188,6 +188,16 @@
                   </div>
 
                   <div class="row mb-3">
+                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="email" type="email" class="form-control bg-secondary text-white" id="Email" value="{{ Auth::user()->email }}" readonly>
+                    </div>
+                    @error('email')
+                      <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                  </div>
+
+                  <div class="row mb-3">
                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}" required>
@@ -279,7 +289,7 @@
                   <div class="row mb-3">
                     <label for="university" class="col-md-4 col-lg-3 col-form-label">Sekolah / Universitas</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="university" type="text" class="form-control" id="university" value="{{ Auth::user()->address }}" required>
+                      <input name="university" type="text" class="form-control" id="university" value="{{ Auth::user()->university }}" required>
                       @error('university')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -320,9 +330,9 @@
                   <div class="row mb-3">
                     <label for="ipk" class="col-md-4 col-lg-3 col-form-label">IPK/Nilai Rata-rata Ujian Sekolah</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="ipk" type="number" step="0.01" min="0" max="4"class="form-control" id="ipk" value="{{ Auth::user()->address }}" required aria-describedby="ipk">
+                      <input name="gpa" type="number" step="0.01" min="0" max="4"class="form-control" id="ipk" value="{{ Auth::user()->gpa }}" required aria-describedby="ipk">
                       <small id="helpId" class="form-text text-muted">Gunakan koma contoh: 3,5</small>
-                      @error('ipk')
+                      @error('gpa')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
@@ -330,29 +340,21 @@
                   <div class="row mb-3">
                     <label for="yeargraduation" class="col-md-4 col-lg-3 col-form-label">Tahun Lulus</label>
                     <div class="col-md-8 col-lg-9">
-                        <select class="form-select" name="yeargraduation" id="yeargraduation" required>
+                        <select class="form-select" name="graduation_year" id="yeargraduation" required>
                           <option value="" selected>Pilih salah satu</option>
                           @for ($i = date('Y'); $i >= (date('Y')-15); $i--)
-                            <option value="{{ $i }}">{{ $i }}</option>
+                            <option value="{{ $i }}" {{ Auth::user()->graduation_year == $i ? 'selected' :'' }} >{{ $i }}</option>
                             @endfor
                         
                         </select>
                       
-                      @error('yeargraduation')
+                      @error('graduation_year')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
                   </div>
 
-                  <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}" required>
-                    </div>
-                    @error('email')
-                      <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                  </div>
+                  
 
                   <div class="row mb-3">
                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
@@ -473,12 +475,14 @@
                             </div>
                             <div class="mb-3">
                              <label for="companypos" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="job_title" id="companypos" required>
+                             <select class="form-select form-select-sm search-select" name="job_title" id="companypos" required>
                                <option value="" selected>Pilih salah satu</option>
-                               <option value="lokal">Lokal</option>
-                               <option value="nasional">Nasional</option>
-                               <option value="internasional">Internasional</option>
+                               @foreach ($jobtype as $jobtitle)
+                                <option value="{{ $jobtitle->name }}">{{ $jobtitle->name }}</option>
+                                @endforeach
+                               
                              </select>
+                             
                             </div>
                             <div class="mb-3">
                               <label for="companystart" class="form-label">Tgl Mulai Bekerja</label>
@@ -487,7 +491,7 @@
                              
                             </div>
                             <div class="mb-3">
-                              <label for="companyend" class="form-label">Tahun</label>
+                              <label for="companyend" class="form-label">Tgl Akhir Bekerja</label>
                               <input type="date"
                                 class="form-control form-control-sm" name="end_date" id="companyend" >
                               <div class="form-check">
@@ -624,13 +628,13 @@
                             </div>
                             <div class="mb-3">
                              <label for="orgjob" class="form-label">Jabatan</label>
-                             <select class="form-select form-select-sm" name="job_title" id="orgjob" required>
-                               <option value="" selected>Pilih salah satu</option>
-                               <option value="ketua">Ketua</option>
-                               <option value="wakil">Wakil Ketua</option>
-                               <option value="kepaladivisi">Kepala Departemen/Divisi</option>
-                               <option value="staff">Staff</option>
-                             </select>
+                             <select class="form-select form-select-sm search-select2" name="job_title" id="orgjob" required>
+                              <option value="" selected>Pilih salah satu</option>
+                              @foreach ($jobtype as $jobtitle)
+                               <option value="{{ $jobtitle->name }}">{{ $jobtitle->name }}</option>
+                               @endforeach
+                              
+                            </select>
                             </div>
                             <div class="mb-3">
                               <label for="orgstart" class="form-label">Tgl Mulai Menjabat</label>

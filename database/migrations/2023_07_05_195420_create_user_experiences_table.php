@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->boolean('is_current_job')->default(false);
-            $table->enum('status',['intern', 'contract', 'permanent', 'project']);
+            $table->string('status');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

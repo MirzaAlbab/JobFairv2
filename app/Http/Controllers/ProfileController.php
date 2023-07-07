@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Faculty;
+use App\Models\JobType;
 use App\Models\Major;
 use App\Models\User;
 use App\Models\UserAchievement;
@@ -31,7 +32,7 @@ class ProfileController extends Controller
         $certificates = UserCertification::where('user_id', $request->user()->id)->get();
         $training = UserTraining::where('user_id', $request->user()->id)->get();
         $achievements = UserAchievement::where('user_id', $request->user()->id)->get();
-
+        $jobtype = JobType::skip(24)->take(161)->get();
         
         
         return view('user.editprofile', [
@@ -42,7 +43,7 @@ class ProfileController extends Controller
             'certificates' => $certificates,
             'training' => $training,
             'achievements' => $achievements,
-              
+            'jobtype' => $jobtype,
         ]);
     }
 
@@ -60,9 +61,12 @@ class ProfileController extends Controller
             'province' => 'required',
             'city' => 'required',
             'address' => 'required',
+            'university' => 'required',
             'education' => 'required',
             'faculty' => 'required',
             'major' => 'required',
+            'gpa' => 'required',
+            'graduation_year' => 'required',
            
             // 'instagram' => 'required',
             // 'linkedin' => 'required',
@@ -91,9 +95,12 @@ class ProfileController extends Controller
             'province' => $request->province,
             'city' => $request->city,
             'address' => $request->address,
+            'university' => $request->university,
             'education' => $request->education,
             'faculty' => $request->faculty,
             'major' => $request->major,
+            'gpa' => $request->gpa,
+            'graduation_year' => $request->graduation_year,
             'instagram' => $request->instagram,
             'linkedin' => $request->linkedin,
             
@@ -163,6 +170,7 @@ class ProfileController extends Controller
             'start_date' => 'required',
             'status' => 'required',
         ]);
+        
         if($request->current_job){
             UserExperience::create([
                 'company_name' => $request->company_name,

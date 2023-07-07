@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('university')->nullable()->default('Lainnya');
+            $table->string('university')->nullable();
             $table->string('education')->nullable()->default('Lainnya');
             $table->string('faculty')->nullable()->default('Lainnya');
             $table->string('major')->nullable()->default('Lainnya');

@@ -108,6 +108,22 @@
       });
     });
   </script>
+  <script>
+    $(document).ready(function() {
+      $('.search-select').select2({
+        placeholder: 'Pilih salah satu',
+        theme: 'bootstrap-5',
+        dropdownParent: $('#addWorkModal')
+      });
+      $('.search-select2').select2({
+        placeholder: 'Pilih salah satu',
+        theme: 'bootstrap-5',
+        dropdownParent: $('#addOrgModal')
+      });
+
+     
+    });
+  </script>
 
   <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
   

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('achievement_name');
             $table->string('achievement_description');
             $table->year('achievement_date');
-            $table->enum('achievement_level',['local','national', 'international']);
+            $table->string('achievement_level');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
