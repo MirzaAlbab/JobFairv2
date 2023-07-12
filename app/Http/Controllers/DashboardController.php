@@ -220,7 +220,7 @@ class DashboardController extends Controller
         $this->authorize('admin');
         Artisan::call('down', ['--secret' => $secret]);
         // rediret to url with secret
-        return redirect()->to('/dashboard/'.$secret);
+        return redirect()->to('/'.$secret);
         
     }
 
