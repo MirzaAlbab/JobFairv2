@@ -1095,52 +1095,7 @@
     </section>
   </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      let maintenanceSwitch = document.getElementById("maintenanceSwitch");
-      fetch('{{ route('maintenance-status') }}')
-        .then((response) => response.json())
-        .then((data) => {
-          
-          if (data.status == true) {
-            maintenanceSwitch.checked = true;
-            maintenanceSwitch.removeAttribute("disabled");
-          } else {
-            maintenanceSwitch.checked = false;
-            maintenanceSwitch.removeAttribute("disabled");
-          }
-        });
-
-      
-      maintenanceSwitch.addEventListener("change", function() {
-       
-        if (this.checked) {
-          if(confirm("Are you sure you want to turn on maintenance mode?")){
-            fetch('{{ route('maintenance',"17ed288276383b342914f440596fea0567d5ae85") }}')
-            .then((response) => response.json())
-            .then((data) => {
-              maintenanceSwitch.checked = true;
-            });
-          }
-          else{
-            maintenanceSwitch.checked = false;
-          }
-        } else {
-          if(confirm("Are you sure you want to turn off maintenance mode?")){
-            maintenanceSwitch.checked = false;
-            fetch('{{ route('live') }}')
-            .then((response) => response.json())
-            .then((data) => {
-              maintenanceSwitch.checked = false;
-            });
-          }
-          else{
-            maintenanceSwitch.checked = true;
-          }
-        }
-      });
-    });
-  </script>
+  
 
   
 @endsection

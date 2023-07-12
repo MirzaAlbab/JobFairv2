@@ -210,18 +210,7 @@ class FrontController extends Controller
         $gallery = Gallery::where('status', 'active')->latest()->paginate(9);
         return view('landing-page.gallery', compact('gallery', 'aocf'));
     }
-    public function login(Request $request)
-    {   
-        $career = Careerfair::find($request->id);
-        $career->increment('user');
-        return redirect('https://dpkka.unair.ac.id/site/login');
-    }
-    public function counter(Request $request){
-        
-        $user = Careerfair::find($request->id);
-        $user = $user['user'];
-        return response()->json(['user' => $user]);
-    }
+    
     public function team(){
         $aocf = Careerfair::where('status', 'active')->latest()->first();
         return view('landing-page.teams',compact('aocf'));

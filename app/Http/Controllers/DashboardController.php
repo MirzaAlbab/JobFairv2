@@ -218,9 +218,10 @@ class DashboardController extends Controller
     // call artisan maintenance
     public function maintenance($secret){
         $this->authorize('admin');
-        $exitCode = Artisan::call('down', ['--secret' => $secret]);
-        // rediret to url
-        return redirect()->route('dashboard', [$secret]);
+        Artisan::call('down', ['--secret' => $secret]);
+        // rediret to url with secret
+        return redirect()->to('/dashboard/'.$secret);
+        
     }
 
     public function maintenanceStatus(){
@@ -232,7 +233,7 @@ class DashboardController extends Controller
     // call artisan live
     public function live(){
         $this->authorize('admin');
-        $exitCode = Artisan::call('up');
+        Artisan::call('up');
         return redirect()->back();
     }
 
